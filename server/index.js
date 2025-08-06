@@ -31,6 +31,9 @@ uploadDirs.forEach(dir => {
 });
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 //Routes
+app.get('/', (req, res) => {
+  return res.send('Welcome to the Nutrition API');
+});
 app.use('/api/auth', authRouter);
 app.use('/api', blogRoutes);
 app.use('/api', variationRoutes); // Use variation routes
