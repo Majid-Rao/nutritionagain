@@ -22,7 +22,7 @@ import UpdatePackages from "./admin/pages/UpdatePackages"
 import PackageShow from "./components/PackageShow"
 import Orders from "./admin/pages/Orders"
 import UpdateOrder from "./admin/pages/UpdateOrder"
-import Checkout from "./components/CheckOut"
+import Checkout from "./components/Checkout"
 function App() {
   const { isAuthenticated } = useAuth();
   return (
