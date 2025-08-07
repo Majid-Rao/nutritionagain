@@ -1,12 +1,26 @@
+import watermelon from "../assets/product1.jpg";
+import Mango from "../assets/product2.jpg";
+import Grape from "../assets/product3.jpg";
+import Orange from "../assets/product4.jpg";
+import Apple from "../assets/product5.jpg";
+import Strawberries from "../assets/product6.jpg";
+import Pineapple from "../assets/product7.jpg";
+import Broccoli from "../assets/product8.jpg";
+import Cucumber from "../assets/product9.jpg";
+import Spinach from "../assets/product10.jpg";
+import Cauliflower from "../assets/product11.jpg";
+import Walnuts from "../assets/product12.jpg";
+import Almonds from "../assets/product13.jpg";
+
 const products = [
   {
-    image: "src/assets/product1.jpg",
+    image: watermelon,
     title: "Watermelon Juice",
     price: 39,
     category: "FOOD & DRINKS",
   },
   {
-    image: "src/assets/product2.jpg",
+    image: Mango,
     title: "Mango Smoothie",
     price: 70,
     oldPrice: 85,
@@ -14,7 +28,7 @@ const products = [
     category: "FOOD & DRINKS",
   },
   {
-    image: "src/assets/product3.jpg",
+    image: Grape,
     title: "Grape Drink",
     price: 39,
     oldPrice: 55,
@@ -22,7 +36,7 @@ const products = [
     category: "FOOD & DRINKS",
   },
   {
-    image: "src/assets/product4.jpg",
+    image: Orange,
     title: "Orange Juice",
     price: 59,
     oldPrice: 35,
@@ -30,13 +44,13 @@ const products = [
     category: "FOOD & DRINKS",
   },
   {
-    image: "src/assets/product5.jpg",
+    image: Apple,
     title: "Organic Apple",
     price: 29,
     category: "FRESH FRUITS",
   },
   {
-    image: "src/assets/product6.jpg",
+    image: Strawberries,
     title: "Strawberries",
     price: 49,
     oldPrice: 65,
@@ -44,13 +58,13 @@ const products = [
     category: "FRESH FRUITS",
   },
   {
-    image: "src/assets/product7.jpg",
+    image: Pineapple,
     title: "Pineapple",
     price: 59,
     category: "FRESH FRUITS",
   },
   {
-    image: "src/assets/product8.jpg",
+    image: Broccoli,
     title: "Broccoli",
     price: 99,
     oldPrice: 115,
@@ -58,13 +72,13 @@ const products = [
     category: "VEGETABLES",
   },
   {
-    image: "src/assets/img/product9.jpg",
+    image: Cucumber,
     title: "Cucumber",
     price: 39,
     category: "VEGETABLES",
   },
   {
-    image: "src/assets/product10.jpg",
+    image: Spinach,
     title: "Spinach",
     price: 89,
     oldPrice: 145,
@@ -72,13 +86,13 @@ const products = [
     category: "VEGETABLES",
   },
   {
-    image: "src/assets/product11.jpg",
+    image: Cauliflower,
     title: "Cauliflower",
     price: 79,
     category: "VEGETABLES",
   },
   {
-    image: "src/assets/product12.jpg",
+    image: Walnuts,
     title: "Organic Walnuts",
     price: 39,
     oldPrice: 52,
@@ -86,7 +100,7 @@ const products = [
     category: "DRIED FOODS & NUTS",
   },
   {
-    image: "src/assets/product13.jpg",
+    image: Almonds,
     title: "Raw Almonds",
     price: 33,
     oldPrice: 59,
