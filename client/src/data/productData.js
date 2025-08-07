@@ -1,6 +1,6 @@
 import Watermelon from "../assets/product1.jpg";
 import Mango from "../assets/product2.jpg";
-import Grape from "../assets/product3.jpg";
+import Grape from "../assets/product2.jpg";
 import Orange from "../assets/product4.jpg";
 import Apple from "../assets/product5.jpg";
 import Strawberries from "../assets/product6.jpg";
