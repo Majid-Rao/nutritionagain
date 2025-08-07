@@ -1,4 +1,4 @@
-import watermelon from "../assets/product1.jpg";
+import Watermelon from "../assets/product1.jpg";
 import Mango from "../assets/product2.jpg";
 import Grape from "../assets/product3.jpg";
 import Orange from "../assets/product4.jpg";
@@ -14,7 +14,7 @@ import Almonds from "../assets/product13.jpg";
 
 const products = [
   {
-    image: watermelon,
+    image: Watermelon,
     title: "Watermelon Juice",
     price: 39,
     category: "FOOD & DRINKS",
