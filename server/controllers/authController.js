@@ -46,8 +46,8 @@ exports.login = async (req,res,next) =>{
         if (!isValidPassword) {
             return next(new createError('Invalid password',401));
         }
-        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {
-        expiresIn: '90d'
+        const token = jwt.sign({_id: user._id}, "secretkey123", {
+            expiresIn: '90d'
         });
         res.status(200).json({
             status: 'success',
