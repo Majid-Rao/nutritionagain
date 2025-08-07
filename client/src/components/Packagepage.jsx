@@ -6,11 +6,10 @@ import { Link } from 'react-router-dom';
 
 const PkgCard = ({ pkg }) => {
   return (
-  
     <div className=" bg-white rounded-lg shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out ">
       <img
         className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity duration-300"
-        src={`${import.meta.env.VITE_BACKEND_API}uploads/${pkg.image}`} // Image path assuming it's in uploads folder
+        src={`${import.meta.env.VITE_BACKEND_API}uploads/${pkg.image}`}
         alt={pkg.name}
       />
       <div className="p-6 space-y-4">
@@ -31,21 +30,42 @@ const PkgCard = ({ pkg }) => {
 };
 
 const Packagepage = () => {
-  const [packages, setPackages] = useState([]);
+  const [packages, setPackages] = useState([]); // ✅ Initialize as empty array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch package data from the API
     const fetchPackages = async () => {
       try {
+        setLoading(true);
         const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getpackages`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
-        setPackages(data); // Store fetched packages in the state
+        
+        // ✅ Ensure data is an array before setting state
+        if (Array.isArray(data)) {
+          setPackages(data);
+        } else if (data && Array.isArray(data.packages)) {
+          // If API returns {packages: [...]}
+          setPackages(data.packages);
+        } else {
+          console.warn('API returned non-array data:', data);
+          setPackages([]);
+        }
       } catch (error) {
         console.error('Error fetching packages:', error);
+        setError(error.message);
+        setPackages([]); // ✅ Set empty array on error
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchPackages(); // Fetch packages when component mounts
+    fetchPackages();
   }, []);
 
   return (
@@ -53,24 +73,50 @@ const Packagepage = () => {
       <Navbar />
       {/* Hero Section */}
       <div className='bg-primary dark:bg-gray-700 dark:text-white duration-200'>
-      <section className=" text-white text-center py-20 relative  ">
-        <h1 className="text-2xl sm:text-5xl font-bold mb-4 animate__animated animate__fadeInUp">Our Packages</h1>
-        <p className="text-lg max-w-3xl mx-auto mb-8 animate__animated animate__fadeInUp">
-          Stay updated with the latest insights and articles from our expert team. We bring you fresh content to keep you informed and inspired.
-        </p>
-      </section>
+        <section className=" text-white text-center py-20 relative  ">
+          <h1 className="text-2xl sm:text-5xl font-bold mb-4 animate__animated animate__fadeInUp">Our Packages</h1>
+          <p className="text-lg max-w-3xl mx-auto mb-8 animate__animated animate__fadeInUp">
+            Stay updated with the latest insights and articles from our expert team. We bring you fresh content to keep you informed and inspired.
+          </p>
+        </section>
       </div>
-<div className='dark:bg-gray-700 dark:text-white duration-200'>
-      <div className='bg-primary w-40 sm:w-56 px-3 mt-8 rounded-r-lg shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out animate-slide-in-right'>
-        <h2 className="text-xl sm:text-2xl font-semibold text-white mb-8 ">Latest Packages</h2>
-       </div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 "> 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {packages.map((pkg) => (
-            <PkgCard key={pkg._id} pkg={pkg} />
-          ))}
+      
+      <div className='dark:bg-gray-700 dark:text-white duration-200'>
+        <div className='bg-primary w-40 sm:w-56 px-3 mt-8 rounded-r-lg shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out animate-slide-in-right'>
+          <h2 className="text-xl sm:text-2xl font-semibold text-white mb-8 ">Latest Packages</h2>
         </div>
-      </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
+          {/* ✅ Handle loading state */}
+          {loading && (
+            <div className="text-center py-8">
+              <p className="text-lg">Loading packages...</p>
+            </div>
+          )}
+          
+          {/* ✅ Handle error state */}
+          {error && (
+            <div className="text-center py-8 text-red-600">
+              <p className="text-lg">Error loading packages: {error}</p>
+            </div>
+          )}
+          
+          {/* ✅ Handle empty state */}
+          {!loading && !error && packages.length === 0 && (
+            <div className="text-center py-8">
+              <p className="text-lg">No packages available at the moment.</p>
+            </div>
+          )}
+          
+          {/* ✅ Safe rendering of packages */}
+          {!loading && !error && packages.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {packages.map((pkg) => (
+                <PkgCard key={pkg._id} pkg={pkg} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <Footer />
     </>
