@@ -26,8 +26,8 @@ const steps = [
 
 const Howitworks = () => {
   return (
-    <section className="bg-gray-100 py-16 px-5 lg:px-20 dark:bg-gray-900 dark:text-white">
-      <div className="flex flex-col lg:flex-row items-center gap-10">
+    <section className="bg-gray-100 py-16 px-5 lg:px-20 dark:bg-gray-900 dark:text-white  ">
+      <div className="flex flex-col lg:flex-row items-center gap-10 sm:pb-20 sm:pt-10 pb-5 ">
         {/* img section  */}
         <div className="lg:w-1/2">
           <img
@@ -45,7 +45,7 @@ const Howitworks = () => {
           <div className="space-y-8">
             {steps.map((step, index) => (
               <div key={index} className="flex items-start gap-5">
-                <div className="text-blue-600 text-3xl font-bold">
+                <div className="text-[#f0a39c] text-3xl font-bold">
                   {step.number}
                 </div>
                 <div>

@@ -50,10 +50,10 @@ const settings = {
   pauseOnFocus: true,
 };
   return (
-    <div className='relative overflow-hidden min-h-[650px] sm:min-h-[700px] flex items-center justify-center 
-    bg-gray-200 dark:bg-gray-900 dark:text-white duration-200'>
+    <div className='relative overflow-hidden min-h-[650px] sm:min-h-[500px] flex items-center justify-center 
+    bg-gray-200 dark:bg-gray-900 dark:text-white duration-200 sm:pt-10'>
         {/* background pattern */}
-      <div className='h-[600px] w-[600px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45
+      <div className='h-[600px] w-[600px] bg-primary/100 absolute -top-1/2 right-0 rounded-3xl rotate-45
       -z-9'></div>
       
       {/* hero section */}
@@ -65,10 +65,10 @@ const settings = {
             {/* text content section */}
             <div className='flex flex-col justify-center gap-4 pt-8 sm:pt-0 text-center
             sm:text-left order-2 sm:order-1 relative z-10 animate-slide-in-right'>
-                <h1 className='text-4xl sm:text-5xl lg:text-6xl font-semibold'>{data.title}</h1>
+                <h1 className='text-3xl sm:text-4xl lg:text-6xl font-semibold'>{data.title}</h1>
                 <p className='text-sm'>{data.description}</p>
                 <div>
-                    <button className='bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-full
+                    <button className='bg-gradient-to-r from-[#f0a39c] to-[#f0a39c] text-white py-2 px-4 rounded-full
                     hover:scale-105 duration-200 animate-pulse'>
                         Start Your Journey
                     </button> 

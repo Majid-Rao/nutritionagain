@@ -8,22 +8,22 @@ import {
 
 const features = [
   {
-    icon: <FaLeaf className="text-primary text-4xl mb-3" size={45} />,
+    icon: <FaLeaf className="text-[#f0a39c] text-4xl mb-3" size={45} />,
     title: "100% Organic",
     desc: "All our produce is grown without harmful chemicals or pesticides.",
   },
   {
-    icon: <FaShippingFast className="text-primary text-4xl mb-3" size={45} />,
+    icon: <FaShippingFast className="text-[#f0a39c] text-4xl mb-3" size={45} />,
     title: "Fast Delivery",
     desc: "We deliver fresh produce at your doorstep within hours of harvesting.",
   },
   {
-    icon: <FaHandsHelping className="text-primary text-4xl mb-3" size={45} />,
+    icon: <FaHandsHelping className="text-[#f0a39c] text-4xl mb-3" size={45} />,
     title: "Farmer Support",
     desc: "Empowering local farmers with fair trade and sustainable practices.",
   },
   {
-    icon: <FaCheckCircle className="text-primary text-4xl mb-3" size={45} />,
+    icon: <FaCheckCircle className="text-[#f0a39c] text-4xl mb-3" size={45} />,
     title: "Quality Assured",
     desc: "Every item is checked for freshness and quality before delivery.",
   },

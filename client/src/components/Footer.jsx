@@ -10,7 +10,7 @@ const Footer = () => {
           className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold
          md:w-2/5"
         >
-          <span className="text-teal-400">Free</span> until you're ready 
+          <span className="text-[#f0a39c]">Free</span> until you're ready
           launch
         </h1>
         <div>
@@ -21,7 +21,7 @@ const Footer = () => {
            sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded px-2 focus:outline-none"
           />
           <button
-            className="bg-teal-400 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
+            className="bg-[#f0a39c] hover:bg-[#f0a39c] duration-300 px-5 py-2.5 font-[Poppins]
            rounded-md text-white md:w-auto w-full"
           >
             Request Code
@@ -35,7 +35,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
         {/* logo section */}
         <div>
-          <h3 className="text-2xl font-bold text-blue-700 mb-3">
+          <h3 className="text-2xl font-bold text-[#f0a39c] mb-3">
             Nutrionist
           </h3>
           <p className="text-sm text-gray-300">
@@ -46,61 +46,52 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h4 className="font-semibold mb-3 text-blue-700">Quick Links</h4>
+          <h4 className="font-semibold mb-3 text-[#f0a39c]">Quick Links</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/" className="hover:text-blue-600">
+              <Link to="/" className="hover:text-[#f0a39c]">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-blue-600">
+              <Link to="/" className="hover:text-[#f0a39c]">
                 About Us
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-blue-600">
-                Products
+              <Link to="/" className="hover:text-[#f0a39c]">
+                Programs
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-blue-600">
+              <Link to="/" className="hover:text-[#f0a39c]">
                 Contact
               </Link>
             </li>
           </ul>
         </div>
 
-        {/* Categories */}
+        {/* Policy */}
         <div>
-          <h4 className="font-semibold mb-3 text-blue-700">Categories</h4>
+          <h4 className="font-semibold mb-3 text-[#f0a39c]">Policy</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/" className="hover:text-blue-600">
-                Vegetables
+              <Link to="/" className="hover:text-[#f0a39c]">
+                Terms & Conditions
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-blue-600">
-                Fruits
+              <Link to="/" className="hover:text-[#f0a39c]">
+                Privacy Policy
               </Link>
             </li>
-            <li>
-              <Link to="/" className="hover:text-blue-600">
-                Dairy Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/" className="hover:text-blue-600">
-                Diet Plans
-              </Link>
-            </li>
+            
           </ul>
         </div>
 
         {/* Contact + Social */}
         <div>
-          <h4 className="font-semibold mb-3 text-blue-700">Contact</h4>
+          <h4 className="font-semibold mb-3 text-[#f0a39c]">Contact</h4>
           <p className="text-sm text-gray-300 mb-2">
             123 Organic Street, London, UK
           </p>
@@ -109,13 +100,13 @@ const Footer = () => {
           </p>
           <p className="text-sm text-gray-300 mb-4">Phone: +44 123 456 7890</p>
           <div className="flex space-x-4">
-            <a href="/" className="text-blue-700 hover:text-white">
+            <a href="/" className="text-[#f0a39c] hover:text-white">
               <FaFacebookF />
             </a>
-            <a href="/" className="text-blue-700 hover:text-white">
+            <a href="/" className="text-[#f0a39c] hover:text-white">
               <FaInstagram />
             </a>
-            <a href="/" className="text-blue-700 hover:text-white">
+            <a href="/" className="text-[#f0a39c] hover:text-white">
               <FaTwitter />
             </a>
           </div>

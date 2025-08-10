@@ -29,6 +29,9 @@ const Navbar = () => {
 
   return (
     <div className='shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40'>
+     <div className='w-full h-8 bg-white  justify-center items-center flex dark:bg-gray-900 dark:text-white duration-200'>
+      <marquee><h2 className='text-black font-semibold text-center sm:text-sm text-xs dark:text-white'>Empowering Your Journey to Parenthood – Expert Fertility Care, Every Step of the Way!</h2></marquee>
+     </div>
       {/* upper nav */}
       <div className='bg-primary dark:bg-gray-800 transition-colors duration-200 py-2'>
         <div className='flex justify-between h-10  items-center md:px-20 drop-shadow-md'>
@@ -37,16 +40,16 @@ const Navbar = () => {
       animate={{ opacity: 1 }} // Animate to opacity 1 (visible)
       transition={{ duration: 1 }} // Animation duration is 1 second
             >
-                <a href="#home"><img src={logo2} alt="Logo"  className='w-32 sm:w-36  hover:scale-105 transition-all'/></a>
+                <a href="#home"><img src={logo2} alt="Logo"  className='w-32 sm:w-40  hover:scale-105 transition-all'/></a>
             </motion.div>
           <div className={`xl:hidden lg:hidden md:hidden absolute flex flex-col items-center bg-white w-full 
           gap-6 top-12 right-0 transition-transform transform dark:bg-gray-900 ${isOpen ? "opacity-100, animate-slide-in-left" : "opacity-0" } `}>
-            <Link to='/'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-blue-300 rounded-full hover:scale-105 italic transition-transform transform'>Home</li></Link>
-            <Link to='/about'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-blue-300 rounded-full hover:scale-105 italic transition-transform transform'>About</li></Link>
-            <Link to='/packages'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-blue-300 rounded-full hover:scale-105 italic transition-transform transform'>Packages</li></Link>
-            <Link to='/services'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-blue-300 rounded-full hover:scale-105 italic transition-transform transform'>Services</li></Link>
-            <Link to='/blogs'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-blue-300 rounded-full hover:scale-105 italic transition-transform transform'>Blogs</li></Link>
-            <Link to='/contact'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-blue-300 rounded-full hover:scale-105 italic transition-transform transform'>Contact</li></Link>
+            <Link to='/'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Home</li></Link>
+            <Link to='/about'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>About</li></Link>
+            <Link to='/packages'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Programs</li></Link>
+            <Link to='/blogs'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Blogs</li></Link>
+            <Link to='/contact'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Contact</li></Link>
+            <Link to='/services'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Policy</li></Link>
           </div>
             {/* search bar and cart btn */}
             <div className='flex justify-between items-center gap-4 animate-slide-in-right transition-all duration-300'>
@@ -78,17 +81,17 @@ const Navbar = () => {
         <ul className='hidden md:flex justify-between items-center lg:gap-20 md:gap-12 xl:gap-32 text-gray-900 dark:text-gray-300
         text-md px-4 subpixel-antialiased font-semibold'>
           {/* Navigation Links */}
-        <Link to='/'>  <li className='xl:p-2 lg:p-4 md:p-4 hover:bg-blue-300 hover:border-gray-800 hover:border-2 rounded-full hover:scale-100 italic transition-transform transform'>Home
+        <Link to='/'>  <li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Home
           </li></Link>
-         <Link to='/about'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-blue-300 hover:border-gray-700 hover:border-2 rounded-full hover:scale-100 italic transition-transform transform'>About
+         <Link to='/about'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>About
           </li></Link>
-         <Link to='/packages'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-blue-300 hover:border-gray-700 hover:border-2 rounded-full hover:scale-100 italic transition-transform transform'>Packages</li>
+         <Link to='/packages'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Programs</li>
          </Link>
-         <Link to='/services'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-blue-300 hover:border-gray-700 hover:border-2 rounded-full hover:scale-100 italic transition-transform transform'>Services</li>
+         <Link to='/blogs'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Blogs</li>
          </Link>
-         <Link to='/blogs'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-blue-300 hover:border-gray-700 hover:border-2 rounded-full hover:scale-100 italic transition-transform transform'>Blogs</li>
+         <Link to='/contact'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Contact</li>
          </Link>
-         <Link to='/contact'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-blue-300 hover:border-gray-700 hover:border-2 rounded-full hover:scale-100 italic transition-transform transform'>Contact</li>
+         <Link to='/services'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Policy</li>
          </Link>
         </ul>
       </div>
