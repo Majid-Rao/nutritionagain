@@ -10,6 +10,7 @@ export default {
       colors: {
         primary: "#f2d2cf",
         secondary: "#f5bcb7ff",
+        ternary: "#f0a39c"
       },
       container: {
         center: true,

@@ -1,6 +1,6 @@
 import React from "react";
 import img from "../assets/process.jpg";
-
+import { useNavigate } from "react-router-dom";
 const steps = [
   {
     number: "01",
@@ -25,7 +25,9 @@ const steps = [
 ];
 
 const Howitworks = () => {
+  const navigate = useNavigate();
   return (
+    <>
     <section className="bg-gray-100 py-16 px-5 lg:px-20 dark:bg-gray-900 dark:text-white  ">
       <div className="flex flex-col lg:flex-row items-center gap-10 sm:pb-20 sm:pt-10 pb-5 ">
         {/* img section  */}
@@ -45,7 +47,7 @@ const Howitworks = () => {
           <div className="space-y-8">
             {steps.map((step, index) => (
               <div key={index} className="flex items-start gap-5">
-                <div className="text-[#f0a39c] text-3xl font-bold">
+                <div className="text-ternary text-3xl font-bold">
                   {step.number}
                 </div>
                 <div>
@@ -60,6 +62,13 @@ const Howitworks = () => {
         </div>
       </div>
     </section>
+     <div className="flex justify-center sm:pt-6 sm:pb-4 pt-0 pb-0 dark:bg-gray-800 dark:text-white duration-200">
+        <button className='bg-gradient-to-r from-ternary to-ternary text-black font-medium py-2 px-4 rounded-full
+        hover:scale-105 duration-200 animate-pulse' onClick={() => navigate('/consult')}>
+        Consult Now
+        </button> 
+        </div>
+</>
   );
 };
 

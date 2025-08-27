@@ -65,16 +65,16 @@ const CompleteBlog = () => {
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+              <button className="mt-3 w-full bg-ternary text-white py-2 rounded-md hover:bg-secondary transition">
                 Subscribe
               </button>
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Latest News</h2>
               <ul className="space-y-4">
-                <li className="border-b pb-2 text-gray-700 hover:text-blue-600 cursor-pointer">React 19 Beta Released</li>
-                <li className="border-b pb-2 text-gray-700 hover:text-blue-600 cursor-pointer">Tailwind CSS v4 Roadmap</li>
-                <li className="border-b pb-2 text-gray-700 hover:text-blue-600 cursor-pointer">Top 10 JS Frameworks in 2025</li>
+                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">React 19 Beta Released</li>
+                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Tailwind CSS v4 Roadmap</li>
+                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Top 10 JS Frameworks in 2025</li>
               </ul>
             </div>
           </div>

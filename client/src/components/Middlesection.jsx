@@ -8,7 +8,7 @@ const Middlesection = () => {
         {/* Left: Text Content */}
         <div className="lg:w-1/2 ">
           <h2 className="text-3xl font-bold text-gray-800 mb-4 sm:text-left text-center dark:text-white">Your Diet Matter's</h2>
-          <p className="text-[#f0a39c] font-semibold mb-3 sm:text-left text-center">
+          <p className="text-ternary font-semibold mb-3 sm:text-left text-center">
             Fresh. Local. Organic.
           </p>
           <p className="text-gray-600 mb-4 sm:text-left text-center dark:text-white">
@@ -23,7 +23,7 @@ const Middlesection = () => {
             straight to your doorstep.
           </p>
           <div className="flex justify-center items-center sm:justify-start">
-          <button className="bg-[#f0a39c]  text-white px-6 py-2 rounded hover:bg-pink-300 transition">
+          <button className="bg-ternary  text-white px-6 py-2 rounded hover:bg-pink-300 transition">
             Learn More
           </button>
           </div>

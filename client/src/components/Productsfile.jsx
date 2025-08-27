@@ -24,16 +24,16 @@ const Productsfile = () => {
         Our Packages
       </h2></div>
 
-      <div className="flex flex-wrap justify-center mb-6 space-x-4 text-sm font-medium text-blue-600">
+      <div className="flex flex-wrap justify-center mb-6 space-x-4 text-sm font-medium text-ternary">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
             className={`pb-1 border-b-2 ${
               selectedCategory === cat
-                ? "border-blue-600"
+                ? "border-ternary"
                 : "border-transparent"
-            } hover:border-blue-400 transition`}
+            } hover:border-secondary transition`}
           >
             {cat}
           </button>

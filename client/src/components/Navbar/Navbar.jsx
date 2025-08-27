@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import logo2 from '../../assets/logo2.webp'
 import { IoMdSearch,IoMdMenu  } from "react-icons/io";
-import { FaCartShopping } from "react-icons/fa6";
 import { MdOutlineDarkMode } from "react-icons/md";
-import { MdOutlineLightMode } from "react-icons/md";
+import { MdOutlineLightMode,MdCurrencyExchange } from "react-icons/md";
+
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
@@ -28,7 +29,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40'>
+    <div className='shadow-md bg-white dark:bg-gray-900 dark:text-white  duration-200 relative z-40'>
      <div className='w-full h-8 bg-white  justify-center items-center flex dark:bg-gray-900 dark:text-white duration-200'>
       <marquee><h2 className='text-black font-semibold text-center sm:text-sm text-xs dark:text-white'>Empowering Your Journey to Parenthood – Expert Fertility Care, Every Step of the Way!</h2></marquee>
      </div>
@@ -46,10 +47,10 @@ const Navbar = () => {
           gap-6 top-12 right-0 transition-transform transform dark:bg-gray-900 ${isOpen ? "opacity-100, animate-slide-in-left" : "opacity-0" } `}>
             <Link to='/'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Home</li></Link>
             <Link to='/about'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>About</li></Link>
-            <Link to='/packages'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Programs</li></Link>
+            <Link to='/consult'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Consult</li></Link>
             <Link to='/blogs'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Blogs</li></Link>
             <Link to='/contact'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Contact</li></Link>
-            <Link to='/services'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Policy</li></Link>
+            <Link to='/policy'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 italic transition-transform transform'>Policy</li></Link>
           </div>
             {/* search bar and cart btn */}
             <div className='flex justify-between items-center gap-4 animate-slide-in-right transition-all duration-300'>
@@ -62,10 +63,10 @@ const Navbar = () => {
                 group-hover:text-primary text-gray-500' />
               </div>
               {/* order btn */}
-              <button className='bg-gradient-to-r from-primary to-orange-300 dark:from-gray-700 dark:to-gray-600 text-white rounded-full px-4 py-1 hover:bg-gray-900 transition-all
-              duration-200 flex items-center gap-3 group' onClick={() => alert("Ordering feature coming soon!")}>
-               <span className='font-bold group-hover:block hidden transition-all duration-200'>Order</span> 
-               <FaCartShopping className='text-xl text-white drop-shadow-sm cursor-pointer animate-bounce-logo' />
+              <button className='bg-gradient-to-r from-ternary to-green-300 dark:from-gray-700 dark:to-gray-600 text-white rounded-full px-4 py-1 hover:bg-gray-900 transition-all
+              duration-200 flex items-center gap-3 group' onClick={() => navigate('/checkdata')}>
+               <span className='font-bold group-hover:block hidden transition-all duration-200'>PayNow</span> 
+               <MdCurrencyExchange className='text-xl text-black dark:text-white drop-shadow-sm cursor-pointer animate-bounce-logo' />
               </button>
               {/* Darkmode Toggle */}
               {darkMode ? (
@@ -80,18 +81,18 @@ const Navbar = () => {
       <div className='hidden md:flex justify-center items-center animate-fade-in bg-white dark:bg-gray-900 py-2'>
         <ul className='hidden md:flex justify-between items-center lg:gap-20 md:gap-12 xl:gap-32 text-gray-900 dark:text-gray-300
         text-md px-4 subpixel-antialiased font-semibold'>
-          {/* Navigation Links */}
-        <Link to='/'>  <li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Home
+          {/* Navigation Links */} 
+        <Link to='/'>  <li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 italic transition-transform transform'>Home
           </li></Link>
-         <Link to='/about'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>About
+         <Link to='/about'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 italic transition-transform transform'>About
           </li></Link>
-         <Link to='/packages'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Programs</li>
+         <Link to='/consult'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 italic transition-transform transform'>Consult</li>
          </Link>
-         <Link to='/blogs'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Blogs</li>
+         <Link to='/blogs'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 italic transition-transform transform'>Blogs</li>
          </Link>
-         <Link to='/contact'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Contact</li>
+         <Link to='/contact'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 italic transition-transform transform'>Contact</li>
          </Link>
-         <Link to='/services'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] rounded-md  hover:scale-100 italic transition-transform transform'>Policy</li>
+         <Link to='/policy'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 italic transition-transform transform'>Policy</li>
          </Link>
         </ul>
       </div>

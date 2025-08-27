@@ -47,7 +47,7 @@ import {
 	  name: "Your Orders",
 	  icon: MessageSquare,
 	  color: "#6EE7B7",
-	  href: "/orders",
+	  href: "/patients",
 	},
 	{
 	  name: "Complain's",

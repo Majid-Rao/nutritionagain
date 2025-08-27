@@ -19,7 +19,7 @@ const ProductCard = ({ image, title, price, oldPrice, discount, status }) => {
       <h3 className="text-lg font-semibold mt-4 text-center">{title}</h3>
 
       <div className="mt-2 text-center">
-        <span className="text-blue-600 font-bold">${price}</span>
+        <span className="text-ternary font-bold">${price}</span>
         {oldPrice && (
           <span className="text-gray-500 line-through ml-2">${oldPrice}</span>
         )}
@@ -28,7 +28,7 @@ const ProductCard = ({ image, title, price, oldPrice, discount, status }) => {
       {status === "soldout" ? (
         <p className="text-red-600 font-semibold mt-5 text-center">Sold Out</p>
       ) : (
-        <button className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded text-sm font-medium transition">
+        <button className="mt-4 w-full bg-ternary hover:bg-primary text-black py-2 px-4 rounded text-sm font-medium transition">
           Shop Now
         </button>
       )}

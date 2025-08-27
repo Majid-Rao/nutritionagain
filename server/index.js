@@ -9,6 +9,8 @@ const variationRoutes = require('./routes/variationRoutes'); // Import variation
 const packageRoutes = require('./routes/packageRoutes'); // Import package routes
 const orderRoutes = require('./routes/orderRoutes'); // Import order routes
 const buyRoutes = require('./routes/buyRoutes'); // Import order routes
+const customerRoutes = require('./routes/customerRoutes'); // Import customer routes
+const transactionRoutes = require('./routes/transactionRoutes'); // Import transaction routes
 
 
 const cors = require('cors');
@@ -40,6 +42,8 @@ app.use('/api', variationRoutes); // Use variation routes
 app.use('/api', packageRoutes); // Use package routes
 app.use('/api', orderRoutes); // Use order routes
 app.use('/api', buyRoutes); // Use buy routes
+app.use('/api', customerRoutes); // Use customer routes
+app.use('/api', transactionRoutes); // Use transaction routes
 // Global error handler
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;

@@ -2,9 +2,10 @@ import React from 'react'
 import women from '../../assets/aisha.webp'
 import diet from '../../assets/diet.png'
 import Slider from 'react-slick'
-
+import { useNavigate } from 'react-router-dom';
 
 function Hero() {
+const navigate = useNavigate();
 const ImageList = [
   {
     id: 1,
@@ -69,7 +70,7 @@ const settings = {
                 <p className='text-sm'>{data.description}</p>
                 <div>
                     <button className='bg-gradient-to-r from-[#f0a39c] to-[#f0a39c] text-white py-2 px-4 rounded-full
-                    hover:scale-105 duration-200 animate-pulse'>
+                    hover:scale-105 duration-200 animate-pulse' onClick={() => navigate('/consult')}>
                         Start Your Journey
                     </button> 
                 </div>
