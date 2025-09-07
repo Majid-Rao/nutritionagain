@@ -1,37 +1,53 @@
 import React from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer';
-import dr from '../assets/dr.webp'; 
-
+import one from '../assets/1.webp';
+import two from '../assets/2.webp';
+import { useNavigate } from 'react-router-dom';
 const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <>
     <Navbar />
     <div className="bg-blue-50">
      {/* Hero Section */}
 <section className="flex flex-col items-center py-16 bg-secondary text-black text-center relative animation-fade-in dark:bg-gray-700 dark:text-white duration-200">
-  <h1 className="text-5xl font-semibold mb-4 animate-slide-in-up">About Us</h1>
-  <p className="text-lg max-w-2xl mb-6 animate-slide-in-down">We are a passionate team dedicated to delivering high-quality solutions for our customers. Our innovative approach and commitment to excellence make us stand out in the industry.</p>
+  <h1 className="sm:text-5xl text-3xl font-semibold mb-4 animate-slide-in-up">About Us</h1>
+  <h2 className="sm:text-2xl text-xl font-semibold mb-4 animate-slide-in-up">Fertility Specialist | Clinical Dietitian | Lifestyle Medicine Expert</h2>
+  <p className="text-lg max-w-2xl mb-6 animate-slide-in-down">Welcome! We are Dr. Aisha and Team — a passionate, purpose-driven group of professionals committed to  healthcare, research, coaching, consulting, etc. Led by Dr. Aisha, a respected expert known for her integrity, compassion, and innovative thinking, we blend expertise with empathy in everything we do.</p>
 </section>
 
 {/* Our Mission Section */}
-<section className="py-16 bg-white  animation-slide-in-left relative dark:bg-gray-900 dark:text-white duration-200">
-  <div className="container mx-auto px-4 flex items-center justify-between">
-    <div className="w-full md:w-2/3">
-      <h2 className="text-4xl font-semibold text-center mb-4 text-ternary">Our Mission</h2>
-      <p className="text-lg text-center max-w-3xl mx-auto">We aim to revolutionize the way businesses operate by offering cutting-edge technology and exceptional service. Our mission is to help companies grow and thrive in an ever-evolving digital world.</p>
+<section className="py-16 bg-white animation-slide-in-left relative dark:bg-gray-900 dark:text-white duration-200">
+  <div className="container mx-auto px-2 flex flex-col md:flex-row justify-between items-center">
+    <div className="w-full md:w-2/3 mb-8 md:mb-0">
+      <h2 className="sm:text-3xl text-2xl font-semibold text-center mb-4 text-ternary">Hi, I’m Dr. Aisha Lakhwani</h2>
+      <p className="text-md text-center sm:max-w-xl max-w-lg">
+        I am a fertility specialist with advanced training from Harvard University (USA) in Lifestyle Medicine, and I started my journey in healthcare back in 2017.
+      </p>
+      <p className="text-md text-center sm:max-w-xl max-w-lg">
+        What began as a passion for nutrition and health soon evolved into a life-changing mission. I initially worked as a clinical dietitian, helping individuals manage weight, reverse chronic conditions like diabetes, and adopt healthier lifestyles. My dedication to evidence-based practices led me to pursue further specialization in lifestyle medicine — the foundation of much of my approach today. As a mother of two wonderful children — one currently in college and the other finishing high school — I deeply understand the emotions, challenges, and hopes that come with the journey to parenthood.
+        Today, I’m proud to run a thriving fertility and wellness clinic, supported by a dedicated team of 5 professionals who share my passion for transforming lives. I still remember the nervous excitement when I saw my first patient — the weight of their trust was humbling. And although I couldn’t promise perfection, I always promised commitment, honesty, and my very best. That promise still holds true today.
+        Over the years, I’ve had the privilege of guiding countless couples through their fertility journeys — from despair to hope, and eventually to the miracle of new life. Each positive pregnancy test, each baby photo shared with me, is a reminder of why I do what I do.
+        I’m grateful beyond words to every individual and couple who has believed in me, and in the power of my personalized fertility programs.
+        I am here to remind you — hope is real, healing is possible, and your dream of parenthood is valid. Let’s walk this journey together.
+      </p>
     </div>
-    <div className="w-full md:w-1/3 flex justify-end">
-      <img src={dr} alt="Mission Image" className="w-full max-w-xs md:max-w-sm animate-slide-in-right" />
+    <div className="w-full md:w-2/3 flex justify-center md:justify-end">
+      <img src={two} alt="Mission Image" className="w-full max-w-lg md:max-w-xl object-contain animate-slide-in-right" />
     </div>
   </div>
+  <div className='container mx-auto px-4  sm:pt-14 pt-16 text-center'>
+    <button className="bg-ternary text-black py-2 font-bold px-6 rounded-lg hover:bg-ternary hover:text-white transition-colors duration-300"
+        onClick={() => navigate('/consult')}>
+          Contact Us
+        </button>
+  </div>
 </section>
-
-
       {/* Our Team Section */}
-      <section className="py-16 bg-secondary dark:bg-gray-800 dark:text-white duration-200">
+      <section className="py-6 sm:py-16 bg-secondary dark:bg-gray-800 dark:text-white duration-200">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-semibold text-center text-black mb-8 animate-slide-in-right">Meet Our Team</h2>
+          <h2 className="sm:text-4xl text-3xl font-semibold text-center text-black mb-8 animate-slide-in-right">Meet Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
@@ -56,28 +72,48 @@ const AboutUs = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 bg-white  dark:bg-gray-900 dark:text-white duration-200">
+      <section className="py-6 sm:py-16 bg-white  dark:bg-gray-900 dark:text-white duration-200">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-semibold text-center text-ternary mb-6 animate-slide-in-left">Our Core Values</h2>
-          <ul className="space-y-4 text-lg max-w-3xl mx-auto">
+          <h2 className="sm:text-4xl text-2xl font-semibold text-center text-ternary mb-6 animate-slide-in-left">Our Team Core Values</h2>
+          <ul className="space-y-4 sm:text-lg text-md max-w-3xl mx-auto">
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> Innovation is at the heart of everything we do.
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Trust – We honor every relationship with confidentiality and respect
             </li>
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> Customer satisfaction drives our actions.
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Growth – Personally and professionally, we never stop learning.
             </li>
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> We foster a culture of collaboration and creativity.
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Excellence – We aim for the highest standards in all we deliver.
+            </li>
+            <li className="flex items-center justify-center">
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Kindness – Always, to ourselves and to each other.
             </li>
           </ul>
         </div>
       </section>
-
+      <section className="py-6 sm:py-16 pb-8 sm:pb-20 bg-secondary animation-slide-in-left relative dark:bg-gray-900 dark:text-white duration-200">
+  <div className="container mx-auto px-2 flex flex-col md:flex-row justify-between items-center">
+     <div className="w-full md:w-2/3 flex justify-center md:justify-start sm:mb-0 mb-10">
+      <img src={one} alt="Mission Image" className="w-full max-w-md md:max-w-lg object-contain animate-slide-in-right" />
+    </div>
+    <div className="w-full md:w-2/3 mb-8 md:mb-0">
+      <h2 className="sm:text-4xl text-xl font-semibold text-center mb-4 text-black dark:text-white">What Makes Us Different?</h2>
+      <ol className='list-disc list-inside space-y-2 text-md mb-4 px-8 sm:px-20'>
+      <li>We listen deeply before we act.</li>
+      <li>We tailor every approach to meet real, human needs.</li>
+      <li>We build relationships, not just services.</li>
+      <li>We are not transactional. We’re transformational.</li>
+    </ol>
+    </div>
+   
+  </div>
+</section>
       {/* Contact CTA Section */}
-      <section className="py-16 bg-secondary text-black text-center dark:bg-gray-800 dark:text-white duration-200  ">
-        <h2 className="text-4xl font-semibold mb-6 animate-slide-in-right">Get In Touch</h2>
+      <section className="py-16 bg-white  text-center dark:bg-gray-800 dark:text-white duration-200  ">
+        <h2 className="sm:text-4xl text-3xl font-semibold mb-6 animate-slide-in-right text-ternary">Get In Touch</h2>
         <p className="text-lg max-w-2xl mx-auto mb-8">We’d love to hear from you. Whether you’re interested in our services, have questions, or just want to connect, reach out to us today!</p>
-        <button className="bg-white text-ternary py-2 font-bold px-6 rounded-lg hover:bg-ternary hover:text-white transition-colors duration-300">
+        <button className="bg-ternary text-black py-2 font-bold px-6 rounded-lg hover:bg-ternary hover:text-white transition-colors duration-300"
+        onClick={() => navigate('/consult')}>
           Contact Us
         </button>
       </section>

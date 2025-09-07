@@ -7,17 +7,17 @@ const features = [
   {
     icon: <MdLocationOn  className="text-primary text-4xl mb-3" size={45} />,
     title: "Address",
-    desc: "All our produce is grown without harmful chemicals or pesticides.",
+    desc: "Physical location is opening soon!",
   },
   {
     icon: <MdOutlineMail  className="text-primary text-4xl mb-3" size={45} />,
     title: "Email",
-    desc: "We deliver fresh produce at your doorstep within hours of harvesting.",
+    desc: "Aishalakhwani10@gmail.com",
   },
   {
     icon: <FaPhoneVolume  className="text-primary text-4xl mb-3" size={45} />,
     title: "Phone",
-    desc: "Empowering local farmers with fair trade and sustainable practices.",
+    desc: "+16077690051",
   },
 ];
 

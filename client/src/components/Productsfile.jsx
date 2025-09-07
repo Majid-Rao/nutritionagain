@@ -3,14 +3,12 @@ import ProductCard from "../layouts/ProductCard";
 import products from "../data/productData";
 
 const categories = [
-  "FOOD & DRINKS",
-  "FRESH FRUITS",
-  "VEGETABLES",
-  "DRIED FOODS & NUTS",
+  "FOR MALE'S HEALTH",
+  "FOR FEMALE'S HEALTH",
 ];
 
 const Productsfile = () => {
-  const [selectedCategory, setSelectedCategory] = useState("FOOD & DRINKS");
+  const [selectedCategory, setSelectedCategory] = useState("FOR MALE'S HEALTH");
 
   const filteredProducts = products.filter(
     (product) => product.category === selectedCategory
@@ -21,7 +19,7 @@ const Productsfile = () => {
       <div className="flex justify-center ">
       <hr className="w-14 border-t-2  border-black mt-3 sm:mt-4 dark:border-white" />
       <h2 className="sm:text-3xl md:text-4xl text-xl font-bold text-center text-gray-800 mb-10 dark:text-white">
-        Our Packages
+        Our Programs
       </h2></div>
 
       <div className="flex flex-wrap justify-center mb-6 space-x-4 text-sm font-medium text-ternary">

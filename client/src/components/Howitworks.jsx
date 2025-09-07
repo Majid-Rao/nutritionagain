@@ -4,23 +4,28 @@ import { useNavigate } from "react-router-dom";
 const steps = [
   {
     number: "01",
-    title: "Place Your Order",
-    desc: "Browse our organic range and place your order in a few easy clicks.",
+    title: "Open Communication",
+    desc: "We value clarity and honesty. We encourage questions, feedback, and collaboration. Reach out to us via email, WhatsApp, or in-person during working hours.",
   },
   {
     number: "02",
-    title: "Harvest from Farm",
-    desc: "We pick the freshest items straight from local organic farms.",
+    title: "Respect Each Other’s Time",
+    desc: "We show up prepared and punctual. We appreciate scheduled meetings and timely responses. Emergencies are always given priority — we understand life happens.",
   },
   {
     number: "03",
-    title: "Eco-Packaging",
-    desc: "We use sustainable, hygienic packaging to ensure freshness.",
+    title: "Shared Responsibility",
+    desc: "We believe in accountability from both sides. We’re here to support you — and we appreciate when you’re actively engaged, too.",
   },
   {
     number: "04",
-    title: "Quick Delivery",
-    desc: "Your order reaches your doorstep within hours, farm-fresh.",
+    title: "Celebrate Progress",
+    desc: "We acknowledge wins — big or small. Your growth is our mission, and your success is our joy.",
+  },
+   {
+    number: "05",
+    title: "Boundaries & Balance",
+    desc: "We honor mental health and personal space — for you and for us. We honor mental health and personal space — for you and for us.",
   },
 ];
 
@@ -41,8 +46,8 @@ const Howitworks = () => {
 
         {/* content section  */}
         <div className="lg:w-1/2">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 sm:text-left text-center dark:text-white">
-            How It Works
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center  dark:text-white">
+            How to Work With Us
           </h2>
           <div className="space-y-8">
             {steps.map((step, index) => (

@@ -29,7 +29,7 @@ const ProductCard = ({ image, title, price, oldPrice, discount, status }) => {
         <p className="text-red-600 font-semibold mt-5 text-center">Sold Out</p>
       ) : (
         <button className="mt-4 w-full bg-ternary hover:bg-primary text-black py-2 px-4 rounded text-sm font-medium transition">
-          Shop Now
+          Consult Now
         </button>
       )}
     </div>
