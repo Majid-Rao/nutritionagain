@@ -1,30 +1,29 @@
 import React from "react";
 import img from "../assets/xyz.jpg"
-
+import { useNavigate } from "react-router-dom";
 const Middlesection = () => {
+  const Navigate = useNavigate();
   return (
     <section className="bg-white py-16 px-5 lg:px-20 dark:bg-gray-900 dark:text-white">
       <div className="flex flex-col-reverse lg:flex-row items-center gap-10 ">
         {/* Left: Text Content */}
         <div className="lg:w-1/2 ">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4 sm:text-left text-center dark:text-white">Your Diet Matter's</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4 sm:text-left text-center dark:text-white">About Dr Aisha Lakhwani</h2>
           <p className="text-ternary font-semibold mb-3 sm:text-left text-center">
-            Fresh. Local. Organic.
+            Fertility Expert
           </p>
+           <p className="text-gray-600 mb-4 font-semibold sm:text-left text-center dark:text-white">Hi, I’m Dr. Aisha Lakhwani.</p>
           <p className="text-gray-600 mb-4 sm:text-left text-center dark:text-white">
-            At NatureHarvest, we believe in bringing you the freshest organic
-            produce directly from our partnered farmers. Our mission is to
-            promote healthy living, sustainable farming, and fair trade for
-            local communities.
+           
+           I am a fertility specialist with advanced training from Harvard University (USA) in Lifestyle Medicine, and I started my journey in healthcare back in 2017.
+
           </p>
           <p className="text-gray-600 mb-6 sm:text-left text-center dark:text-white">
-            We carefully select farms that follow natural practices — no
-            chemicals, no shortcuts. Just pure, wholesome food delivered
-            straight to your doorstep.
+           Today, I’m proud to run a thriving fertility and wellness clinic, supported by a dedicated team of 5 professionals who share my passion for transforming lives.
           </p>
           <div className="flex justify-center items-center sm:justify-start">
-          <button className="bg-ternary  text-white px-6 py-2 rounded hover:bg-pink-300 transition">
-            Learn More
+          <button className="bg-ternary  text-white px-6 py-2 rounded hover:bg-pink-300 transition" onClick={()=>Navigate('/about')}>
+            Read More
           </button>
           </div>
         </div>

@@ -17,7 +17,7 @@ const products = [
     image: Watermelon,
     title: "Watermelon Juice",
     price: 39,
-    category: "FOR MALE'S HEALTH",
+    category: "Fertility Programs",
   },
   {
     image: Mango,
@@ -25,7 +25,7 @@ const products = [
     price: 70,
     oldPrice: 85,
     discount: 17,
-    category: "FOR MALE'S HEALTH",
+    category: "Fertility Programs",
   },
   {
     image: Grape,
@@ -33,7 +33,7 @@ const products = [
     price: 39,
     oldPrice: 55,
     discount: 29,
-    category: "FOR MALE'S HEALTH",
+    category: "Fertility Programs",
   },
   {
     image: Orange,
@@ -41,13 +41,13 @@ const products = [
     price: 59,
     oldPrice: 35,
     discount: 20,
-    category: "FOR MALE'S HEALTH",
+    category: "Fertility Programs",
   },
   {
     image: Apple,
     title: "Organic Apple",
     price: 29,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Strawberries,
@@ -55,13 +55,13 @@ const products = [
     price: 49,
     oldPrice: 65,
     discount: 20,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Pineapple,
     title: "Pineapple",
     price: 59,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Broccoli,
@@ -69,13 +69,13 @@ const products = [
     price: 99,
     oldPrice: 115,
     discount: 17,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Cucumber,
     title: "Cucumber",
     price: 39,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Spinach,
@@ -83,13 +83,13 @@ const products = [
     price: 89,
     oldPrice: 145,
     discount: 14,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Cauliflower,
     title: "Cauliflower",
     price: 79,
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
   {
     image: Walnuts,
@@ -97,7 +97,7 @@ const products = [
     price: 39,
     oldPrice: 52,
     discount: 25,
-    category: "FOR MALE'S HEALTH",
+    category: "Fertility Programs",
   },
   {
     image: Almonds,
@@ -105,7 +105,7 @@ const products = [
     price: 33,
     oldPrice: 59,
     status: "soldout",
-    category: "FOR FEMALE'S HEALTH",
+    category: "Reversal Programs",
   },
 ];
 

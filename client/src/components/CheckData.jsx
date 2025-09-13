@@ -75,22 +75,38 @@ const CheckData = () => {
   return (
     <>
       <Navbar />
+      <section className="flex flex-col items-center py-16 bg-secondary text-black text-center relative animation-fade-in dark:bg-gray-700 dark:text-white duration-200">
+  <h1 className="sm:text-4xl text-2xl font-semibold mb-4 animate-slide-in-up">Pay Your Amount</h1>
+  <h2 className=" sm:text-2xl text-lg font-semibold mb-4 animate-slide-in-up">Some Instructions</h2>
+   <ol className='list-disc  sm:text-left list-inside space-y-2 text-md mb-4'>
+      <li>Type your id in the search box.</li>
+      <li>You can see your info with amount after searching.</li>
+      <li>Then click to checkout button then you will redirect to paynow page.</li>
+      <li>At this page simply type your required payment details.</li>
+      
+    </ol></section>
       <div className="container mx-auto px-4 py-6">
         <div className="w-full max-w-sm mx-auto">
-          <input
-            type="text"
-            placeholder="Enter User ID"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-          />
+           <input
+    type="text"
+    inputMode="text"
+    placeholder="Enter User ID"
+    value={userId}
+    onChange={(e) => setUserId(e.target.value)}
+    onTouchStart={(e) => e.target.focus()}
+    autoComplete="off"
+    autoCorrect="off"
+    autoCapitalize="none"
+    spellCheck="false"
+    className="w-full p-3 border border-gray-300 rounded-lg appearance-none"
+  />
           <button
-            onClick={handleSearch}
-            disabled={loading}
-            className={`w-full mt-4 p-3 ${loading ? 'bg-gray-400' : 'bg-ternary'} text-black rounded-lg`}
-          >
-            {loading ? 'Searching...' : 'Search'}
-          </button>
+    onClick={handleSearch}
+    disabled={loading}
+    className={`w-full mt-4 p-3 ${loading ? 'bg-gray-400' : 'bg-ternary'} text-black rounded-lg`}
+  >
+    {loading ? 'Searching...' : 'Search'}
+  </button>
         </div>
 
         {error && (

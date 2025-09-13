@@ -65,9 +65,9 @@ const Testimonial = () => {
   return (
     <section className="bg-white py-16 px-4 dark:bg-gray-900 dark:text-white duration-200">
       <div className="flex justify-center ">
-      <hr className="w-14 border-t-2  border-black mt-3 sm:mt-4 dark:border-white" />
+   
       <h2 className="sm:text-3xl md:text-4xl text-xl font-bold text-center dark:text-white text-gray-800 mb-10">
-        What Our Customers Say
+        Our Testimonials
       </h2></div>
       <div className="slider-container max-w-6xl mx-auto">
         <Slider {...settings}>

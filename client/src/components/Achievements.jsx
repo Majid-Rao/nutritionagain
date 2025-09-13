@@ -7,7 +7,6 @@ const Achievements = () => {
     <section className="py-18 bg-gradient-to-r from-primary to-ternary pt-10 pb-10  text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900 duration-200">
       <div className="container mx-auto px-6 text-center">
         <div className="flex justify-center ">
-        <hr className="w-14 border-t-2  border-white mt-3 sm:mt-4" />
         <h2 className="sm:text-3xl md:text-4xl text-xl font-bold mb-8">
           Our Achievements
         </h2></div>

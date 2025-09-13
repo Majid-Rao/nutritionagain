@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer';
-import { FaPhoneVolume } from "react-icons/fa6";
-import { MdLocationOn,MdOutlineMail} from "react-icons/md";
+import { FaPhoneVolume,FaTiktok  } from "react-icons/fa6";
+import { MdOutlineMail} from "react-icons/md";
+import { RiContactsFill } from "react-icons/ri";
+import { LuInstagram } from "react-icons/lu";
+import { TiSocialFacebookCircular } from "react-icons/ti";
+import { Link } from 'react-router-dom';
 const features = [
   {
-    icon: <MdLocationOn  className="text-primary text-4xl mb-3" size={45} />,
-    title: "Address",
-    desc: "Physical location is opening soon!",
+    icon: <FaPhoneVolume  className="text-ternary text-4xl mb-3" size={45} />,
+    title: "Phone",
+    desc: "+16077690051",
   },
   {
-    icon: <MdOutlineMail  className="text-primary text-4xl mb-3" size={45} />,
+    icon: <MdOutlineMail  className="text-ternary text-4xl mb-3" size={45} />,
     title: "Email",
     desc: "Aishalakhwani10@gmail.com",
   },
   {
-    icon: <FaPhoneVolume  className="text-primary text-4xl mb-3" size={45} />,
-    title: "Phone",
-    desc: "+16077690051",
+    icon: <RiContactsFill  className="text-ternary text-4xl mb-3" size={45} />,
+    title: "Other Platforms",
+    desc: (
+      <>
+       <Link to="https://www.facebook.com">
+         <TiSocialFacebookCircular className="text-ternary text-3xl mb-3  mt-[-1px] dark:text-white" size={32} />
+       </Link>
+       <Link to="https://www.instagram.com">
+         <LuInstagram className="text-ternary text-3xl mb-2 ml-2 dark:text-white" size={28} />
+       </Link>
+       <Link to="https://www.tiktok.com">
+         <FaTiktok className="text-ternary text-3xl mb-2 ml-2 dark:text-white" size={28} />
+       </Link>
+      </>
+    ),
   },
 ];
 
@@ -30,14 +46,40 @@ const Contact = () => {
   
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const handleChange = (event) => {
+    
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
   };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission, you can use an API to send the form data to your server
-    setFormSubmitted(true);
+    console.log('Form submitted:', formData);
+    
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/submit-form`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      } else {
+        console.log('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   return (
@@ -45,8 +87,8 @@ const Contact = () => {
     <Navbar />
       {/* Hero Section */}
 <section className="flex flex-col items-center py-16 bg-secondary text-black text-center relative animation-fade-in dark:bg-gray-700 dark:text-white duration-200">
-  <h1 className="text-5xl font-semibold mb-4 animate-slide-in-up">Contact Us</h1>
-  <p className="text-lg max-w-2xl mb-6 animate-slide-in-down">We are a passionate team dedicated to delivering high-quality solutions for our customers. Our innovative approach and commitment to excellence make us stand out in the industry.</p>
+  <h1 className="text-3xl sm:text-5xl font-semibold mb-4 animate-slide-in-up">Contact Us</h1>
+  <p className="text-md sm:text-lg max-w-2xl mb-6 animate-slide-in-down">We are a passionate team dedicated to delivering high-quality solutions for our customers. Our innovative approach and commitment to excellence make us stand out in the industry.</p>
   </section>
      <section className="bg-white py-14 px-5 lg:px-14 text-center dark:bg-gray-900 dark:text-white duration-200">
       <h2 className="text-3xl font-bold mb-10  dark:text-white duration-200 text-ternary">Our Information</h2>
@@ -61,71 +103,78 @@ const Contact = () => {
             <h3 className="text-xl dark:text-white font-semibold mb-2 text-gray-700">
               {feature.title}
             </h3>
-            <p className="text-gray-600 dark:text-white text-sm">{feature.desc}</p>
+            <p className="text-gray-800 dark:text-white text-md flex justify-center">{feature.desc}</p>
           </div>
         ))}
       </div>
     </section>
-    {/* <div className="min-h-screen p-6 bg-blue-50 pt-8 dark:bg-gray-900 text-white duration-200">
-      <div className="container mx-auto">
-        <section className="md:flex md:justify-between md:space-x-8 ">
-          <div className="md:w-1/2 p-6 bg-white rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl animate-slide-in-left ">
-            <h3 className="text-2xl font-semibold text-black mb-4">Get In Touch</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="flex flex-col">
-                <label htmlFor="name" className="text-black">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                  required
-                />
-              </div>
+   <div className="min-h-screen p-6 bg-blue-50 pt-8 dark:bg-gray-900 text-black duration-200">
+        <div className="container mx-auto">
+          <section className="md:flex md:justify-between md:space-x-8">
+            <div className="md:w-1/2 p-6 bg-white rounded-lg shadow-lg">
+              <h3 className="text-2xl font-semibold text-black mb-4">Get In Touch</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-black mb-2">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded"
+                    placeholder="Your name"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="email" className="text-black">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                  required
-                />
-              </div>
+                <div className="mb-4">
+                  <label htmlFor="email" className="block text-black mb-2">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded"
+                    placeholder="Your email"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="message" className="text-black">Message</label>
-                <textarea
-                  name="message"
-                  id="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                  required
-                  rows="5"
-                />
-              </div>
+                <div className="mb-4">
+                  <label htmlFor="message" className="block text-black mb-2">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
+                    className="w-full p-2 border border-gray-300 rounded"
+                    placeholder="Your message"
+                    required
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="w-full bg-ternary text-white py-3 rounded-lg text-lg hover:bg-primary hover:text-black transition-colors duration-300"
-              >
-                Send Message
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  className="w-full bg-ternary text-white py-2 rounded hover:bg-primary"
+                >
+                  Send Message
+                </button>
+              </form>
 
-            {formSubmitted && (
-              <div className="mt-4 text-green-600">Thank you for reaching out to us! We will get back to you soon.</div>
-            )}
-          </div>
-        </section>
+              {formSubmitted && (
+                <div className="mt-4 text-green-600">
+                  Thank you! We'll get back to you soon.
+                </div>
+              )}
+            </div>
+          </section>
+        </div>
       </div>
-    </div> */}
     <Footer/>
     </>
   );
