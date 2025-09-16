@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../assets/xyz.jpg"
+import i from "../assets/i.webp"
 import { useNavigate } from "react-router-dom";
 const Middlesection = () => {
   const Navigate = useNavigate();
@@ -31,7 +32,7 @@ const Middlesection = () => {
         {/* Right: Image */}
         <div className="lg:w-1/2">
           <img
-            src={img}
+            src={i}
             alt="Our Farm"
             className="w-full h-auto rounded-lg shadow-lg"
           />

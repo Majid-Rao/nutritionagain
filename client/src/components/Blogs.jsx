@@ -14,7 +14,7 @@ const BlogCard = ({ blog }) => {
         alt={blog.heading}
       />
       <div className="p-6 space-y-4">
-        <h3 className="sm:text-2xl text-xl font-semibold text-gray-900 group-hover:text-primary transition duration-300">{blog.heading}</h3>
+        <h3 className="sm:text-xl text-lg font-semibold text-gray-900 group-hover:text-primary transition duration-300">{blog.heading}</h3>
         <p className="text-gray-700 text-base">{blog.description}</p>
         <div className="flex items-center justify-between">
           <Link

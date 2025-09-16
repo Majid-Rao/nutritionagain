@@ -72,9 +72,9 @@ const CompleteBlog = () => {
             <div>
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Latest News</h2>
               <ul className="space-y-4">
-                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">React 19 Beta Released</li>
-                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Tailwind CSS v4 Roadmap</li>
-                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Top 10 JS Frameworks in 2025</li>
+                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Trying to Conceive?</li>
+                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Pregnancy Tips</li>
+                <li className="border-b pb-2 text-gray-700 hover:text-black cursor-pointer">Fertility Awareness</li>
               </ul>
             </div>
           </div>

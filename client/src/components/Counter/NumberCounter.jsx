@@ -8,33 +8,33 @@ const NumberCounter = () => {
         {/* Expert Tutors */}
         <div className="flex flex-col items-center justify-center">
           <p className="text-3xl font-semibold">
-            <CountUp start={0} end={898} duration={3} />
+            <CountUp start={0} end={1000} separator="," suffix="+" duration={3} />
           </p>
-          <p>Expert tutors</p>
+          <p>Successful pregnancies</p>
         </div>
 
         {/* Hours Content */}
         <div className="flex flex-col items-center justify-center">
           <p className="text-3xl font-semibold">
-            <CountUp start={0} end={20000} separator="," suffix="+" duration={3} />
+            <CountUp start={0} end={4000} separator="," suffix="+" duration={3} />
           </p>
-          <p>Hours content</p>
+          <p>With low Amh</p>
         </div>
 
         {/* Subjects and Courses */}
         <div className="flex flex-col items-center justify-center">
           <p className="text-3xl font-semibold">
-            <CountUp start={0} end={298} duration={3} />
+            <CountUp start={0} end={1000} separator="," suffix="+" duration={3} />
           </p>
-          <p>Subjects and courses</p>
+          <p>Male clients</p>
         </div>
 
         {/* Active Students */}
         <div className="flex flex-col items-center justify-center">
           <p className="text-3xl font-semibold">
-            <CountUp start={0} end={72878} separator="," suffix="+" duration={3} />
+            <CountUp start={0} end={100} separator="," suffix="+" duration={3} />
           </p>
-          <p>Active students</p>
+          <p>Active patients</p>
         </div>
       </div>
     </div>

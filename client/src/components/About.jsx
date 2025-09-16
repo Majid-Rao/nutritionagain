@@ -20,8 +20,8 @@ const AboutUs = () => {
 
 {/* Our Mission Section */}
 <section className="py-16 bg-white animation-slide-in-left relative dark:bg-gray-900 dark:text-white duration-200">
-  <div className="container mx-auto px-2 flex flex-col md:flex-row justify-between items-center">
-    <div className="w-full md:w-2/3 mb-8 md:mb-0">
+  <div className="container sm:mx-10 px-2 flex flex-col md:flex-row justify-between items-center">
+    <div className="w-full md:w-3/3 mb-8 md:mb-0">
       <h2 className="sm:text-4xl text-2xl font-semibold text-center sm:text-left mb-4 text-ternary">Who We Are</h2>
       <p className="text-md text-center sm:text-left sm:max-w-xl max-w-lg">
        Welcome! We are Dr. Aisha and Team — a passionate, purpose-driven group of professionals committed to  healthcare, research, coaching, consulting, etc. Led by Dr. Aisha, a respected expert known for her integrity, compassion, and innovative thinking, we blend expertise with empathy in everything we do.
@@ -34,16 +34,16 @@ const AboutUs = () => {
         I am here to remind you — hope is real, healing is possible, and your dream of parenthood is valid. Let’s walk this journey together.
       </p>
     </div>
-    <div className="w-full md:w-2/3 flex justify-center md:justify-end mb-10">
+    <div className="w-full md:w-2/3 sm:ml-32 flex justify-center md:justify-end mb-10">
       <img src={aisha} alt="Mission Image" className="w-full max-w-sm md:max-w-lg object-contain animate-slide-in-right" />
     </div>
   </div>
-  <div className='container mx-auto px-4  sm:pt-14 pt-16 text-center'>
+  {/* <div className='container mx-auto px-4  sm:pt-14 pt-16 text-center'>
     <button className="bg-ternary text-black py-2 font-bold px-6 rounded-lg hover:bg-ternary hover:text-white transition-colors duration-300"
         onClick={() => navigate('/consult')}>
           Contact Us
         </button>
-  </div>
+  </div> */}
 </section>
       {/* Our Team Section */}
       <section className="py-6 sm:py-16 bg-secondary dark:bg-gray-800 dark:text-white duration-200">
@@ -53,20 +53,20 @@ const AboutUs = () => {
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">John Doe</h3>
-              <p className="text-center text-lg text-ternary">CEO & Founder</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">DR AISHA LAKHWANI</h3>
+              <p className="text-center text-lg text-ternary">CEO & FOUNDER</p>
             </div>
             {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
              <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/> 
-              <h3 className="text-2xl font-semibold text-center mb-2">Jane Smith</h3>
-              <p className="text-center text-lg text-ternary">Lead Developer</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">MR TALAL</h3>
+              <p className="text-center text-lg text-ternary">Graphic DESIGNER & VIDEO EDITOR</p>
             </div>
             {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">Alex Johnson</h3>
-              <p className="text-center text-lg text-ternary">UX/UI Designer</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS AREEBA </h3>
+              <p className="text-center text-lg text-ternary">MARKETING MANAGER</p>
             </div>
           </div>
           
@@ -76,20 +76,20 @@ const AboutUs = () => {
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">John Doe</h3>
-              <p className="text-center text-lg text-ternary">CEO & Founder</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS HINA </h3>
+              <p className="text-center text-lg text-ternary">SENIOR SALES REPRESENTATIVE</p>
             </div>
             {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">Jane Smith</h3>
-              <p className="text-center text-lg text-ternary">Lead Developer</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS SAIMA</h3>
+              <p className="text-center text-lg text-ternary">SALES REPRESENTATIVE</p>
             </div>
             {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">Alex Johnson</h3>
-              <p className="text-center text-lg text-ternary">UX/UI Designer</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS ANY</h3>
+              <p className="text-center text-lg text-ternary">-</p>
             </div>
           </div>
           
@@ -102,16 +102,25 @@ const AboutUs = () => {
           <h2 className="sm:text-4xl text-2xl font-semibold text-center text-ternary mb-6 animate-slide-in-left">Our Team Core Values</h2>
           <ul className="space-y-4 sm:text-lg text-md max-w-3xl mx-auto">
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> Trust – We honor every relationship with confidentiality and respect
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Compassion & Empathy 
             </li>
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> Growth – Personally and professionally, we never stop learning.
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Integrity & Trust
             </li>
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> Excellence – We aim for the highest standards in all we deliver.
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Excellence in Care
             </li>
             <li className="flex items-center justify-center">
-              <span className="text-xl mr-4 text-ternary">&#10003;</span> Kindness – Always, to ourselves and to each other.
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Innovation & Research
+            </li>
+             <li className="flex items-center justify-center">
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Patient-Centered Approach
+            </li>
+             <li className="flex items-center justify-center">
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Collaboration & Teamwork
+            </li>
+            <li className="flex items-center justify-center">
+              <span className="text-xl mr-4 text-ternary">&#10003;</span> Hope & Positivity
             </li>
           </ul>
         </div>

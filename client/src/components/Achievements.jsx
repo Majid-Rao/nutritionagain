@@ -17,10 +17,9 @@ const Achievements = () => {
             <div className="text-center mb-6">
               <FontAwesomeIcon icon={faTrophy} className="text-5xl text-yellow-500" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Award Winning</h3>
+            <h3 className="text-2xl font-semibold mb-3">Recognized Expert </h3>
             <p className="text-md">
-              Recognized as one of the top companies in our industry. Over
-              50+ awards for excellence and innovation.
+              Featured in live TV presentations as a trusted fertility and nutrition expert.
             </p>
           </div>
 
@@ -29,10 +28,9 @@ const Achievements = () => {
             <div className="text-center mb-6">
               <FontAwesomeIcon icon={faUsers} className="text-5xl text-blue-500" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Global Presence</h3>
+            <h3 className="text-2xl font-semibold mb-3">Global Impact </h3>
             <p className="text-md">
-              We have expanded our operations to over 25 countries worldwide,
-              serving more than 1 million customers.
+             Successfully guided and supported more than 10,000 patients worldwide on their fertility journey.
             </p>
           </div>
 
@@ -41,10 +39,9 @@ const Achievements = () => {
             <div className="text-center mb-6">
               <FontAwesomeIcon icon={faRocket} className="text-5xl text-red-500" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Innovation Leader</h3>
+            <h3 className="text-2xl font-semibold mb-3">Innovative Leadership </h3>
             <p className="text-md">
-              Over 100 patents in various fields of technology. We strive to
-              create innovative solutions that change the industry.
+              Pioneer of dynamic, science-backed approaches in fertility treatments.
             </p>
           </div>
 
@@ -53,10 +50,9 @@ const Achievements = () => {
             <div className="text-center mb-6">
               <FontAwesomeIcon icon={faClipboardCheck} className="text-5xl text-green-500" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Quality Assurance</h3>
+            <h3 className="text-2xl font-semibold mb-3">Proven Success </h3>
             <p className="text-md">
-              We maintain the highest standards of quality, with 99% customer
-              satisfaction rate and industry-leading certifications.
+             Achieved the highest success rates in low AMH pregnancies, offering hope where chances seemed slim.
             </p>
           </div>
 
@@ -65,10 +61,9 @@ const Achievements = () => {
             <div className="text-center mb-6">
               <FontAwesomeIcon icon={faPeopleCarry} className="text-5xl text-purple-500" />
             </div>
-            <h3 className="text-2xl font-semibold mb-3">Social Impact</h3>
+            <h3 className="text-2xl font-semibold mb-3">Male Fertility Solutions </h3>
             <p className="text-md">
-              Through charity and volunteer work, we've donated over $10 million
-              to various global causes and initiatives.
+             Successfully designed effective treatments for azoospermia and other male fertility challenges, helping couples achieve parenthood.
             </p>
           </div>
 

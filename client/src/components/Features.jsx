@@ -9,23 +9,23 @@ import { useNavigate } from "react-router-dom";
 const features = [
   {
     icon: <FaLeaf className="text-ternary text-4xl mb-3" size={45} />,
-    title: "100% Natural Treatments",
-    desc: "We use only natural approaches to support your fertility journey.",
+    title: "Natural & Holistic Treatment",
+    desc: "We focus on safe, non-invasive, and natural approaches that work with your body, not against it.",
   },
   {
     icon: <MdGroups className="text-ternary text-4xl mb-3" size={45} />,
-    title: "Expert Team",
-    desc: "Our team consists of experienced professionals dedicated to your health.",
+    title: "Highest Success Rates",
+    desc: "Our personalized fertility programs are designed to maximize your chances of success.",
   },
   {
     icon: <TbBabyCarriage className="text-ternary text-4xl mb-3" size={45} />,
-    title: "More Than 3000 + Pregnancies",
-    desc: "We have successfully supported over 3000 pregnancies.",
+    title: "Trusted & Science-Backed Methods",
+    desc: "Every recommendation is rooted in proven, research-based practices for reproductive health.",
   },
   {
     icon: <FaCheckCircle className="text-ternary text-4xl mb-3" size={45} />,
-    title: "Quality Assured",
-    desc: "We adhere to the highest standards of care and professionalism.",
+    title: "Simple & Realistic Plans",
+    desc: "Easy-to-follow lifestyle, nutrition, and treatment strategies tailored for long-term results.",
   },
 ];
 

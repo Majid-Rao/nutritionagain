@@ -1,36 +1,41 @@
 import React from "react";
-import img from "../assets/process.jpg";
+import report from "../assets/report.webp"
 import { useNavigate } from "react-router-dom";
 const steps = [
   {
     number: "01",
-    title: "Open Communication",
-    desc: "We value clarity and honesty. We encourage questions, feedback, and collaboration. Reach out to us via email, WhatsApp, or in-person during working hours.",
+    title: "Fill Out the Consultation Form ",
+    desc: "Start by completing our simple online consultation form with your details.",
   },
   {
     number: "02",
-    title: "Respect Each Other’s Time",
-    desc: "We show up prepared and punctual. We appreciate scheduled meetings and timely responses. Emergencies are always given priority — we understand life happens.",
+    title: "Wait 24–48 Hours ",
+    desc: "Our team carefully reviews each case and will get back to you within 1–2 working days.",
   },
   {
     number: "03",
-    title: "Shared Responsibility",
-    desc: "We believe in accountability from both sides. We’re here to support you — and we appreciate when you’re actively engaged, too.",
+    title: "Personalized Follow-Up ",
+    desc: "Once we contact you, we’ll gather more information to understand your fertility journey.",
   },
   {
     number: "04",
-    title: "Celebrate Progress",
-    desc: "We acknowledge wins — big or small. Your growth is our mission, and your success is our joy.",
+    title: "Case Investigation ",
+    desc: "Our experts will analyze your medical history to recommend the right program for you.",
   },
    {
     number: "05",
-    title: "Boundaries & Balance",
-    desc: "We honor mental health and personal space — for you and for us. We honor mental health and personal space — for you and for us.",
+    title: "Payment Details ",
+    desc: "Secure payment instructions will be shared once your program is finalized.",
+  },
+  {
+    number: "06",
+    title: "Confirm Enrollment  ",
+    desc: "Pay your program charges easily through our official website to confirm your spot.",
   },
 ];
 
 const Howitworks = () => {
-  const navigate = useNavigate();
+  
   return (
     <>
     <section className="bg-gray-100 py-16 px-5 lg:px-20 dark:bg-gray-900 dark:text-white  ">
@@ -38,7 +43,7 @@ const Howitworks = () => {
         {/* img section  */}
         <div className="lg:w-1/2">
           <img
-            src={img}
+            src={report}
             alt="Organic process"
             className="w-full h-auto rounded-lg shadow-lg"
           />
@@ -47,7 +52,7 @@ const Howitworks = () => {
         {/* content section  */}
         <div className="lg:w-1/2">
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center  dark:text-white">
-            How to Work With Us
+            How to Join Our Program
           </h2>
           <div className="space-y-8">
             {steps.map((step, index) => (

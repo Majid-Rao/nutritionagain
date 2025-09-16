@@ -37,9 +37,8 @@ const Footer = () => {
           <h3 className="text-2xl font-bold text-[#f0a39c] mb-3">
             Dr Aisha Lakhwani
           </h3>
-          <p className="text-sm text-gray-300">
-            I am a fertility specialist with advanced training from Harvard University (USA) in Lifestyle Medicine, and I started my journey in healthcare back in 2017.
-          </p>
+          <p className="text-lg text-gray-300">
+           Fertility & Low AMH Expert  </p>
         </div>
 
         {/* Quick Links */}

@@ -29,6 +29,13 @@
       <li>Share helpful health content and updates (only if you choose to receive them).</li>
       <li>Keep our website running smoothly and easy to use.</li>
     </ol>
+     <h2 className='sm:text-2xl text-xl mb-4' >Payment Policy</h2>
+    <ol className='list-disc list-inside space-y-2 text-md mb-4'>
+      <li><b>No Refund Policy-</b> Please note that all program fees are non-refundable once payment has been made.</li>
+      <li><b>Accepted Payment Method-</b> Payments can be made conveniently through bank transfer.</li>
+      <li><b>Mandatory Consultation Form-</b> To begin your fertility journey with us, you must first complete the consultation form. This allows our team to review your case and guide you toward the right program.</li>
+
+    </ol>
     <h2 className='sm:text-2xl text-xl mb-4' >How We Protect Your Privacy?</h2>
   <p className='text-md mb-4'>We treat your information with care and confidentiality. We never sell your data. Your details are only shared with trusted services like secure payment providers, or if we are legally required to do so.
   </p>
