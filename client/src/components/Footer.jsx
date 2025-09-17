@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaInstagram,FaLinkedinIn } from "react-icons/fa";
 import {Link} from "react-router-dom";
 const Footer = () => {
   return (
@@ -97,14 +97,14 @@ const Footer = () => {
           </p>
           <p className="text-sm text-gray-300 mb-4">Phone: +16077690051</p>
           <div className="flex space-x-4">
-            <Link href="/" className="text-[#f0a39c] hover:text-white">
+            <Link to="https://www.facebook.com/share/176EMJgtPy/" className="text-[#f0a39c] hover:text-white">
               <FaFacebookF />
             </Link>
-            <Link href="/" className="text-[#f0a39c] hover:text-white">
+            <Link to="https://www.instagram.com/dr_aishalakhwani?igsh=MW5kY3kwZTc5N2g5MQ==" className="text-[#f0a39c] hover:text-white">
               <FaInstagram />
             </Link>
-            <Link href="/" className="text-[#f0a39c] hover:text-white">
-              <FaTwitter />
+            <Link to="https://www.linkedin.com/in/draishalakhwani?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="text-[#f0a39c] hover:text-white">
+              <FaLinkedinIn />
             </Link>
           </div>
         </div>

@@ -23,13 +23,13 @@ const features = [
     title: "Other Platforms",
     desc: (
       <>
-       <Link to="https://www.facebook.com">
+       <Link to="https://www.facebook.com/share/176EMJgtPy/">
          <TiSocialFacebookCircular className="text-ternary text-3xl mb-3  mt-[-1px] dark:text-white" size={32} />
        </Link>
-       <Link to="https://www.instagram.com">
+       <Link to="https://www.instagram.com/dr_aishalakhwani?igsh=MW5kY3kwZTc5N2g5MQ==">
          <LuInstagram className="text-ternary text-3xl mb-2 ml-2 dark:text-white" size={28} />
        </Link>
-       <Link to="https://www.tiktok.com">
+       <Link to="https://vt.tiktok.com/ZSDBFugBS/">
          <FaTiktok className="text-ternary text-3xl mb-2 ml-2 dark:text-white" size={28} />
        </Link>
       </>
