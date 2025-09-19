@@ -90,12 +90,10 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-3 text-[#f0a39c]">Contact</h4>
           <p className="text-sm text-gray-300 mb-2">
-          Email: Aishalakhwani10@gmail.com
+          Email: aishalakhwani10@gmail.com
           </p>
-          <p className="text-sm text-gray-300 mb-2">
-            Email: Aishalakhwani10@gmail.com
-          </p>
-          <p className="text-sm text-gray-300 mb-4">Phone: +16077690051</p>
+      
+          <p className="text-sm text-gray-300 mb-4">Phone: +160 776 90051</p>
           <div className="flex space-x-4">
             <Link to="https://www.facebook.com/share/176EMJgtPy/" className="text-[#f0a39c] hover:text-white">
               <FaFacebookF />

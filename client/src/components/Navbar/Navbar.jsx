@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import logo2 from '../../assets/logo2.webp'
-import aot from '../../assets/aot.webp'
+import axt from '../../assets/axt.webp'
+
 import { IoMdSearch,IoMdMenu  } from "react-icons/io";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode,MdCurrencyExchange } from "react-icons/md";
@@ -42,7 +42,7 @@ const Navbar = () => {
       animate={{ opacity: 1 }} // Animate to opacity 1 (visible)
       transition={{ duration: 1 }} // Animation duration is 1 second
             >
-                <a href="#home"><img src={aot} alt="Logo"  className='w-32 sm:w-36  hover:scale-105 transition-all'/></a>
+                <a href="#home"><img src={axt} alt="Logo"  className='w-32 sm:w-36  hover:scale-105 transition-all'/></a>
             </motion.div>
           <div className={`xl:hidden lg:hidden md:hidden absolute flex flex-col items-center bg-white w-full 
           gap-6 top-12 right-0 transition-transform transform dark:bg-gray-700 ${isOpen ? "opacity-100, animate-slide-in-left" : "opacity-0" } `}>
@@ -51,7 +51,7 @@ const Navbar = () => {
             <Link to='/consult'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Consult</li></Link>
             <Link to='/blogs'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Blogs</li></Link>
             <Link to='/contact'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Contact</li></Link>
-            <Link to='/policy'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Policy</li></Link>
+            <Link to='/testimonials'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Testimonials</li></Link>
           </div>
             {/* search bar and cart btn */}
             <div className='flex justify-between items-center gap-4 animate-slide-in-right transition-all duration-300'>
@@ -93,8 +93,8 @@ const Navbar = () => {
          </Link>
          <Link to='/contact'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>Contact</li>
          </Link>
-         <Link to='/policy'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>Policy</li>
-         </Link>
+        <Link to='/testimonials'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Testimonials</li></Link>
+
         </ul>
       </div>
     </div>

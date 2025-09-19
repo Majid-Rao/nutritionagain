@@ -23,15 +23,26 @@ const AboutUs = () => {
   <div className="container sm:mx-10 px-2 flex flex-col md:flex-row justify-between items-center">
     <div className="w-full md:w-3/3 mb-8 md:mb-0">
       <h2 className="sm:text-4xl text-2xl font-semibold text-center sm:text-left mb-4 text-ternary">Who We Are</h2>
+      <h2 className="sm:text-2xl text-xl font-semibold text-center sm:text-left mb-4 text-black">Dr Aisha Lakhwani & Team</h2>
+      
       <p className="text-md text-center sm:text-left sm:max-w-xl max-w-lg">
-       Welcome! We are Dr. Aisha and Team — a passionate, purpose-driven group of professionals committed to  healthcare, research, coaching, consulting, etc. Led by Dr. Aisha, a respected expert known for her integrity, compassion, and innovative thinking, we blend expertise with empathy in everything we do.
+      Welcome! We are Dr. Aisha and Team, a passionate, purpose-driven group of professionals committed to healthcare, research, coaching, consulting, etc. Led by Dr. Aisha, a respected expert known for her integrity, compassion, and innovative thinking, we blend expertise with empathy in everything we do.
+What began as a passion for nutrition and health soon evolved into a life-changing mission.<br />
+At Dr Aisha Lakhwani, we believe that everyone deserves to experience the touch, the warmth, the feeling of parenthood, not through forceful medications or invasive procedures as a first choice, but through a deep, healing journey that begins with nutrition.
+     <br /><br />
       </p>
       <p className="text-md text-center sm:text-left sm:max-w-xl max-w-lg">
-        What began as a passion for nutrition and health soon evolved into a life-changing mission. I initially worked as a clinical dietitian, helping individuals manage weight, reverse chronic conditions like diabetes, and adopt healthier lifestyles. My dedication to evidence-based practices led me to pursue further specialization in lifestyle medicine — the foundation of much of my approach today. As a mother of two wonderful children — one currently in college and the other finishing high school — I deeply understand the emotions, challenges, and hopes that come with the journey to parenthood.
-        Today, I’m proud to run a thriving fertility and wellness clinic, supported by a dedicated team of 5 professionals who share my passion for transforming lives. I still remember the nervous excitement when I saw my first patient — the weight of their trust was humbling. And although I couldn’t promise perfection, I always promised commitment, honesty, and my very best. That promise still holds true today.
-        Over the years, I’ve had the privilege of guiding countless couples through their fertility journeys — from despair to hope, and eventually to the miracle of new life. Each positive pregnancy test, each baby photo shared with me, is a reminder of why I do what I do.
-        I’m grateful beyond words to every individual and couple who has believed in me, and in the power of my personalized fertility programs.
-        I am here to remind you — hope is real, healing is possible, and your dream of parenthood is valid. Let’s walk this journey together.
+       <b>Dr. Aisha Lakhwani,</b> is a Harvard certified <b>fertility & low AMH expert.</b> Our mission is to treat the root causes behind infertility, either its hormonal imbalance, PCOS, recurrent miscarriages ovarian failure, other reproductive issues or due to male factors i.e. low sperm count, pyospermia and other problems which are responsible for infertility. Dr. Aisha has worked with thousands of couples worldwide who were told they had “no hope”, helping them conceive naturally by restoring their body's balance through food and lifestyle, not just prescriptions
+      <br/><br/>
+      Our approach is evidence-based, personalized, and deeply compassionate. We don’t believe in similar treatment for all. Instead, we design fertility plans according to your body, your history, and your goals.
+      <br/><br/>
+      Behind Dr. Aisha is a dedicated team, all working together to ensure that every woman who walks into our community feels seen, heard, and supported. From daily check-ins to ongoing education and thorough follow-ups, we’re here with you in every step.
+      <br/><br/>
+      Whether you’re struggling with unexplained infertility, low AMH, IVF failure, PCOS, fibroid, endometriosis, male factor infertility or any other fertility issue, or want to prepare your body for pregnancy, we’re here for you.
+       <br/><br/>
+      <b>Ready to take control of your fertility naturally?</b>
+      Join our growing community of couples healing their hormones and rebuilding hope.
+
       </p>
     </div>
     <div className="w-full md:w-2/3 sm:ml-32 flex justify-center md:justify-end mb-10">
@@ -88,8 +99,8 @@ const AboutUs = () => {
             {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS ANY</h3>
-              <p className="text-center text-lg text-ternary">-</p>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS ANNY</h3>
+              <p className="text-center text-lg text-ternary">ASSISTANT</p>
             </div>
           </div>
           

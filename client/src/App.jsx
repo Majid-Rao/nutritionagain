@@ -28,6 +28,7 @@ import CustomerDetails from "./admin/pages/Patient"
 import UpdateCustomer from "./admin/pages/UpdateCustomer" 
 import PayNow from "./components/PayNow"
 import Terms from "./components/Terms"
+import TestimonialMain from "./components/TestimonialMain"
 function App() {
   const { isAuthenticated } = useAuth();
   return (
@@ -48,6 +49,7 @@ function App() {
     <Route path="/consult" element={<Consult/>}/>
     <Route path="/payment/:userId" element={<PayNow/>}/>
     <Route path="/terms" element={<Terms/>}/>
+    <Route path="/testimonials" element={<TestimonialMain/>}/>
     //admin routes
     <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login"/>} />
     <Route path="/addblogs" element={isAuthenticated ? <AddBlogs /> : <Navigate to="/login"/>} />
