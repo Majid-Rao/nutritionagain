@@ -7,6 +7,7 @@ import Navbar from './Navbar/Navbar'
 import Middlesection from './Middlesection'
 import Howitworks from './Howitworks'
 import Achievements from './Achievements'
+import SlidesHome from './SlidesHome'
 import Testimonial from './Testimonial'
 import Footer from './Footer'
 
@@ -20,6 +21,7 @@ const Home = () => {
    <Middlesection/>
    <Howitworks/>
    <Achievements/>
+    <SlidesHome/>
    <NumberCounter/>
    <Testimonial/>
    <Footer/>

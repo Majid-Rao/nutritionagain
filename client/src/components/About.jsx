@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer';
 import one from '../assets/1.webp';
-
+import SlidesHome from './SlidesHome';
 import aisha from '../assets/aisha.webp';
 import { useNavigate } from 'react-router-dom';
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -153,11 +153,12 @@ At Dr Aisha Lakhwani, we believe that everyone deserves to experience the touch,
    
   </div>
 </section>
+<SlidesHome/>
       {/* Contact CTA Section */}
-      <section className="py-16 bg-white  text-center dark:bg-gray-800 dark:text-white duration-200  ">
-        <h2 className="sm:text-4xl text-3xl font-semibold mb-6 animate-slide-in-right text-ternary">Get In Touch</h2>
+      <section className="py-16 bg-ternary text-center dark:bg-gray-800 dark:text-white duration-200  ">
+        <h2 className="sm:text-4xl text-3xl font-semibold mb-6 animate-slide-in-right text-black">Get In Touch</h2>
         <p className="text-lg max-w-2xl mx-auto mb-8">We’d love to hear from you. Whether you’re interested in our services, have questions, or just want to connect, reach out to us today!</p>
-        <button className="bg-ternary text-black py-2 font-bold px-6 rounded-lg hover:bg-ternary hover:text-white transition-colors duration-300"
+        <button className="bg-secondary text-black py-2 font-bold px-6 rounded-lg hover:bg-secondary hover:text-white transition-colors duration-300"
         onClick={() => navigate('/consult')}>
           Contact Us
         </button>
