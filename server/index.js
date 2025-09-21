@@ -12,7 +12,7 @@ const buyRoutes = require('./routes/buyRoutes'); // Import order routes
 const customerRoutes = require('./routes/customerRoutes'); // Import customer routes
 const transactionRoutes = require('./routes/transactionRoutes'); // Import transaction routes
 const mailerRoutes = require('./routes/mailerRoutes');
-const consultMailerRoutes = require('./routes/consultMailerRoutes');
+const consultemailRoutes = require('./routes/consultemailRoutes');
 
 
 
@@ -48,7 +48,7 @@ app.use('/api', buyRoutes); // Use buy routes
 app.use('/api', customerRoutes); // Use customer routes
 app.use('/api', transactionRoutes); // Use transaction routes
 app.use('/api', mailerRoutes); // Use mailer routes
-app.use('/api', consultMailerRoutes); // Use mailer routes
+app.use('/api', consultemailRoutes); // Use mailer routes
 // Global error handler
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
