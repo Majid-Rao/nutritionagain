@@ -60,15 +60,15 @@ const TestimonialMain = () => {
 
     <section className="bg-white py-16 px-4 dark:bg-gray-900 dark:text-white duration-200">
       
-      <div className="slider-container max-w-7xl mx-auto sm:pt-5 pb-10">
+      <div className="slider-container sm:max-w-7xl max-w-10xl mx-auto sm:pt-5 sm:pb-10 pb-5">
         <Slider {...settings}>
           {testimonials.map((item, index) => (
-            <div key={index} className="px-4 mb-2">
+            <div key={index} className="px-4 mb-2 ">
               <div className=" p-6  dark:bg-gray-900 dark:text-white duration-200 rounded-lg  text-center h-full">
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="w-full sm:h-[450px] h-[110px] mx-auto mb-5 rounded-lg object-cover"
+                  className="w-full sm:h-[450px] h-[140px] mx-auto sm:mb-5 sm:rounded-lg rounded-lg  sm:object-cover"
                 />
                
               </div>

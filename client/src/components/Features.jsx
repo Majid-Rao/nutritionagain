@@ -55,12 +55,12 @@ const Features = () => {
         ))}
       </div>
     </section>
-     <div className="flex justify-center sm:pt-6 sm:pb-4 pt-0 pb-0 dark:bg-gray-800 dark:text-white duration-200">
+     {/* <div className="flex justify-center sm:pt-6 sm:pb-4 pt-0 pb-0 dark:bg-gray-800 dark:text-white duration-200">
         <button className='bg-gradient-to-r from-ternary to-ternary text-black font-medium py-2 px-4 rounded-full
         hover:scale-105 duration-200 animate-pulse' onClick={() => navigate('/consult')}>
         Consult Now
         </button> 
-        </div>
+        </div> */}
      
     </>
   );

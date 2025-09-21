@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const sendEmail = async (senderEmail, recipientEmail, subject, messageContent) => {
   try {
     const response = await resend.emails.send({
-      from: `From website contact form <onboarding@resend.dev>`, // required verified sender domain or default Resend domain
+      from: `website Consultation form <onboarding@resend.dev>`, // required verified sender domain or default Resend domain
       to: recipientEmail, // Admin email
       reply_to: senderEmail, // So admin can reply directly to sender
       subject: subject,

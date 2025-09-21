@@ -284,19 +284,27 @@ const handleSubmit = async (e) => {
         }
       }
     );
-
-    if (response.status === 201) {
-      setError("");
-      alert("Form submitted successfully!");
-      // Optional: Reset form
-      setFormData(initialFormState);
-      
+     const emailRes = await axios.post(
+    `${import.meta.env.VITE_BACKEND_API}api/submitconsult-form`,
+    { name: transformedData.fullName, email: transformedData.email },
+    {
+      headers: { 'Content-Type': 'application/json' }
     }
+  );
 
-  } catch (err) {
-    console.error("Submission error:", err.response?.data || err);
-    setError(err.response?.data?.error || "Error submitting form. Please check all required fields.");
+    if (response.status === 201 && emailRes.status === 200) {
+    setError("");
+    alert("Form submitted successfully!");
+    setFormData(initialFormState); // Reset form
   }
+
+} catch (err) {
+  console.error("Submission error:", err.response?.data || err);
+  setError(
+    err.response?.data?.error ||
+    "Error submitting form. Please check all required fields."
+  );
+}
 };
 
   return (

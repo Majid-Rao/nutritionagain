@@ -64,19 +64,19 @@ At Dr Aisha Lakhwani, we believe that everyone deserves to experience the touch,
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">DR AISHA LAKHWANI</h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">DR Aisha Lakhwani</h3>
               <p className="text-center text-lg text-ternary">CEO & FOUNDER</p>
             </div>
             {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
              <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/> 
-              <h3 className="text-2xl font-semibold text-center mb-2">MR TALAL</h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MR Talal</h3>
               <p className="text-center text-lg text-ternary">Graphic DESIGNER & VIDEO EDITOR</p>
             </div>
             {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS AREEBA </h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS Areeba</h3>
               <p className="text-center text-lg text-ternary">MARKETING MANAGER</p>
             </div>
           </div>
@@ -87,19 +87,19 @@ At Dr Aisha Lakhwani, we believe that everyone deserves to experience the touch,
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS HINA </h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS Hina</h3>
               <p className="text-center text-lg text-ternary">SENIOR SALES REPRESENTATIVE</p>
             </div>
             {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS SAIMA</h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS Saima</h3>
               <p className="text-center text-lg text-ternary">SALES REPRESENTATIVE</p>
             </div>
             {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS ANNY</h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS Anny</h3>
               <p className="text-center text-lg text-ternary">ASSISTANT</p>
             </div>
           </div>
@@ -136,28 +136,22 @@ At Dr Aisha Lakhwani, we believe that everyone deserves to experience the touch,
           </ul>
         </div>
       </section>
-      <section className="py-6 sm:py-16 pb-8 sm:pb-20 bg-secondary animation-slide-in-left relative dark:bg-gray-900 dark:text-white duration-200">
-  <div className="container mx-auto px-2 flex flex-col md:flex-row justify-between items-center">
-     <div className="w-full md:w-2/3 flex justify-center md:justify-start sm:mb-0 mb-10">
-      <img src={one} alt="Mission Image" className="w-full max-w-md md:max-w-lg object-contain animate-slide-in-right" />
-    </div>
-    <div className="w-full md:w-2/3 mb-8 md:mb-0">
-      <h2 className="sm:text-4xl text-xl font-semibold text-center mb-4 text-black dark:text-white">What Makes Us Different?</h2>
-      <ol className='list-disc list-inside space-y-2 text-md mb-4 px-8 sm:px-20'>
+      <section className="py-6 sm:py-14 pb-8 sm:pb-16 bg-secondary animation-slide-in-left relative dark:bg-gray-900 dark:text-white duration-200">
+  <div className="container mx-auto px-2 flex flex-col justify-center items-center">
+      <h2 className="sm:text-5xl text-xl font-semibold mb-8 text-black dark:text-white">What Makes Us Different?</h2>
+      <ol className='list-disc list-inside space-y-5 text-md mb-4 px-12 sm:px-0 text-sm sm:text-lg'>
       <li>We listen deeply before we act.</li>
       <li>We tailor every approach to meet real, human needs.</li>
       <li>We build relationships, not just services.</li>
       <li>We are not transactional. We’re transformational.</li>
     </ol>
-    </div>
-   
   </div>
 </section>
 <SlidesHome/>
       {/* Contact CTA Section */}
       <section className="py-16 bg-ternary text-center dark:bg-gray-800 dark:text-white duration-200  ">
-        <h2 className="sm:text-4xl text-3xl font-semibold mb-6 animate-slide-in-right text-black">Get In Touch</h2>
-        <p className="text-lg max-w-2xl mx-auto mb-8">We’d love to hear from you. Whether you’re interested in our services, have questions, or just want to connect, reach out to us today!</p>
+        <h2 className="sm:text-4xl text-2xl font-semibold mb-6 animate-slide-in-right text-black">Get In Touch</h2>
+        <p className="text-sm sm:text-lg max-w-2xl mx-auto mb-8">We’d love to hear from you. Whether you’re interested in our services, have questions, or just want to connect, reach out to us today!</p>
         <button className="bg-secondary text-black py-2 font-bold px-6 rounded-lg hover:bg-secondary hover:text-white transition-colors duration-300"
         onClick={() => navigate('/consult')}>
           Contact Us

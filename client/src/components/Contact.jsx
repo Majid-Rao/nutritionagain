@@ -1,17 +1,19 @@
 import React, { useState,useEffect } from 'react';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer';
-import { FaPhoneVolume,FaTiktok  } from "react-icons/fa6";
+import { FaPhoneVolume,FaTiktok ,FaXTwitter  } from "react-icons/fa6";
 import { MdOutlineMail} from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 import { LuInstagram } from "react-icons/lu";
 import { TiSocialFacebookCircular } from "react-icons/ti";
+import { FaMedium } from "react-icons/fa";
+
 import { Link } from 'react-router-dom';
 const features = [
   {
     icon: <FaPhoneVolume  className="text-ternary text-4xl mb-3" size={45} />,
     title: "Phone",
-    desc: "+160 776 90051",
+    desc: "+1 607 769 0051",
   },
   {
     icon: <MdOutlineMail  className="text-ternary text-4xl mb-3" size={45} />,
@@ -31,6 +33,12 @@ const features = [
        </Link>
        <Link to="https://vt.tiktok.com/ZSDBFugBS/">
          <FaTiktok className="text-ternary text-3xl mb-2 ml-5 dark:text-white" size={26} />
+       </Link>
+       <Link to="https://medium.com/@aishalakhwani10">
+         <FaMedium className="text-ternary text-3xl mb-2 ml-5 dark:text-white" size={26} />
+       </Link>
+       <Link to="https://medium.com/@aishalakhwani10">
+         <FaXTwitter className="text-ternary text-3xl mb-2 ml-5 dark:text-white" size={26} />
        </Link>
       </>
     ),

@@ -1,23 +1,24 @@
 // controllers/contactController.js
-const sendEmail = require('../utils/mailer.js'); // Import the email sending function
+const sendEmail = require('../utils/cmailer.js'); // Import the email sending function
 
 // Controller function to handle form submission and email sending
-const handleContactForm = async (req, res) => {
-  const { name, email, message } = req.body;
+const handleMailerForm = async (req, res) => {
+  const { name, email } = req.body;
 
   // Validate the required fields
-  if (!name || !email || !message) {
+  if (!name || !email) {
     return res.status(400).json({ message: 'All fields are required!' });
   }
 
   // Prepare email details
   const senderEmail = email; // User's email from the form
   const recipientEmail = 'aishalakhwani10@gmail.com'; // Admin's hardcoded email
-  const subject = 'New Form Submission'; // Email subject
+  const subject = 'Consultation Form Submission'; // Email subject
   const messageContent = `
     <p><strong>Name:</strong> ${name}</p>
     <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Message:</strong> ${message}</p>
+    <p><strong>Message:</strong> Check Your Dashboard for more details.</p>
+
   `;
 
   try {
@@ -38,4 +39,4 @@ const handleContactForm = async (req, res) => {
   }
 };
 
-module.exports = { handleContactForm };
+module.exports = { handleMailerForm };

@@ -42,13 +42,13 @@ const Navbar = () => {
       animate={{ opacity: 1 }} // Animate to opacity 1 (visible)
       transition={{ duration: 1 }} // Animation duration is 1 second
             >
-                <a href="#home"><img src={axt} alt="Logo"  className='w-32 sm:w-36  hover:scale-105 transition-all'/></a>
+                <a href="/"><img src={axt} alt="Logo"  className='w-32 sm:w-36  hover:scale-105 transition-all'/></a>
             </motion.div>
           <div className={`xl:hidden lg:hidden md:hidden absolute flex flex-col items-center bg-white w-full 
           gap-6 top-12 right-0 transition-transform transform dark:bg-gray-700 ${isOpen ? "opacity-100, animate-slide-in-left" : "opacity-0" } `}>
             <Link to='/'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Home</li></Link>
             <Link to='/about'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>About</li></Link>
-            <Link to='/consult'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Consult</li></Link>
+            <Link to='/consult'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Consultation form</li></Link>
             <Link to='/blogs'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Blogs</li></Link>
             <Link to='/contact'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Contact</li></Link>
             <Link to='/testimonials'><li className='list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md  hover:scale-105 transition-transform transform'>Testimonials</li></Link>
@@ -80,14 +80,14 @@ const Navbar = () => {
       </div>
       {/* lower nav */}
       <div className='hidden md:flex justify-center items-center animate-fade-in bg-white dark:bg-gray-900 py-2'>
-        <ul className='hidden md:flex justify-between items-center lg:gap-20 md:gap-12 xl:gap-32 text-gray-900 dark:text-gray-300
+        <ul className='hidden md:flex justify-between items-center lg:gap-20 md:gap-12 xl:gap-28 text-gray-900 dark:text-gray-300
         text-md px-4 subpixel-antialiased font-semibold'>
           {/* Navigation Links */} 
         <Link to='/'>  <li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>Home
           </li></Link>
          <Link to='/about'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>About
           </li></Link>
-         <Link to='/consult'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>Consult</li>
+         <Link to='/consult'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>Consultation form</li>
          </Link>
          <Link to='/blogs'><li className='xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md  hover:scale-100 transition-transform transform'>Blogs</li>
          </Link>

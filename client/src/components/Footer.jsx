@@ -1,5 +1,6 @@
 import React from "react";
-import { FaFacebookF, FaInstagram,FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram,FaLinkedinIn ,FaMedium} from "react-icons/fa";
+import {FaTiktok ,FaXTwitter  } from "react-icons/fa6";
 import {Link} from "react-router-dom";
 const Footer = () => {
   return (
@@ -93,7 +94,7 @@ const Footer = () => {
           Email: aishalakhwani10@gmail.com
           </p>
       
-          <p className="text-sm text-gray-300 mb-4">Phone: +160 776 90051</p>
+          <p className="text-sm text-gray-300 mb-4">Phone: +1 607 769 0051</p>
           <div className="flex space-x-4">
             <Link to="https://www.facebook.com/share/176EMJgtPy/" className="text-[#f0a39c] hover:text-white">
               <FaFacebookF />
@@ -103,6 +104,15 @@ const Footer = () => {
             </Link>
             <Link to="https://www.linkedin.com/in/draishalakhwani?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="text-[#f0a39c] hover:text-white">
               <FaLinkedinIn />
+            </Link>
+            <Link to="https://vt.tiktok.com/ZSDBFugBS/">
+            <FaTiktok className="text-[#f0a39c] hover:text-white" />
+            </Link>
+            <Link to="https://medium.com/@aishalakhwani10">
+            <FaMedium className="text-[#f0a39c] hover:text-white" />
+            </Link>
+            <Link to="https://medium.com/@aishalakhwani10">
+            <FaXTwitter className="text-[#f0a39c] hover:text-white" />
             </Link>
           </div>
         </div>
