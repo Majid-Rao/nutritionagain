@@ -111,7 +111,7 @@ const Footer = () => {
             <Link to="https://medium.com/@aishalakhwani10">
             <FaMedium className="text-[#f0a39c] hover:text-white" />
             </Link>
-            <Link to="https://medium.com/@aishalakhwani10">
+            <Link to="https://x.com/AishaLakhw11844">
             <FaXTwitter className="text-[#f0a39c] hover:text-white" />
             </Link>
           </div>
