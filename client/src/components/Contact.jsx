@@ -37,7 +37,7 @@ const features = [
        <Link to="https://medium.com/@aishalakhwani10">
          <FaMedium className="text-ternary text-3xl mb-2 ml-5 dark:text-white" size={26} />
        </Link>
-       <Link to="https://medium.com/@aishalakhwani10">
+       <Link to="https://x.com/AishaLakhw11844">
          <FaXTwitter className="text-ternary text-3xl mb-2 ml-5 dark:text-white" size={26} />
        </Link>
       </>
