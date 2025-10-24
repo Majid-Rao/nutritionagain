@@ -82,12 +82,6 @@ function Login() {
                 {loading ? <Spin /> :'Sign In'}
                 </Button>
             </Form.Item>
-            <Form.Item>
-              <Link to="/register">
-              <Button size="large" className="btn">Create an account</Button>
-              </Link>
-              
-            </Form.Item>
           </Form>
         </Flex>
       

@@ -20,7 +20,11 @@ const CompleteBlog = () => {
     fetchBlog();
   }, [id]);
 
-  if (!blog) return <div className="text-center py-10">Loading...</div>;
+  if (!blog) return (
+      <div className="flex justify-center items-center py-20">
+            <div className="w-12 h-12 border-4 border-primary border-dashed rounded-full animate-spin"></div>
+          </div>
+  )
 
   return (
     <>
