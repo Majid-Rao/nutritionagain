@@ -14,7 +14,6 @@ const transactionRoutes = require('./routes/transactionRoutes'); // Import trans
 const mailerRoutes = require('./routes/mailerRoutes');
 const consultemailRoutes = require('./routes/consultemailRoutes');
 const testimonialRoutes = require( "./routes/testimonialRoutes"); // import testimonial routes
-const programRoutes = require('./routes/programRoutes');
 
 
 const cors = require('cors');
@@ -51,7 +50,7 @@ app.use('/api', transactionRoutes); // Use transaction routes
 app.use('/api', mailerRoutes); // Use mailer routes
 app.use('/api', consultemailRoutes); // Use mailer routes
 app.use('/api', testimonialRoutes); // Use testimonial routes
-app.use('/api', programRoutes); // Use program routes
+
 // Global error handler
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
