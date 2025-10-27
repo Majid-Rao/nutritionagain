@@ -8,7 +8,7 @@ import Middlesection from './Middlesection'
 import Howitworks from './Howitworks'
 import Achievements from './Achievements'
 import SlidesHome from './SlidesHome'
-import Testimonial from './Testimonial'
+import Testimonial from './TestimonialSlider'
 import Footer from './Footer'
 
 const Home = () => {

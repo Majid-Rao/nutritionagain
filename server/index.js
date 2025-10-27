@@ -13,6 +13,7 @@ const customerRoutes = require('./routes/customerRoutes'); // Import customer ro
 const transactionRoutes = require('./routes/transactionRoutes'); // Import transaction routes
 const mailerRoutes = require('./routes/mailerRoutes');
 const consultemailRoutes = require('./routes/consultemailRoutes');
+const testimonialRoutes = require('./routes/testimonialRoutes');
 
 
 
@@ -49,6 +50,8 @@ app.use('/api', customerRoutes); // Use customer routes
 app.use('/api', transactionRoutes); // Use transaction routes
 app.use('/api', mailerRoutes); // Use mailer routes
 app.use('/api', consultemailRoutes); // Use mailer routes
+app.use('/api', testimonialRoutes); // Use mailer routes
+
 // Global error handler
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
