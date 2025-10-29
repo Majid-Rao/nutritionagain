@@ -17,8 +17,8 @@ import { Link } from "react-router-dom";
 
 const SIDEBAR_ITEMS = [
   { name: "Dashboard", icon: BarChart2, color: "#6366f1", href: "/admin" },
-  { name: "Add Packages", icon: Users, color: "#8B5CF6", href: "/addpackages" },
-  { name: "View Packages", icon: NotebookPen, color: "#EC4899", href: "/viewpackages" },
+  // { name: "Add Packages", icon: Users, color: "#8B5CF6", href: "/addpackages" },
+  // { name: "View Packages", icon: NotebookPen, color: "#EC4899", href: "/viewpackages" },
   { name: "Add Blogs", icon: ArrowLeftRight, color: "#10B981", href: "/addblogs" },
   { name: "View Blogs", icon: BookOpenCheck, color: "#F59E0B", href: "/viewblogs" },
   { name: "Add Variation", icon: ArrowLeftRight, color: "#10B981", href: "/addvariation" },
@@ -29,8 +29,8 @@ const SIDEBAR_ITEMS = [
   { name: "View Programs", icon: BookOpenCheck, color: "#F59E0B", href: "/viewprograms" },
   { name: "Update Programs", icon: BookOpenCheck, color: "#F59E0B", href: "/updateprogram/:id" },
   { name: "Your Orders", icon: MessageSquare, color: "#6EE7B7", href: "/patients" },
-  { name: "Complain's", icon: TrendingUp, color: "#3B82F6", href: "/" },
-  { name: "Feedbacks", icon: MessageSquare, color: "#6EE7B7", href: "/" },
+  { name: "Complain's", icon: TrendingUp, color: "#3B82F6", href: "#" },
+  { name: "Feedbacks", icon: MessageSquare, color: "#6EE7B7", href: "#" },
 ];
 
 const Sidebar = () => {
