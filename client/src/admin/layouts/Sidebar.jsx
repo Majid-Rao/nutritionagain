@@ -29,8 +29,8 @@ const SIDEBAR_ITEMS = [
   { name: "View Programs", icon: BookOpenCheck, color: "#F59E0B", href: "/viewprograms" },
   { name: "Update Programs", icon: BookOpenCheck, color: "#F59E0B", href: "/updateprogram/:id" },
   { name: "Your Orders", icon: MessageSquare, color: "#6EE7B7", href: "/patients" },
-  { name: "Complain's", icon: TrendingUp, color: "#3B82F6", href: "#" },
-  { name: "Feedbacks", icon: MessageSquare, color: "#6EE7B7", href: "#" },
+  // { name: "Complain's", icon: TrendingUp, color: "#3B82F6", href: "/" },
+  // { name: "Feedbacks", icon: MessageSquare, color: "#6EE7B7", href: "/" },
 ];
 
 const Sidebar = () => {
