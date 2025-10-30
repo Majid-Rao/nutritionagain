@@ -6,8 +6,8 @@ const fs = require('fs');
 exports.createProgram = async (req, res) => {
   try {
     const { heading, description, content } = req.body;
-    let image = null;
-    let video = null;
+    let image ;
+    let video ;
 
     // Check if files are uploaded
     if (req.files) {
