@@ -14,7 +14,7 @@ const AddPrograms = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!name || !description || !content) {
@@ -22,80 +22,76 @@ const AddPrograms = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("heading", name);
-    formData.append("description", description);
-    formData.append("content", content);
-    
-    // Add file validation with type checking
-    if (image) {
-      if (image.size > 5242880) {
-        toast.error("Image size should be less than 5MB");
-        return;
+    // Convert files to base64 before sending
+    const prepareFormData = async () => {
+      const formData = new FormData();
+      formData.append("heading", name);
+      formData.append("description", description);
+      formData.append("content", content);
+      
+      if (image) {
+        try {
+          const base64Image = await convertToBase64(image);
+          formData.append("image", base64Image);
+        } catch (err) {
+          throw new Error("Error processing image: " + err.message);
+        }
       }
-      // Validate image type
-      const validImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-      if (!validImageTypes.includes(image.type)) {
-        toast.error("Please upload a valid image file (JPEG, PNG, WEBP, GIF)");
-        return;
+      
+      if (video) {
+        try {
+          const base64Video = await convertToBase64(video);
+          formData.append("video", base64Video);
+        } catch (err) {
+          throw new Error("Error processing video: " + err.message);
+        }
       }
-      formData.append("image", image);
-    }
-    
-    if (video) {
-      if (video.size > 104857600) {
-        toast.error("Video size should be less than 100MB");
-        return;
-      }
-      // Validate video type
-      const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg'];
-      if (!validVideoTypes.includes(video.type)) {
-        toast.error("Please upload a valid video file (MP4, WEBM, OGG)");
-        return;
-      }
-      formData.append("video", video);
-    }
+      
+      return formData;
+    };
 
     try {
       setLoading(true);
       const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
       
-      // Log the request details
-      console.log("Submitting to:", apiUrl);
-      console.log("Form Data Contents:", {
-        heading: name,
-        description: description,
-        contentLength: content.length,
-        hasImage: !!image,
-        hasVideo: !!video
-      });
+      // Verify API URL
+      if (!apiUrl) {
+        throw new Error("API URL is not configured properly");
+      }
 
+      console.log("API URL:", apiUrl);
+      
+      const formData = await prepareFormData();
+      
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Accept": "application/json",
+          "Content-Type": "application/json",
         },
-        body: formData,
+        body: JSON.stringify(Object.fromEntries(formData)),
       });
 
-      // Log the response status
-      console.log("Response status:", response.status);
-      
-      const result = await response.json();
-      console.log("Response data:", result);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `Server error: ${response.status}`);
+      }
 
-      if (response.ok) {
+      const result = await response.json();
+      
+      if (result.status === "success") {
         toast.success("Program added successfully!");
         resetForm();
         window.dispatchEvent(new Event("programAdded"));
       } else {
-        throw new Error(result.message || 'Server responded with an error');
+        throw new Error(result.message || "Failed to add program");
       }
+
     } catch (err) {
-      console.error("Error details:", {
+      console.error("Submission Error:", {
         message: err.message,
         stack: err.stack,
-        response: err.response
+        apiUrl: import.meta.env.VITE_BACKEND_API
       });
       
       toast.error(err.message || "Error adding program. Please try again.");
@@ -113,6 +109,14 @@ const AddPrograms = () => {
     setVideo(null);
     setMessage("✅ Program added successfully!");
     setTimeout(() => setMessage(""), 2500);
+  };
+    const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   };
    const handleImageChange = (e) => {
     const file = e.target.files[0];
