@@ -4,7 +4,7 @@ import "react-quill-new/dist/quill.snow.css";
 import Header from "../layouts/Header";
 import Sidebar from "../layouts/Sidebar";
 import toast from "react-hot-toast";
-
+import axios from "axios";
 const AddPrograms = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -14,100 +14,55 @@ const AddPrograms = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
+  // ...existing imports...
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
     
-    if (!name || !description || !content) {
-      toast.error("Please fill all required fields");
-      return;
+  if (!name || !description || !content) {
+    toast.error("Please fill all required fields");
+    return;
+  }
+
+  try {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("heading", name);
+    formData.append("description", description);
+    formData.append("content", content);
+    
+    if (image) {
+      formData.append("image", image);
+    }
+    
+    if (video) {
+      formData.append("video", video);
     }
 
-    try {
-      setLoading(true);
-      const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
-      
-      // Validate API URL
-      if (!apiUrl) {
-        toast.error("API configuration missing");
-        return;
+    const response = await axios.post(
+      `${import.meta.env.VITE_BACKEND_API}api/addprogram`, 
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
       }
+    );
 
-      console.log("Submitting to API:", apiUrl);
-
-      const formData = new FormData();
-      formData.append("heading", name);
-      formData.append("description", description);
-      formData.append("content", content);
-      
-      // Add file validation before append
-      if (image) {
-        if (!validateFile(image, 'image')) return;
-        formData.append("image", image);
-      }
-      
-      if (video) {
-        if (!validateFile(video, 'video')) return;
-        formData.append("video", video);
-      }
-
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        body: formData
-      });
-
-      const result = await response.json();
-      console.log("Server response:", result);
-
-      if (response.status === 500) {
-        throw new Error("Server error - please try again later");
-      }
-
-      if (!response.ok) {
-        throw new Error(result.message || `Error: ${response.status}`);
-      }
-
+    if (response.data.status === 'success') {
       toast.success("Program added successfully!");
       resetForm();
       window.dispatchEvent(new Event("programAdded"));
-
-    } catch (err) {
-      console.error("Submission failed:", {
-        error: err.message,
-        status: err.status,
-        apiUrl: import.meta.env.VITE_BACKEND_API
-      });
-      
-      toast.error(
-        err.message === "Failed to fetch" 
-          ? "Cannot connect to server" 
-          : err.message || "Error adding program"
-      );
-      
-      setMessage("❌ Upload failed - please try again");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Add file validation helper
-  const validateFile = (file, type) => {
-    const maxSize = type === 'image' ? 5242880 : 104857600; // 5MB for images, 100MB for videos
-    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    const validVideoTypes = ['video/mp4', 'video/webm'];
-
-    if (file.size > maxSize) {
-      toast.error(`${type === 'image' ? 'Image' : 'Video'} size too large`);
-      return false;
     }
 
-    const validTypes = type === 'image' ? validImageTypes : validVideoTypes;
-    if (!validTypes.includes(file.type)) {
-      toast.error(`Invalid ${type} format`);
-      return false;
-    }
+  } catch (err) {
+    console.error("Upload error:", err);
+    toast.error(err.response?.data?.message || "Error adding program");
+    setMessage("❌ Upload failed - please try again");
+  } finally {
+    setLoading(false);
+  }
+};
 
-    return true;
-  };
+ 
 
   const resetForm = () => {
     setName("");
