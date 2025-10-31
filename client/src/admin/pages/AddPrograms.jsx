@@ -22,80 +22,54 @@ const AddPrograms = () => {
       return;
     }
 
-    // Convert files to base64 before sending
-    const prepareFormData = async () => {
+    try {
+      setLoading(true);
+      const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
+      
+      if (!apiUrl) {
+        throw new Error("API URL is not configured properly");
+      }
+
       const formData = new FormData();
       formData.append("heading", name);
       formData.append("description", description);
       formData.append("content", content);
       
       if (image) {
-        try {
-          const base64Image = await convertToBase64(image);
-          formData.append("image", base64Image);
-        } catch (err) {
-          throw new Error("Error processing image: " + err.message);
-        }
+        formData.append("image", image);
       }
       
       if (video) {
-        try {
-          const base64Video = await convertToBase64(video);
-          formData.append("video", base64Video);
-        } catch (err) {
-          throw new Error("Error processing video: " + err.message);
-        }
-      }
-      
-      return formData;
-    };
-
-    try {
-      setLoading(true);
-      const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
-      
-      // Verify API URL
-      if (!apiUrl) {
-        throw new Error("API URL is not configured properly");
+        formData.append("video", video);
       }
 
-      console.log("API URL:", apiUrl);
-      
-      const formData = await prepareFormData();
-      
       const response = await fetch(apiUrl, {
         method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: formData
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || `Server error: ${response.status}`);
+        throw new Error(result.message || `Server error: ${response.status}`);
       }
 
-      const result = await response.json();
-      
-      if (result.status === "success") {
+      // Success case
+      toast.success("Program added successfully!");
+      resetForm();
+      window.dispatchEvent(new Event("programAdded"));
+
+    } catch (err) {
+      if (err.message.includes("Program created successfully")) {
+        // Handle success case that was incorrectly thrown as error
         toast.success("Program added successfully!");
         resetForm();
         window.dispatchEvent(new Event("programAdded"));
       } else {
-        throw new Error(result.message || "Failed to add program");
+        console.error("Error:", err.message);
+        toast.error(err.message || "Error adding program. Please try again.");
+        setMessage("❌ " + (err.message || "Error adding program"));
       }
-
-    } catch (err) {
-      console.error("Submission Error:", {
-        message: err.message,
-        stack: err.stack,
-        apiUrl: import.meta.env.VITE_BACKEND_API
-      });
-      
-      toast.error(err.message || "Error adding program. Please try again.");
-      setMessage("❌ " + (err.message || "Error adding program"));
     } finally {
       setLoading(false);
     }
@@ -110,14 +84,7 @@ const AddPrograms = () => {
     setMessage("✅ Program added successfully!");
     setTimeout(() => setMessage(""), 2500);
   };
-    const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
+
    const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
