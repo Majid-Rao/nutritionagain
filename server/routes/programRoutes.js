@@ -6,46 +6,28 @@ const fs = require('fs');
 const programController = require('../controllers/programController');
 
 // Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+const dir = process.env.NODE_ENV === "production"
+  ? "/tmp/programs"
+  : path.join(__dirname, "../uploads/programs");
+
+// Safely create directory
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, { recursive: true });
 }
-
-// File type validation
-const fileFilter = (req, file, cb) => {
-  const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-  const allowedVideoTypes = ['video/mp4', 'video/webm', 'video/ogg'];
-
-  if (file.fieldname === 'image' && allowedImageTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else if (file.fieldname === 'video' && allowedVideoTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error('Invalid file type'), false);
-  }
-};
 
 // Configure storage
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadsDir);
+  destination: (req, file, cb) => {
+    cb(null, dir);
   },
-  filename: function (req, file, cb) {
-    // Sanitize filename
-    const sanitizedName = path.basename(file.originalname).replace(/[^a-zA-Z0-9]/g, '');
-    cb(null, `${Date.now()}-${sanitizedName}${path.extname(file.originalname)}`);
-  }
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
 });
 
 // Configure multer
-const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: {
-    fileSize: 100 * 1024 * 1024, // 100MB max file size
-    files: 2 // Max number of files
-  }
-});
+const upload = multer({ storage });
+
 
 // Error handling middleware
 const handleUploadError = (err, req, res, next) => {
@@ -65,19 +47,11 @@ const handleUploadError = (err, req, res, next) => {
 };
 
 // Routes with error handling
-router.post('/addprogram', 
-  (req, res, next) => {
-    upload.fields([
-      { name: 'image', maxCount: 1 }, 
-      { name: 'video', maxCount: 1 }
-    ])(req, res, (err) => {
-      if (err) {
-        handleUploadError(err, req, res, next);
-      } else {
-        next();
-      }
-    });
-  },
+router.post("/addprogram", 
+  upload.fields([
+    { name: 'image', maxCount: 1 },
+    { name: 'video', maxCount: 1 }
+  ]), 
   programController.createProgram
 );
 
