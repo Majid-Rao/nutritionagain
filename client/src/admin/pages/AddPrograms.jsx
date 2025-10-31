@@ -14,9 +14,7 @@ const AddPrograms = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleImageChange = (e) => setImage(e.target.files[0]);
-  const handleVideoChange = (e) => setVideo(e.target.files[0]);
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!name || !description || !content) {
@@ -29,18 +27,30 @@ const handleSubmit = async (e) => {
     formData.append("description", description);
     formData.append("content", content);
     
-    // Add file validation
+    // Add file validation with type checking
     if (image) {
-      if (image.size > 5242880) { // 5MB limit
+      if (image.size > 5242880) {
         toast.error("Image size should be less than 5MB");
+        return;
+      }
+      // Validate image type
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+      if (!validImageTypes.includes(image.type)) {
+        toast.error("Please upload a valid image file (JPEG, PNG, WEBP, GIF)");
         return;
       }
       formData.append("image", image);
     }
     
     if (video) {
-      if (video.size > 104857600) { // 100MB limit
+      if (video.size > 104857600) {
         toast.error("Video size should be less than 100MB");
+        return;
+      }
+      // Validate video type
+      const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+      if (!validVideoTypes.includes(video.type)) {
+        toast.error("Please upload a valid video file (MP4, WEBM, OGG)");
         return;
       }
       formData.append("video", video);
@@ -49,7 +59,16 @@ const handleSubmit = async (e) => {
     try {
       setLoading(true);
       const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
-      console.log("Submitting to:", apiUrl); // Debug log
+      
+      // Log the request details
+      console.log("Submitting to:", apiUrl);
+      console.log("Form Data Contents:", {
+        heading: name,
+        description: description,
+        contentLength: content.length,
+        hasImage: !!image,
+        hasVideo: !!video
+      });
 
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -59,34 +78,63 @@ const handleSubmit = async (e) => {
         body: formData,
       });
 
+      // Log the response status
+      console.log("Response status:", response.status);
+      
       const result = await response.json();
+      console.log("Response data:", result);
 
       if (response.ok) {
-        console.log("Success:", result);
         toast.success("Program added successfully!");
-        
-        // Reset form
-        setName("");
-        setDescription("");
-        setContent("");
-        setImage(null);
-        setVideo(null);
-        setMessage("✅ Program added successfully!");
-        
-        // Trigger refresh
+        resetForm();
         window.dispatchEvent(new Event("programAdded"));
       } else {
-        console.error("Server Error:", result);
-        toast.error(result.message || "Failed to add program");
-        setMessage("❌ " + (result.message || "Failed to add program"));
+        throw new Error(result.message || 'Server responded with an error');
       }
     } catch (err) {
-      console.error("Client Error:", err);
-      toast.error("Error adding program");
-      setMessage("❌ Error adding program");
+      console.error("Error details:", {
+        message: err.message,
+        stack: err.stack,
+        response: err.response
+      });
+      
+      toast.error(err.message || "Error adding program. Please try again.");
+      setMessage("❌ " + (err.message || "Error adding program"));
     } finally {
       setLoading(false);
-      setTimeout(() => setMessage(""), 2500);
+    }
+  };
+
+  const resetForm = () => {
+    setName("");
+    setDescription("");
+    setContent("");
+    setImage(null);
+    setVideo(null);
+    setMessage("✅ Program added successfully!");
+    setTimeout(() => setMessage(""), 2500);
+  };
+   const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5242880) {
+        toast.error("Image size should be less than 5MB");
+        e.target.value = '';
+        return;
+      }
+      setImage(file);
+    }
+  };
+
+  const handleVideoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 104857600) {
+        toast.error("Video size should be less than 100MB");
+        e.target.value = '';
+        return;
+      }
+      setVideo(file);
     }
   };
   const quillModules = {
