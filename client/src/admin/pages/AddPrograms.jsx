@@ -14,7 +14,7 @@ const AddPrograms = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
- const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!name || !description || !content) {
@@ -26,20 +26,27 @@ const AddPrograms = () => {
       setLoading(true);
       const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
       
+      // Validate API URL
       if (!apiUrl) {
-        throw new Error("API URL is not configured properly");
+        toast.error("API configuration missing");
+        return;
       }
+
+      console.log("Submitting to API:", apiUrl);
 
       const formData = new FormData();
       formData.append("heading", name);
       formData.append("description", description);
       formData.append("content", content);
       
+      // Add file validation before append
       if (image) {
+        if (!validateFile(image, 'image')) return;
         formData.append("image", image);
       }
       
       if (video) {
+        if (!validateFile(video, 'video')) return;
         formData.append("video", video);
       }
 
@@ -49,30 +56,57 @@ const AddPrograms = () => {
       });
 
       const result = await response.json();
+      console.log("Server response:", result);
 
-      if (!response.ok) {
-        throw new Error(result.message || `Server error: ${response.status}`);
+      if (response.status === 500) {
+        throw new Error("Server error - please try again later");
       }
 
-      // Success case
+      if (!response.ok) {
+        throw new Error(result.message || `Error: ${response.status}`);
+      }
+
       toast.success("Program added successfully!");
       resetForm();
       window.dispatchEvent(new Event("programAdded"));
 
     } catch (err) {
-      if (err.message.includes("Program created successfully")) {
-        // Handle success case that was incorrectly thrown as error
-        toast.success("Program added successfully!");
-        resetForm();
-        window.dispatchEvent(new Event("programAdded"));
-      } else {
-        console.error("Error:", err.message);
-        toast.error(err.message || "Error adding program. Please try again.");
-        setMessage("❌ " + (err.message || "Error adding program"));
-      }
+      console.error("Submission failed:", {
+        error: err.message,
+        status: err.status,
+        apiUrl: import.meta.env.VITE_BACKEND_API
+      });
+      
+      toast.error(
+        err.message === "Failed to fetch" 
+          ? "Cannot connect to server" 
+          : err.message || "Error adding program"
+      );
+      
+      setMessage("❌ Upload failed - please try again");
     } finally {
       setLoading(false);
     }
+  };
+
+  // Add file validation helper
+  const validateFile = (file, type) => {
+    const maxSize = type === 'image' ? 5242880 : 104857600; // 5MB for images, 100MB for videos
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    const validVideoTypes = ['video/mp4', 'video/webm'];
+
+    if (file.size > maxSize) {
+      toast.error(`${type === 'image' ? 'Image' : 'Video'} size too large`);
+      return false;
+    }
+
+    const validTypes = type === 'image' ? validImageTypes : validVideoTypes;
+    if (!validTypes.includes(file.type)) {
+      toast.error(`Invalid ${type} format`);
+      return false;
+    }
+
+    return true;
   };
 
   const resetForm = () => {
@@ -189,7 +223,7 @@ const AddPrograms = () => {
                   <label className="block text-gray-300 mb-2 font-medium">
                     Detailed Content
                   </label>
-                  <div className="bg-gray-700 rounded-md border border-gray-600">
+                  <div className="bg-gray-400 rounded-md border border-gray-600">
                     <ReactQuill
                       theme="snow"
                       value={content}
