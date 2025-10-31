@@ -16,54 +16,79 @@ const AddPrograms = () => {
 
   const handleImageChange = (e) => setImage(e.target.files[0]);
   const handleVideoChange = (e) => setVideo(e.target.files[0]);
-
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!name || !description || !content) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("heading", name);
     formData.append("description", description);
     formData.append("content", content);
-    if (image) formData.append("image", image);
-    if (video) formData.append("video", video);
+    
+    // Add file validation
+    if (image) {
+      if (image.size > 5242880) { // 5MB limit
+        toast.error("Image size should be less than 5MB");
+        return;
+      }
+      formData.append("image", image);
+    }
+    
+    if (video) {
+      if (video.size > 104857600) { // 100MB limit
+        toast.error("Video size should be less than 100MB");
+        return;
+      }
+      formData.append("video", video);
+    }
 
     try {
       setLoading(true);
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_API}api/addprogram`, // Make sure this URL is correct in production
-        {
-          method: "POST",
-          headers: {
-            "Accept": "application/json", // Add this if your backend expects this header
-            // "Authorization": `Bearer ${YOUR_TOKEN}`,  // If you need an auth token
-          },
-          body: formData,
-        }
-      );
+      const apiUrl = `${import.meta.env.VITE_BACKEND_API}api/addprogram`;
+      console.log("Submitting to:", apiUrl); // Debug log
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+        },
+        body: formData,
+      });
+
+      const result = await response.json();
 
       if (response.ok) {
-        const result = await response.json();
-        console.log("Program added successfully:", result);
-        setMessage("✅ Program added successfully!");
+        console.log("Success:", result);
+        toast.success("Program added successfully!");
+        
+        // Reset form
         setName("");
         setDescription("");
         setContent("");
         setImage(null);
         setVideo(null);
+        setMessage("✅ Program added successfully!");
+        
+        // Trigger refresh
         window.dispatchEvent(new Event("programAdded"));
       } else {
-        const errorResponse = await response.json();
-        console.error("Error:", errorResponse);
-        setMessage("❌ Failed to add program");
+        console.error("Server Error:", result);
+        toast.error(result.message || "Failed to add program");
+        setMessage("❌ " + (result.message || "Failed to add program"));
       }
     } catch (err) {
-      console.error("Error:", err);
+      console.error("Client Error:", err);
+      toast.error("Error adding program");
       setMessage("❌ Error adding program");
     } finally {
       setLoading(false);
       setTimeout(() => setMessage(""), 2500);
     }
   };
-
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
