@@ -6,16 +6,16 @@ const fs = require('fs');
 exports.createProgram = async (req, res) => {
   try {
     const { heading, description, content } = req.body;
-    let image ;
-    let video ;
+    let imageUrl = null;
+    let videoUrl = null;
 
-    // Check if files are uploaded
+    // Handle files similar to testimonials
     if (req.files) {
       if (req.files['image']) {
-        image = req.files['image'][0].filename;
+        imageUrl = `/uploads/programs/${req.files['image'][0].filename}`;
       }
       if (req.files['video']) {
-        video = req.files['video'][0].filename;
+        videoUrl = `/uploads/programs/${req.files['video'][0].filename}`;
       }
     }
 
@@ -23,17 +23,24 @@ exports.createProgram = async (req, res) => {
       heading,
       description,
       content,
-      image,
-      video
+      image: imageUrl,
+      video: videoUrl
     });
 
     await newProgram.save();
-    res.status(201).json({ message: 'Program created successfully', program: newProgram });
+    res.status(201).json({ 
+      status: 'success',
+      message: 'Program created successfully', 
+      program: newProgram 
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error creating program', error });
+    console.error('Program creation error:', error);
+    res.status(500).json({ 
+      status: 'error',
+      message: error.message || 'Error creating program'
+    });
   }
 };
-
 // Get all programs
 exports.getAllPrograms = async (req, res) => {
   try {
