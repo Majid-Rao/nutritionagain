@@ -45,7 +45,12 @@ exports.createProgram = async (req, res) => {
 exports.getAllPrograms = async (req, res) => {
   try {
     const programs = await Program.find();
-    res.status(200).json(programs);
+    const programsWithUrls = programs.map(program => ({
+      ...program._doc,
+      image: program.image ? `/uploads/programs/${program.image}` : null,
+      video: program.video ? `/uploads/programs/${program.video}` : null
+    }));
+    res.status(200).json(programsWithUrls);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching programs', error });
   }
