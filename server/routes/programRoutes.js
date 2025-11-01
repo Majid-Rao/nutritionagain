@@ -77,6 +77,48 @@ router.put('/updateprogram/:id',
 
 router.delete('/deleteprogram/:id', programController.deleteProgram);
 
+router.get('/api/image/:filename', (req, res) => {
+  try {
+    const { filename } = req.params;
+    
+    // Construct file path based on environment
+    const filepath = process.env.NODE_ENV === "production"
+      ? path.join("/tmp/programs", filename)
+      : path.join(__dirname, "../uploads/programs", filename);
+
+    // Check if file exists
+    if (fs.existsSync(filepath)) {
+      // Set caching headers
+      res.set({
+        'Cache-Control': 'public, max-age=31557600', // 1 year
+        'Expires': new Date(Date.now() + 31557600000).toUTCString()
+      });
+
+      // Send file
+      res.sendFile(filepath, (err) => {
+        if (err) {
+          console.error('Error sending file:', err);
+          res.status(500).json({
+            status: 'error',
+            message: 'Error serving image'
+          });
+        }
+      });
+    } else {
+      console.log('Image not found:', filepath);
+      res.status(404).json({
+        status: 'error',
+        message: 'Image not found'
+      });
+    }
+  } catch (error) {
+    console.error('Image serve error:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal server error'
+    });
+  }
+});
 // Global error handler
 router.use((err, req, res, next) => {
   console.error(err.stack);
