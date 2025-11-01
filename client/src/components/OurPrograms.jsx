@@ -18,7 +18,7 @@ const ProgramCard = ({ program }) => {
     try {
       const isProduction = import.meta.env.PROD;
       const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-
+      
       if (!backend) return '/placeholder.jpg';
 
       // Extract filename only
@@ -26,7 +26,6 @@ const ProgramCard = ({ program }) => {
 
       // Production path structure for Vercel
       if (isProduction) {
-        console.log("Final image path:", `${backend}/static/uploads/programs/${filename}`);
         return `${backend}/static/uploads/programs/${filename}`;
       }
 
@@ -110,7 +109,7 @@ const ProgramCard = ({ program }) => {
     };
   }, [program.image, imageState.retryCount]);
 
-  return (
+   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 ease-in-out flex flex-col h-full">
       <div className="relative w-full h-56">
         {imageState.loading && (
@@ -143,6 +142,8 @@ const ProgramCard = ({ program }) => {
     </div>
   );
 };
+
+// ...rest of OurPrograms component remains the same...
 
 const OurPrograms = () => {
   const [programs, setPrograms] = useState([]);
