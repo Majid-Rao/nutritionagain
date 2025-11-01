@@ -12,36 +12,41 @@ const ProgramCard = ({ program }) => {
     retryCount: 0
   });
 
-  const getImagePath = (imageName) => {
-    if (!imageName) return '/placeholder.jpg';
+const getImagePath = (imageName) => {
+  if (!imageName) return '/placeholder.jpg';
+  
+  try {
+    const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
+    if (!backend) return '/placeholder.jpg';
+
+    // Clean up the image path by:
+    // 1. Remove leading/trailing slashes
+    // 2. Remove duplicate /uploads/programs/
+    // 3. Extract just the filename
+    const cleanPath = imageName
+      .split('/uploads/programs/')
+      .pop()
+      ?.replace(/^\/+|\/+$/g, '');
+
+    if (!cleanPath) return '/placeholder.jpg';
+
+    // Construct the proper URL with single /uploads/programs/ path
+    const fullPath = `${backend}/uploads/programs/${cleanPath}`;
     
-    try {
-      const isProduction = import.meta.env.PROD;
-      const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-      
-      if (!backend) return '/placeholder.jpg';
-
-      // Extract filename only
-      const filename = imageName.split('/').pop()?.replace(/^\/+/, '') || '';
-
-      // Production path structure for Vercel
-      if (isProduction) {
-        return `${backend}/static/uploads/programs/${filename}`;
-      }
-
-      // Development path
-      return `${backend}/uploads/programs/${filename}`;
-    } catch (error) {
-      console.error('Image path construction error:', error);
-      return '/placeholder.jpg';
-    }
-  };
-
+    // Debug log
+    console.log('Clean image path:', fullPath);
+    
+    return fullPath;
+  } catch (error) {
+    console.error('Image path error:', error);
+    return '/placeholder.jpg';
+  }
+};
   useEffect(() => {
     let mounted = true;
     let retryTimeout;
     const maxRetries = 3;
-    const retryDelay = 2000; // Increased delay
+    const retryDelay = 2000;
 
     const loadImage = async () => {
       if (!mounted || imageState.retryCount >= maxRetries) {
@@ -53,12 +58,13 @@ const ProgramCard = ({ program }) => {
 
       try {
         const src = getImagePath(program.image);
+        console.log('Attempting to load image:', src);
 
         const img = new Image();
         await new Promise((resolve, reject) => {
           const timeoutId = setTimeout(() => {
             reject(new Error('Image load timeout'));
-          }, 15000); // Increased timeout
+          }, 15000);
 
           img.onload = () => {
             clearTimeout(timeoutId);
@@ -70,9 +76,7 @@ const ProgramCard = ({ program }) => {
             reject(new Error(`Failed to load image: ${src}`));
           };
 
-          // Add credentials and cache control
-          img.crossOrigin = "anonymous";
-          img.src = `${src}?cache=${Date.now()}`;
+          img.src = `${src}?t=${Date.now()}`;
         });
 
         if (mounted) {
