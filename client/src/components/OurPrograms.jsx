@@ -12,111 +12,105 @@ const ProgramCard = ({ program }) => {
     retryCount: 0
   });
 
-const getImagePath = (imageName) => {
-  if (!imageName) return '/placeholder.jpg';
-  
-  try {
-    const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-    const isProduction = import.meta.env.PROD;
+  const getImagePath = (imageName) => {
+    if (!imageName) return '/placeholder.jpg';
     
-    if (!backend) return '/placeholder.jpg';
-
-    // Debug log
-    console.log('Original image name:', imageName);
-    console.log('Backend URL:', backend);
-    console.log('Is Production:', isProduction);
-
-    // Clean the filename - remove all path segments and get just the filename
-    const filename = imageName
-      .split('/')
-      .pop()
-      ?.replace(/^\/+/, '') || '';
-
-    // In both development and production, use the same path structure
-    // This should match your backend static file serving configuration
-    const imagePath = `${backend}/uploads/programs/${filename}`;
-    
-    console.log('Final image path:', imagePath);
-    return imagePath;
-
-  } catch (error) {
-    console.error('Image path error:', error);
-    return '/placeholder.jpg';
-  }
-};
-
-// Update useEffect for better error handling
-useEffect(() => {
-  let mounted = true;
-  let retryTimeout;
-  const maxRetries = 3;
-  const retryDelay = 1500;
-
-  const loadImage = async () => {
-    if (!mounted || imageState.retryCount >= maxRetries) {
-      if (imageState.retryCount >= maxRetries) {
-        console.error(`Max retries reached for image: ${program.heading}`);
-        setImageState(prev => ({ ...prev, error: true, loading: false }));
-      }
-      return;
-    }
-
     try {
-      const src = getImagePath(program.image);
-      console.log(`[${program.heading}] Attempt ${imageState.retryCount + 1}:`, src);
+      const isProduction = import.meta.env.PROD;
+      const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
 
-      const img = new Image();
-      await new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(() => {
-          reject(new Error('Image load timeout'));
-        }, 10000); // Increased timeout to 10 seconds
+      if (!backend) return '/placeholder.jpg';
 
-        img.onload = () => {
-          clearTimeout(timeoutId);
-          console.log(`[${program.heading}] Image loaded successfully:`, src);
-          resolve();
-        };
-        
-        img.onerror = (e) => {
-          clearTimeout(timeoutId);
-          console.error(`[${program.heading}] Load error:`, e);
-          reject(new Error('Image load failed'));
-        };
+      // Extract filename only
+      const filename = imageName.split('/').pop()?.replace(/^\/+/, '') || '';
 
-        img.src = `${src}?t=${Date.now()}`;
-      });
-
-      if (mounted) {
-        setImageState({
-          loading: false,
-          error: false,
-          src,
-          retryCount: 0
-        });
+      // Production path structure for Vercel
+      if (isProduction) {
+        console.log("Final image path:", `${backend}/static/uploads/programs/${filename}`);
+        return `${backend}/static/uploads/programs/${filename}`;
       }
+
+      // Development path
+      return `${backend}/uploads/programs/${filename}`;
     } catch (error) {
-      if (mounted && imageState.retryCount < maxRetries - 1) {
-        console.log(`[${program.heading}] Retry ${imageState.retryCount + 1} failed:`, error.message);
-        retryTimeout = setTimeout(() => {
-          setImageState(prev => ({
-            ...prev,
-            retryCount: prev.retryCount + 1
-          }));
-        }, retryDelay * (imageState.retryCount + 1));
-      } else {
-        setImageState(prev => ({ ...prev, error: true, loading: false }));
-      }
+      console.error('Image path construction error:', error);
+      return '/placeholder.jpg';
     }
   };
 
-  loadImage();
+  useEffect(() => {
+    let mounted = true;
+    let retryTimeout;
+    const maxRetries = 3;
+    const retryDelay = 2000; // Increased delay
 
-  return () => {
-    mounted = false;
-    if (retryTimeout) clearTimeout(retryTimeout);
-  };
-}, [program.image, imageState.retryCount]);
-   return (
+    const loadImage = async () => {
+      if (!mounted || imageState.retryCount >= maxRetries) {
+        if (imageState.retryCount >= maxRetries) {
+          setImageState(prev => ({ ...prev, error: true, loading: false }));
+        }
+        return;
+      }
+
+      try {
+        const src = getImagePath(program.image);
+
+        const img = new Image();
+        await new Promise((resolve, reject) => {
+          const timeoutId = setTimeout(() => {
+            reject(new Error('Image load timeout'));
+          }, 15000); // Increased timeout
+
+          img.onload = () => {
+            clearTimeout(timeoutId);
+            resolve();
+          };
+
+          img.onerror = () => {
+            clearTimeout(timeoutId);
+            reject(new Error(`Failed to load image: ${src}`));
+          };
+
+          // Add credentials and cache control
+          img.crossOrigin = "anonymous";
+          img.src = `${src}?cache=${Date.now()}`;
+        });
+
+        if (mounted) {
+          setImageState({
+            loading: false,
+            error: false,
+            src: getImagePath(program.image),
+            retryCount: 0
+          });
+        }
+      } catch (error) {
+        if (mounted && imageState.retryCount < maxRetries - 1) {
+          retryTimeout = setTimeout(() => {
+            setImageState(prev => ({
+              ...prev,
+              retryCount: prev.retryCount + 1
+            }));
+          }, retryDelay * (imageState.retryCount + 1));
+        } else {
+          setImageState(prev => ({ 
+            ...prev, 
+            error: true, 
+            loading: false 
+          }));
+        }
+      }
+    };
+
+    loadImage();
+
+    return () => {
+      mounted = false;
+      if (retryTimeout) clearTimeout(retryTimeout);
+    };
+  }, [program.image, imageState.retryCount]);
+
+  return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 ease-in-out flex flex-col h-full">
       <div className="relative w-full h-56">
         {imageState.loading && (
@@ -149,8 +143,6 @@ useEffect(() => {
     </div>
   );
 };
-
-// ...rest of OurPrograms component remains the same...
 
 const OurPrograms = () => {
   const [programs, setPrograms] = useState([]);
