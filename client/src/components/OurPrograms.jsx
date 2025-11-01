@@ -12,24 +12,29 @@ const ProgramCard = ({ program }) => {
     retryCount: 0
   });
 
-  const getImagePath = (imageName) => {
+ const getImagePath = (imageName) => {
     if (!imageName) return '/placeholder.jpg';
     
     try {
       const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
+      const isProduction = import.meta.env.PROD;
+      
       if (!backend) return '/placeholder.jpg';
 
-      // Clean path by removing duplicates and leading slashes
-      const cleanPath = imageName
-        .replace(/\/uploads\/programs\/+/g, 'uploads/programs/')
-        .replace(/^\/+/, '')
-        .replace(/uploads\/programs\/uploads\/programs\//, 'uploads/programs/');
+      // Clean the filename
+      const cleanFilename = imageName
+        .split('uploads/programs/')
+        .pop()
+        .replace(/^\/+/, '');
 
-      // Extract filename only
-      const filename = cleanPath.split('uploads/programs/').pop();
-      
-      // Construct full URL
-      return `${backend}/uploads/programs/${filename}`;
+      // Construct URL based on environment
+      if (isProduction) {
+        // For production - use the API URL
+        return `${backend}/api/uploads/programs/${cleanFilename}`;
+      } else {
+        // For development
+        return `${backend}/uploads/programs/${cleanFilename}`;
+      }
     } catch (error) {
       console.error('Image path error:', error);
       return '/placeholder.jpg';
@@ -40,11 +45,12 @@ const ProgramCard = ({ program }) => {
     let mounted = true;
     let retryTimeout;
     const maxRetries = 3;
-    const retryDelay = 1000;
+    const retryDelay = 1500; // Increased delay
 
     const loadImage = async () => {
       if (!mounted || imageState.retryCount >= maxRetries) {
         if (imageState.retryCount >= maxRetries) {
+          console.error(`Max retries reached for image: ${program.heading}`);
           setImageState(prev => ({ ...prev, error: true, loading: false }));
         }
         return;
@@ -52,12 +58,25 @@ const ProgramCard = ({ program }) => {
 
       try {
         const src = getImagePath(program.image);
+        console.log(`Attempting to load image (try ${imageState.retryCount + 1}):`, src);
+
         const img = new Image();
-        
         await new Promise((resolve, reject) => {
-          img.onload = resolve;
-          img.onerror = reject;
-          img.src = src;
+          const timeoutId = setTimeout(() => {
+            reject(new Error('Image load timeout'));
+          }, 5000); // 5 second timeout
+
+          img.onload = () => {
+            clearTimeout(timeoutId);
+            resolve();
+          };
+          
+          img.onerror = () => {
+            clearTimeout(timeoutId);
+            reject(new Error('Image load failed'));
+          };
+
+          img.src = `${src}?t=${Date.now()}`; // Cache buster
         });
 
         if (mounted) {
@@ -69,13 +88,17 @@ const ProgramCard = ({ program }) => {
           });
         }
       } catch (error) {
+        console.log(`Retry ${imageState.retryCount + 1} failed for: ${program.heading}`);
+        
         if (mounted && imageState.retryCount < maxRetries - 1) {
           retryTimeout = setTimeout(() => {
             setImageState(prev => ({
               ...prev,
               retryCount: prev.retryCount + 1
             }));
-          }, retryDelay);
+          }, retryDelay * (imageState.retryCount + 1)); // Progressive delay
+        } else {
+          setImageState(prev => ({ ...prev, error: true, loading: false }));
         }
       }
     };
