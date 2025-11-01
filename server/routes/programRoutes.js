@@ -28,7 +28,6 @@ const storage = multer.diskStorage({
 // Configure multer
 const upload = multer({ storage });
 
-
 // Error handling middleware
 const handleUploadError = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
@@ -45,6 +44,9 @@ const handleUploadError = (err, req, res, next) => {
   }
   next(err);
 };
+
+// Serve static files from the uploads folder
+router.use('/uploads', express.static(path.join(__dirname, '../uploads')));  // Add this line to serve static files
 
 // Routes with error handling
 router.post("/addprogram", 
