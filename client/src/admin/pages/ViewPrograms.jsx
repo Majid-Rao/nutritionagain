@@ -23,123 +23,116 @@ const ViewPrograms = () => {
   }, []);
 
   const getImagePath = (imageName) => {
-  if (!imageName) return '/placeholder.jpg';
-  if (!backend) return '/placeholder.jpg';
-  
-  try {
-    // Remove duplicate /uploads/programs/
-    const cleanPath = imageName
-      .replace(/^\/+/, '') // Remove leading slashes
-      .replace(/\/+/g, '/') // Replace multiple slashes with single
-      .replace(/uploads\/programs\/uploads\/programs\//g, 'uploads/programs/'); // Fix duplicates
+    if (!imageName) return '/placeholder.jpg';
+    if (!backend) return '/placeholder.jpg';
+    
+    try {
+      // If it's already a complete URL, return it as-is
+      if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
+        return imageName;
+      }
 
-    // If already a full URL, return as is
-    if (cleanPath.startsWith('http')) {
-      return cleanPath;
+      // Remove any leading slashes or "uploads/programs/" prefix
+      const cleanPath = imageName
+        .replace(/^\/+/, '') // Remove leading slashes
+        .replace(/^uploads\/programs\//, ''); // Remove uploads/programs prefix if exists
+
+      // Construct the full URL
+      const fullPath = `${backend}/api/image/${cleanPath}`;
+      
+      return fullPath;
+    } catch (error) {
+      console.error('Image path construction error:', error);
+      return '/placeholder.jpg';
+    }
+  };
+
+  const ProgramImage = ({ program }) => {
+    const [imgState, setImgState] = useState({
+      loading: true,
+      error: false,
+      src: null,
+      retryCount: 0
+    });
+
+    useEffect(() => {
+      let mounted = true;
+      const maxRetries = 3;
+      
+      const loadImage = async () => {
+        if (!mounted) return;
+        
+        try {
+          const src = getImagePath(program.image);
+          
+          if (imgState.retryCount >= maxRetries) {
+            if (mounted) {
+              setImgState(prev => ({ ...prev, loading: false, error: true }));
+            }
+            return;
+          }
+
+          const img = new Image();
+          
+          await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = src;
+          });
+
+          if (mounted) {
+            setImgState({
+              loading: false,
+              error: false,
+              src,
+              retryCount: 0
+            });
+          }
+        } catch (error) {
+          if (mounted) {
+            // Retry with exponential backoff
+            setTimeout(() => {
+              setImgState(prev => ({
+                ...prev,
+                retryCount: prev.retryCount + 1
+              }));
+            }, 1000 * (imgState.retryCount + 1));
+          }
+        }
+      };
+
+      loadImage();
+
+      return () => {
+        mounted = false;
+      };
+    }, [program.image, imgState.retryCount]); // Added retryCount as dependency
+
+    if (imgState.error) {
+      return (
+        <div className="w-full h-44 bg-gray-700 flex items-center justify-center">
+          <span className="text-gray-400">Image not available</span>
+        </div>
+      );
     }
 
-    // Ensure path starts with uploads/programs
-    const finalPath = cleanPath.startsWith('uploads/programs/') 
-      ? cleanPath 
-      : `uploads/programs/${cleanPath}`;
-
-    // Construct full URL
-    const fullPath = `${backend}/${finalPath}`;
-    
-    // Debug logging
-    return fullPath;
-  } catch (error) {
-    console.error('Image path construction error:', error);
-    return '/placeholder.jpg';
-  }
-};
-
-const ProgramImage = ({ program }) => {
-  const [imgState, setImgState] = useState({
-    loading: true,
-    error: false,
-    src: null,
-    retryCount: 0
-  });
-
-  useEffect(() => {
-    let mounted = true;
-    const maxRetries = 3;
-    
-    const loadImage = async () => {
-      if (!mounted) return;
-      
-      try {
-        const src = getImagePath(program.image);
-        
-        if (imgState.retryCount >= maxRetries) {
-          setImgState(prev => ({ ...prev, loading: false, error: true }));
-          console.error(`Failed to load image for program: ${program.heading}`);
-          return;
-        }
-
-        const img = new Image();
-        
-        await new Promise((resolve, reject) => {
-          img.onload = resolve;
-          img.onerror = reject;
-          img.src = `${src}?t=${Date.now()}`;
-        });
-
-        if (mounted) {
-          setImgState({
-            loading: false,
-            error: false,
-            src,
-            retryCount: 0
-          });
-        }
-      } catch (error) {
-        if (mounted) {
-          setImgState(prev => ({
-            ...prev,
-            retryCount: prev.retryCount + 1
-          }));
-          
-          // Retry after delay
-          setTimeout(() => loadImage(), 1000);
-        }
-      }
-    };
-
-    loadImage();
-
-    return () => {
-      mounted = false;
-    };
-  }, [program.image]);
-
-  if (imgState.error) {
     return (
-      <div className="w-full h-44 bg-gray-700 flex items-center justify-center">
-        <span className="text-gray-400">Image not available</span>
+      <div className="relative w-full h-44">
+        {imgState.loading && (
+          <div className="absolute inset-0 bg-gray-700 animate-pulse" />
+        )}
+        {imgState.src && (
+          <img
+            src={imgState.src}
+            alt={program.heading}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imgState.loading ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+        )}
       </div>
     );
-  }
-
-  return (
-    <div className="relative w-full h-44">
-      {imgState.loading && (
-        <div className="absolute inset-0 bg-gray-700 animate-pulse" />
-      )}
-      {imgState.src && (
-        <img
-          src={imgState.src}
-          alt={program.heading}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
-            imgState.loading ? 'opacity-0' : 'opacity-100'
-          }`}
-        />
-      )}
-    </div>
-  );
-};
-
+  };
 
   const fetchPrograms = async () => {
     try {
@@ -200,7 +193,7 @@ const ProgramImage = ({ program }) => {
         </div>
         <Sidebar />
            <div className='flex-1 overflow-auto relative z-10'>
-          <Header title='Add Package' />
+          <Header title='View Programs' />
         <main className="flex-1 p-6">
           <div className="max-w-7xl mx-auto">
             <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-xl p-6">
