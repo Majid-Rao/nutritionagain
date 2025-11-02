@@ -20,13 +20,13 @@ const getImagePath = (imageName) => {
   try {
     // If it's already a complete URL, return it as-is
     if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
-      console.log('Using full URL:', imageName);
+      
       return imageName;
     }
     
     // Otherwise, construct the URL
     const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-    console.log('Backend URL:', backend);
+   
     
     if (!backend) return '/placeholder.jpg';
 
@@ -34,7 +34,6 @@ const getImagePath = (imageName) => {
     const filename = imageName.replace(/^\/?(uploads\/programs\/)?/, '');
     const fullPath = `${backend}/api/image/${filename}`;
     
-    console.log('Constructed image path:', fullPath);
     
     return fullPath;
 
