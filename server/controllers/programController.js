@@ -6,7 +6,7 @@ const fs = require('fs');
 exports.createProgram = async (req, res) => {
   try {
     const { heading, description, content } = req.body;
-    let imageUrl ;
+    let imageUrl = null;
     let videoUrl = null;
 
     // Handle files similar to testimonials
