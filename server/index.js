@@ -35,8 +35,13 @@ uploadDirs.forEach(dir => {
   }
 });
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-const uploadDir = process.env.NODE_ENV === 'production' ? '/tmp/programs' : path.join(__dirname, '../uploads/programs');
-app.use('/uploads', express.static(uploadDir));
+if (process.env.NODE_ENV === 'production') {
+  // Serve files from /tmp/programs at /uploads/programs
+  app.use('/uploads/programs', express.static('/tmp/programs'));
+} else {
+  // Serve files from local uploads
+  app.use('/uploads/programs', express.static(path.join(__dirname, 'uploads/programs')));
+}
 //Routes
 app.get('/', (req, res) => {
   return res.send('Welcome to the Nutrition API');
