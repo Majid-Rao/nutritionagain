@@ -13,7 +13,6 @@ const ProgramCard = ({ program }) => {
   });
 
 const getImagePath = (imageName) => {
-  console.log('Original imageName:', imageName);
   
   if (!imageName) return '/placeholder.jpg';
   
@@ -133,8 +132,8 @@ const OurPrograms = () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getprograms`);
         const data = await res.json();
-        console.log('Fetched programs:', data); // ADD THIS
-        console.log('First program image:', data[0]?.image); // ADD THIS
+        // console.log('Fetched programs:', data); // ADD THIS
+        // console.log('First program image:', data[0]?.image); // ADD THIS
         setPrograms(data);
       } catch (err) {
         console.error('Error fetching programs:', err);
