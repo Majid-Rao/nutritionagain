@@ -11,7 +11,7 @@ exports.createProgram = async (req, res) => {
 
     if (req.files) {
       if (req.files['image']) {
-        // Store ONLY the filename, not the path
+        // Store ONLY the filename
         imageUrl = req.files['image'][0].filename;
       }
       if (req.files['video']) {
@@ -45,7 +45,7 @@ exports.createProgram = async (req, res) => {
 exports.getAllPrograms = async (req, res) => {
   try {
     const programs = await Program.find();
-    const baseUrl = process.env.BACKEND_URL || `${req.protocol}://${req.get('host')}`;
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
     
     const programsWithUrls = programs.map(program => ({
       ...program._doc,
