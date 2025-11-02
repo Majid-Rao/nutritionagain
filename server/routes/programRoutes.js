@@ -77,24 +77,24 @@ router.put('/updateprogram/:id',
 
 router.delete('/deleteprogram/:id', programController.deleteProgram);
 
-router.get('/api/image/:filename', (req, res) => {
+router.get('/image/:filename', (req, res) => {
   try {
     const { filename } = req.params;
+    console.log('Requesting image:', filename); // ADD THIS
     
-    // Construct file path based on environment
     const filepath = process.env.NODE_ENV === "production"
       ? path.join("/tmp/programs", filename)
       : path.join(__dirname, "../uploads/programs", filename);
 
-    // Check if file exists
+    console.log('File path:', filepath); // ADD THIS
+    console.log('File exists:', fs.existsSync(filepath)); // ADD THIS
+
     if (fs.existsSync(filepath)) {
-      // Set caching headers
       res.set({
-        'Cache-Control': 'public, max-age=31557600', // 1 year
+        'Cache-Control': 'public, max-age=31557600',
         'Expires': new Date(Date.now() + 31557600000).toUTCString()
       });
 
-      // Send file
       res.sendFile(filepath, (err) => {
         if (err) {
           console.error('Error sending file:', err);
