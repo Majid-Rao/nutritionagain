@@ -12,21 +12,21 @@ const ProgramCard = ({ program }) => {
     retryCount: 0
   });
 
-  const getImagePath = (imageName) => {
-    if (!imageName) return '/placeholder.jpg';
-    
-    try {
-      const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-      if (!backend) return '/placeholder.jpg';
-
-      // Simplify path construction to match working implementation
-      return `${backend}/uploads/programs/${imageName.split('/').pop()}`;
-
-    } catch (error) {
-      console.error('Image path error:', error);
-      return '/placeholder.jpg';
-    }
-  };
+ const getImagePath = (imageName) => {
+  if (!imageName) return '/placeholder.jpg';
+  
+  // If it's already a full URL from the backend, use it directly
+  if (imageName.startsWith('http')) {
+    return imageName;
+  }
+  
+  // Otherwise construct it (fallback)
+  const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
+  if (!backend) return '/placeholder.jpg';
+  
+  const filename = imageName.split('/').pop();
+  return `${backend}/api/image/${filename}`;
+};
 
   useEffect(() => {
     let mounted = true;
