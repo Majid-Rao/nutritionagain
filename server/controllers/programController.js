@@ -11,7 +11,7 @@ exports.createProgram = async (req, res) => {
 
     if (req.files) {
       if (req.files['image']) {
-        // Store just the filename in database
+        // Store ONLY the filename, not the path
         imageUrl = req.files['image'][0].filename;
       }
       if (req.files['video']) {
@@ -76,13 +76,20 @@ exports.updateProgram = async (req, res) => {
   const { id } = req.params;
   const { heading, description, content } = req.body;
 
+  // Store only filename, not path
   let image = req.files && req.files['image'] ? req.files['image'][0].filename : null;
   let video = req.files && req.files['video'] ? req.files['video'][0].filename : null;
 
   try {
+    const updateData = { heading, description, content };
+    
+    // Only update image/video if new files were uploaded
+    if (image) updateData.image = image;
+    if (video) updateData.video = video;
+
     const updatedProgram = await Program.findByIdAndUpdate(
       id,
-      { heading, description, content, image, video },
+      updateData,
       { new: true }
     );
 
