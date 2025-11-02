@@ -9,13 +9,13 @@ exports.createProgram = async (req, res) => {
     let imageUrl = null;
     let videoUrl = null;
 
-    // Handle files similar to testimonials
     if (req.files) {
       if (req.files['image']) {
-        imageUrl = `/uploads/programs/${req.files['image'][0].filename}`;
+        // Store just the filename in database
+        imageUrl = req.files['image'][0].filename;
       }
       if (req.files['video']) {
-        videoUrl = `/uploads/programs/${req.files['video'][0].filename}`;
+        videoUrl = req.files['video'][0].filename;
       }
     }
 
@@ -45,11 +45,14 @@ exports.createProgram = async (req, res) => {
 exports.getAllPrograms = async (req, res) => {
   try {
     const programs = await Program.find();
+    const baseUrl = process.env.BACKEND_URL || `${req.protocol}://${req.get('host')}`;
+    
     const programsWithUrls = programs.map(program => ({
       ...program._doc,
-      image: program.image ? program.image : null,
-      video: program.video ? program.video : null
+      image: program.image ? `${baseUrl}/api/image/${program.image}` : null,
+      video: program.video ? `${baseUrl}/api/image/${program.video}` : null
     }));
+    
     res.status(200).json(programsWithUrls);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching programs', error });
