@@ -13,16 +13,30 @@ const ProgramCard = ({ program }) => {
   });
 
 const getImagePath = (imageName) => {
+  console.log('Original imageName:', imageName);
+  
   if (!imageName) return '/placeholder.jpg';
   
   try {
+    // If it's already a complete URL, return it as-is
+    if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
+      console.log('Using full URL:', imageName);
+      return imageName;
+    }
+    
+    // Otherwise, construct the URL
     const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
+    console.log('Backend URL:', backend);
+    
     if (!backend) return '/placeholder.jpg';
 
-    // Extract just the filename, removing any path prefix
+    // Extract just the filename
     const filename = imageName.replace(/^\/?(uploads\/programs\/)?/, '');
+    const fullPath = `${backend}/api/image/${filename}`;
     
-    return `${backend}/api/image/${filename}`;
+    console.log('Constructed image path:', fullPath);
+    
+    return fullPath;
 
   } catch (error) {
     console.error('Image path error:', error);
@@ -112,7 +126,7 @@ const getImagePath = (imageName) => {
   );
 };
 const OurPrograms = () => {
-  const [programs, setPrograms] = useState([]);
+   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -120,6 +134,8 @@ const OurPrograms = () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getprograms`);
         const data = await res.json();
+        console.log('Fetched programs:', data); // ADD THIS
+        console.log('First program image:', data[0]?.image); // ADD THIS
         setPrograms(data);
       } catch (err) {
         console.error('Error fetching programs:', err);
