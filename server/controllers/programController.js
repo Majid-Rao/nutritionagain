@@ -47,8 +47,8 @@ exports.getAllPrograms = async (req, res) => {
     const programs = await Program.find();
     const programsWithUrls = programs.map(program => ({
       ...program._doc,
-      image: program.image ? `/uploads/programs/${program.image}` : null,
-      video: program.video ? `/uploads/programs/${program.video}` : null
+      image: program.image ? `${program.image}` : null,
+      video: program.video ? `${program.video}` : null
     }));
     res.status(200).json(programsWithUrls);
   } catch (error) {
