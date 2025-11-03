@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer';
+
 const CompleteProgram = () => {
   const { id } = useParams();
   const [program, setProgram] = useState(null);
@@ -19,18 +20,18 @@ const CompleteProgram = () => {
       const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
       if (!backend) return '/placeholder.jpg';
 
-      // Debug log
-      // console.log('Original image path:', imageName);
+      // If it's already a complete URL, return it as-is
+      if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
+        return imageName;
+      }
 
-      // Clean path and remove duplicates
+      // Remove any leading slashes or "uploads/programs/" prefix
       const cleanPath = imageName
-        .replace(/^\/+/, '')
-        .replace(/\/uploads\/programs\/+/g, '')
-        .replace(/^uploads\/programs\/+/, '')
-        .replace(/\/{2,}/g, '/');
+        .replace(/^\/+/, '') // Remove leading slashes
+        .replace(/^uploads\/programs\//, ''); // Remove uploads/programs prefix if exists
 
-      const fullPath = `${backend}/uploads/programs/${cleanPath}`;
-      // console.log('Constructed image path:', fullPath);
+      // Use the /api/image/ endpoint
+      const fullPath = `${backend}/api/image/${cleanPath}`;
       
       return fullPath;
     } catch (error) {
@@ -47,15 +48,16 @@ const CompleteProgram = () => {
         const img = new Image();
         img.onload = () => resolve(imgSrc);
         img.onerror = (error) => {
-          console.log(`Retry ${retryCount + 1} for image:`, imgSrc);
-          if (retryCount < maxRetries) {
+          if (retryCount < maxRetries - 1) {
             retryCount++;
-            setTimeout(() => tryLoadImage().then(resolve).catch(reject), 1000);
+            console.log(`Retry ${retryCount} for image:`, imgSrc);
+            // Exponential backoff for retries
+            setTimeout(() => tryLoadImage().then(resolve).catch(reject), 1000 * retryCount);
           } else {
             reject(error);
           }
         };
-        img.src = `${imgSrc}?t=${Date.now()}`;
+        img.src = imgSrc; // Removed cache-busting to allow proper caching
       });
     };
 
@@ -78,12 +80,21 @@ const CompleteProgram = () => {
         if (data?.image) {
           setImageState(prev => ({ ...prev, loading: true }));
           const imgSrc = getImagePath(data.image);
+          console.log('Loading image from:', imgSrc); // Debug log
           const result = await loadImageWithRetry(imgSrc);
           
           setImageState({
             loading: false,
             error: !result.success,
-            src: result.src
+            src: result.src,
+            retryCount: 0
+          });
+        } else {
+          setImageState({
+            loading: false,
+            error: false,
+            src: '/placeholder.jpg',
+            retryCount: 0
           });
         }
       } catch (error) {
@@ -91,7 +102,8 @@ const CompleteProgram = () => {
         setImageState({
           loading: false,
           error: true,
-          src: '/placeholder.jpg'
+          src: '/placeholder.jpg',
+          retryCount: 0
         });
       }
     };
@@ -99,14 +111,15 @@ const CompleteProgram = () => {
     fetchProgram();
   }, [id]);
 
-  // ... rest of the component remains the same ...
-
-
   if (!program) {
     return (
-      <div className="flex justify-center items-center py-20">
-        <div className="w-12 h-12 border-4 border-primary border-dashed rounded-full animate-spin"></div>
-      </div>
+      <>
+        <Navbar />
+        <div className="flex justify-center items-center py-20">
+          <div className="w-12 h-12 border-4 border-primary border-dashed rounded-full animate-spin"></div>
+        </div>
+        <Footer />
+      </>
     );
   }
 
