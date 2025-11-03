@@ -22,6 +22,31 @@ const UpdateProgram = () => {
   const [videoFile, setVideoFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
+  // Helper function to get proper image URL
+  const getImagePath = (imageName) => {
+    if (!imageName) return null;
+    
+    try {
+      // If it's already a complete URL, return it as-is
+      if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
+        return imageName;
+      }
+
+      // Remove any leading slashes or "uploads/programs/" prefix
+      const cleanPath = imageName
+        .replace(/^\/+/, '')
+        .replace(/^uploads\/programs\//, '');
+
+      // Use the /api/image/ endpoint
+      return `${backend}/api/image/${cleanPath}`;
+    } catch (error) {
+      console.error('Image path error:', error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const fetchProgram = async () => {
@@ -33,26 +58,35 @@ const UpdateProgram = () => {
           description: p.description || "",
           content: p.content || "",
         });
+        
         if (p.image) {
-          setCurrentImageUrl(
-            p.image.startsWith("/uploads")
-              ? `${backend}${p.image}`
-              : `${backend}/uploads/${p.image}`
-          );
+          const imageUrl = getImagePath(p.image);
+          console.log('Current image URL:', imageUrl);
+          setCurrentImageUrl(imageUrl);
         }
+        
         if (p.video) {
-          setCurrentVideoUrl(
-            p.video.startsWith("/uploads")
-              ? `${backend}${p.video}`
-              : `${backend}/uploads/${p.video}`
-          );
+          const videoUrl = getImagePath(p.video); // Videos use same endpoint
+          setCurrentVideoUrl(videoUrl);
         }
       } catch (err) {
         console.error("Fetch program error:", err);
       }
     };
     fetchProgram();
-  }, [id]);
+  }, [id, backend]);
+
+  // Image loading handler
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+    console.error('Failed to load image:', currentImageUrl);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +152,7 @@ const UpdateProgram = () => {
         </div>
         <Sidebar />
         <div className="flex-1 overflow-auto relative z-10">
-          <Header title="Update Package" />
+          <Header title="Update Program" />
         <main className="flex-1 p-6">
           <div className="max-w-3xl mx-auto bg-gray-800 border border-gray-700 rounded-xl shadow-xl p-6">
             <h2 className="text-2xl font-semibold mb-4">Edit Program</h2>
@@ -168,7 +202,7 @@ const UpdateProgram = () => {
                 <label className="block text-gray-300 mb-2">
                   Detailed Content
                 </label>
-                <div className="bg-gray-700 rounded-md border border-gray-600 text-black">
+                <div className="bg-gray-500 rounded-md border border-gray-600">
                   <ReactQuill
                     theme="snow"
                     value={form.content}
@@ -187,15 +221,32 @@ const UpdateProgram = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setImageFile(e.target.files[0])}
+                  onChange={(e) => {
+                    setImageFile(e.target.files[0]);
+                    setImageLoading(true);
+                    setImageError(false);
+                  }}
                   className="w-full p-2 rounded-md bg-gray-700 border border-gray-700 text-white"
                 />
                 {currentImageUrl && !imageFile && (
-                  <img
-                    src={currentImageUrl}
-                    alt="current"
-                    className="w-48 h-36 object-cover rounded mt-3 border border-gray-600"
-                  />
+                  <div className="relative w-48 h-36 mt-3">
+                    {imageLoading && (
+                      <div className="absolute inset-0 bg-gray-700 animate-pulse rounded" />
+                    )}
+                    {imageError ? (
+                      <div className="w-full h-full bg-gray-700 flex items-center justify-center rounded border border-gray-600">
+                        <span className="text-gray-400 text-sm">Image not available</span>
+                      </div>
+                    ) : (
+                      <img
+                        src={currentImageUrl}
+                        alt="current"
+                        className="w-full h-full object-cover rounded border border-gray-600"
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                      />
+                    )}
+                  </div>
                 )}
                 {imageFile && (
                   <img
@@ -221,14 +272,14 @@ const UpdateProgram = () => {
                   <video
                     controls
                     src={currentVideoUrl}
-                    className="w-full mt-2 rounded"
+                    className="w-full max-h-64 mt-2 rounded border border-gray-600"
                   />
                 )}
                 {videoFile && (
                   <video
                     controls
                     src={URL.createObjectURL(videoFile)}
-                    className="w-full mt-2 rounded"
+                    className="w-full max-h-64 mt-2 rounded border border-gray-600"
                   />
                 )}
               </div>
@@ -238,7 +289,7 @@ const UpdateProgram = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Updating..." : "Update Program"}
                 </button>
