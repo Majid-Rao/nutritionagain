@@ -8,79 +8,63 @@ const ProgramCard = ({ program }) => {
   const [imageState, setImageState] = useState({
     loading: true,
     error: false,
-    src: null,
-    retryCount: 0
+    src: null
   });
 
-const getImagePath = (imageName) => {
-  
-  if (!imageName) return '/placeholder.jpg';
-  
-  try {
-    // If it's already a complete URL, return it as-is
-    if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
+  const getImagePath = (imageName) => {
+    if (!imageName) return '/placeholder.jpg';
+    
+    try {
+      const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
+      if (!backend) return '/placeholder.jpg';
+
+      // Extract just the filename
+      const filename = imageName.split('/').pop();
       
-      return imageName;
+      // Use direct static path - NOT /api/image/
+      const fullPath = `${backend}/uploads/programs/${filename}`;
+      
+      console.log('🟢 Image Path:', fullPath);
+      
+      return fullPath;
+
+    } catch (error) {
+      console.error('Image path error:', error);
+      return '/placeholder.jpg';
     }
-    
-    // Otherwise, construct the URL
-    const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-   
-    
-    if (!backend) return '/placeholder.jpg';
-
-    // Extract just the filename
-    const filename = imageName.replace(/^\/?(uploads\/programs\/)?/, '');
-    const fullPath = `${backend}/api/image/${filename}`;
-    
-    
-    return fullPath;
-
-  } catch (error) {
-    console.error('Image path error:', error);
-    return '/placeholder.jpg';
-  }
-};
+  };
 
   useEffect(() => {
     let mounted = true;
-    const maxRetries = 3;
 
-    const loadImage = () => {
+    const loadImage = async () => {
       const src = getImagePath(program.image);
-      const img = new Image();
-
-      img.onload = () => {
+      
+      try {
+        await new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = src;
+        });
+        
         if (mounted) {
           setImageState({
             loading: false,
             error: false,
-            src,
-            retryCount: 0
+            src
           });
         }
-      };
-
-      img.onerror = () => {
+      } catch (error) {
+        console.warn('Image load failed:', src);
         if (mounted) {
-          if (imageState.retryCount < maxRetries - 1) {
-            setTimeout(() => {
-              setImageState(prev => ({
-                ...prev,
-                retryCount: prev.retryCount + 1
-              }));
-            }, 1000 * (imageState.retryCount + 1));
-          } else {
-            setImageState(prev => ({
-              ...prev,
-              error: true,
-              loading: false
-            }));
-          }
+          setImageState({
+            loading: false,
+            error: true,
+            src: '/placeholder.jpg'
+          });
         }
-      };
-
-      img.src = src;
+      }
     };
 
     loadImage();
@@ -88,7 +72,7 @@ const getImagePath = (imageName) => {
     return () => {
       mounted = false;
     };
-  }, [program.image, imageState.retryCount]);
+  }, [program.image]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 ease-in-out flex flex-col h-full">
@@ -123,17 +107,16 @@ const getImagePath = (imageName) => {
     </div>
   );
 };
+
 const OurPrograms = () => {
-   const [programs, setPrograms] = useState([]);
+  const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchPrograms = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getprograms`);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getprograms`);
         const data = await res.json();
-        // console.log('Fetched programs:', data); // ADD THIS
-        // console.log('First program image:', data[0]?.image); // ADD THIS
         setPrograms(data);
       } catch (err) {
         console.error('Error fetching programs:', err);

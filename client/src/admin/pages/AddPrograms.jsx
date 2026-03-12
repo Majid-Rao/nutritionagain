@@ -40,7 +40,7 @@ const handleSubmit = async (e) => {
     }
 
     const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_API}api/addprogram`, 
+      `${import.meta.env.VITE_BACKEND_API}/api/addprogram`, 
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },

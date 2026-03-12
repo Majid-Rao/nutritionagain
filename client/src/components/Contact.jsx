@@ -67,7 +67,7 @@ const Contact = () => {
     console.log('Form submitted:', formData);
     
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/submit-form`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/submit-form`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

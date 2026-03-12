@@ -14,7 +14,7 @@ const ViewVariation = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getallvariations`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getallvariations`);
       setVariations(response.data);
       setFilteredVariations(response.data);
     };
@@ -37,7 +37,7 @@ const ViewVariation = () => {
 
   const deleteVariation = async (variationId) => {
     await axios
-      .delete(`${import.meta.env.VITE_BACKEND_API}api/deletevariation/${variationId}`)
+      .delete(`${import.meta.env.VITE_BACKEND_API}/api/deletevariation/${variationId}`)
       .then((response) => {
         setVariations((prevVariations) => {
           const updatedVariations = prevVariations.filter((variation) => variation._id !== variationId);

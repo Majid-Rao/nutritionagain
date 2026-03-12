@@ -46,10 +46,10 @@ const CheckData = () => {
       // Try to fetch data based on ID format
       if (cleanId.startsWith('user-')) {
         // Try simplified ID first
-        response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getcustomer/simpleId/${cleanId}`);
+        response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getcustomer/simpleId/${cleanId}`);
       } else {
         // Try original MongoDB ID
-        response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getcustomer/${cleanId}`);
+        response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getcustomer/${cleanId}`);
       }
 
       const customerData = response.data.customer || response.data;

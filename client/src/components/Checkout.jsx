@@ -23,7 +23,7 @@ const Checkout = () => {
   useEffect(() => {
     const fetchBuyData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/onebuy/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/onebuy/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch buy data');
         }
@@ -120,7 +120,7 @@ const handleSubmit = async (e) => {
 
     
 
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/createorders`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/createorders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -14,7 +14,7 @@ const ViewPackages = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getpackages`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getpackages`);
       setPackages(response.data);
       setFilteredPackages(response.data);
     };
@@ -35,7 +35,7 @@ const ViewPackages = () => {
 
   const deletePackage = async (packageId) => {
     await axios
-      .delete(`${import.meta.env.VITE_BACKEND_API}api/deletepackage/${packageId}`)
+      .delete(`${import.meta.env.VITE_BACKEND_API}/api/deletepackage/${packageId}`)
       .then((response) => {
         setPackages((prevPackages) => {
           const updatedPackages = prevPackages.filter((pkg) => pkg._id !== packageId);
@@ -137,7 +137,7 @@ const ViewPackages = () => {
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">
                           {pkg.image ? (
                             <img
-                              src={`${import.meta.env.VITE_BACKEND_API}uploads/${pkg.image}`}
+                              src={`${import.meta.env.VITE_BACKEND_API}/uploads/${pkg.image}`}
                               alt="Package Image"
                               className="w-24 h-18 object-cover"
                             />

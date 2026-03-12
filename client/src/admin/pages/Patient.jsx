@@ -17,7 +17,7 @@ const CustomerDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getcustomers`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getcustomers`);
         setCustomers(response.data);
         setFilteredCustomers(response.data);
       } catch (error) {
@@ -72,7 +72,7 @@ const handleSearch = (e) => {
   const deleteCustomer = async (customerId) => {
     if (window.confirm("Are you sure you want to delete this customer?")) {
       try {
-        await axios.delete(`${import.meta.env.VITE_BACKEND_API}api/deletecustomer/${customerId}`);
+        await axios.delete(`${import.meta.env.VITE_BACKEND_API}/api/deletecustomer/${customerId}`);
         setCustomers((prevCustomers) => {
           const updatedCustomers = prevCustomers.filter((customer) => customer._id !== customerId);
           setFilteredCustomers(updatedCustomers);

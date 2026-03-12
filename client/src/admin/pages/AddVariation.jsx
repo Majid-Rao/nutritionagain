@@ -47,7 +47,7 @@ const AddVariation = () => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/createvariation`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/createvariation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

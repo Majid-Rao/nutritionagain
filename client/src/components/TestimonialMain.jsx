@@ -31,6 +31,9 @@ const TestimonialMain = () => {
           <TestimonialSlider category="Positive Pregnancies With Other Fertility Issues" />
           <TestimonialSlider category="Reversals" />
           <TestimonialSlider category="Male Fertility" />
+          <TestimonialSlider category="Miracles Through Our Program" />
+          <TestimonialSlider category="Miracles With Azoospermia & Ovarian Failure" />
+
         </section>
       </div>
       <Footer />

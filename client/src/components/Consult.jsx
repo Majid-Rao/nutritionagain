@@ -276,7 +276,7 @@ const handleSubmit = async (e) => {
     // console.log('Submitting data:', transformedData);
 
     const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_API}api/addcustomer`, 
+      `${import.meta.env.VITE_BACKEND_API}/api/addcustomer`, 
       transformedData,
       {
         headers: {
@@ -285,7 +285,7 @@ const handleSubmit = async (e) => {
       }
     );
      const emailRes = await axios.post(
-    `${import.meta.env.VITE_BACKEND_API}api/submitconsult-form`,
+    `${import.meta.env.VITE_BACKEND_API}/api/submitconsult-form`,
     { name: transformedData.fullName, email: transformedData.email },
     {
       headers: { 'Content-Type': 'application/json' }
@@ -320,7 +320,7 @@ const handleSubmit = async (e) => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Information Section */}
-            <div className="space-y-4">
+            <div className="lg:space-y-4">
               <h3 className="text-xl font-semibold text-gray-700">Basic Information</h3>
               
               {/* Full Name */}
@@ -335,7 +335,7 @@ const handleSubmit = async (e) => {
                   required
                 />
               </div>
-                <div>
+    <div>
     <label className="block text-lg font-medium text-gray-700">Email</label>
     <input
       type="email"

@@ -15,7 +15,7 @@ const Orders = () => {
   // Fetch all orders from the API
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/allorders`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/allorders`);
       setOrders(response.data);
       setFilteredOrders(response.data);
     };
@@ -38,7 +38,7 @@ const Orders = () => {
   // Delete order
   const deleteOrder = async (orderId) => {
     await axios
-      .delete(`${import.meta.env.VITE_BACKEND_API}api/deleteorders/${orderId}`)
+      .delete(`${import.meta.env.VITE_BACKEND_API}/api/deleteorders/${orderId}`)
       .then((response) => {
         setOrders((prevOrders) => {
           const updatedOrders = prevOrders.filter((order) => order._id !== orderId);

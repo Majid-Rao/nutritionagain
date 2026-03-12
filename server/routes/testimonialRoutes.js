@@ -32,7 +32,18 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+// ✅✅✅ IMAGE SERVE KARNE KA ROUTE ✅✅✅
+router.get("/image/:filename", (req, res) => {
+  const { filename } = req.params;
+  const filepath = path.join(dir, filename);
 
+  // Check if file exists
+  if (fs.existsSync(filepath)) {
+    res.sendFile(filepath);
+  } else {
+    res.status(404).json({ message: "Image not found" });
+  }
+});
 // ✅ Routes
 router.post("/addtestimonial", upload.single("image"), addTestimonial);
 router.get("/gettestimonials", getTestimonials);

@@ -16,13 +16,13 @@ const PackageShow = () => {
     // Fetch the package data based on the package ID
     const fetchPackageData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getonepackage/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getonepackage/${id}`);
         const data = await response.json();
         setPackageData(data); // Store package data in state
 
         // Check if the package has a variation ID and fetch variation data
         if (data.variation && data.variation._id) {
-          const variationResponse = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getonevariation/${data.variation._id}`);
+          const variationResponse = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getonevariation/${data.variation._id}`);
           const variationData = await variationResponse.json();
           setVariationData(variationData); // Store variation data in state
         }
@@ -72,7 +72,7 @@ const handleBuyNow = async () => {
       packages: [packageDetails]
     };
 
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/createbuy`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/createbuy`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ const handleBuyNow = async () => {
             <div className="flex justify-center">
               <img
                 className=" w-full h-[250px] md:h-[400px] sm:h-[300px] rounded-lg shadow-md"
-                src={`${import.meta.env.VITE_BACKEND_API}uploads/${packageData.image}`} // Image path assuming it's in uploads folder
+                src={`${import.meta.env.VITE_BACKEND_API}/uploads/${packageData.image}`} // Image path assuming it's in uploads folder
                 alt={packageData.name}
               />
             </div>

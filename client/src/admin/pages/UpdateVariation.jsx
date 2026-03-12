@@ -18,7 +18,7 @@ const UpdateVariation = () => {
     // Fetch the current variation details
     const fetchVariationData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getonevariation/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getonevariation/${id}`);
         const variation = response.data;
         setName(variation.name);
         setOptions(variation.options); // assuming variation has an 'options' array
@@ -67,7 +67,7 @@ const UpdateVariation = () => {
     };
 
     try {
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_API}api/updatevariation/${id}`, formData);
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_API}/api/updatevariation/${id}`, formData);
 
       if (response.status === 200) {
         console.log('Variation updated successfully:', response.data);

@@ -9,7 +9,7 @@ const PkgCard = ({ pkg }) => {
     <div className=" bg-white rounded-lg shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out ">
       <img
         className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity duration-300"
-        src={`${import.meta.env.VITE_BACKEND_API}uploads/${pkg.image}`}
+        src={`${import.meta.env.VITE_BACKEND_API}/uploads/${pkg.image}`}
         alt={pkg.name}
       />
       <div className="p-6 space-y-4">
@@ -38,7 +38,7 @@ const Packagepage = () => {
     const fetchPackages = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getpackages`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getpackages`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

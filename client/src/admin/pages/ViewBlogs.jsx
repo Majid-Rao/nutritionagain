@@ -14,7 +14,7 @@ const ViewBlogs = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getblog`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getblog`);
       setBlogs(response.data);
       setFilteredBlogs(response.data);
     };
@@ -35,7 +35,7 @@ const ViewBlogs = () => {
 
   const deleteBlog = async (blogId) => {
     await axios
-      .delete(`${import.meta.env.VITE_BACKEND_API}api/deleteblog/${blogId}`)
+      .delete(`${import.meta.env.VITE_BACKEND_API}/api/deleteblog/${blogId}`)
       .then((response) => {
         setBlogs((prevBlogs) => {
           const updatedBlogs = prevBlogs.filter((blog) => blog._id !== blogId);
@@ -126,7 +126,7 @@ const ViewBlogs = () => {
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">
                           {blog.image ? (
                             <img
-                              src={`${import.meta.env.VITE_BACKEND_API}uploads/${blog.image}`}
+                              src={`${import.meta.env.VITE_BACKEND_API}/uploads/${blog.image}`}
                               alt="Blog Image"
                               className="w-24 h-18 object-cover"
                             />
@@ -142,7 +142,7 @@ const ViewBlogs = () => {
                               className="max-w-xs w-32 object-cover"
                             >
                               <source
-                                src={`${import.meta.env.VITE_BACKEND_API}uploads/${blog.video}`}
+                                src={`${import.meta.env.VITE_BACKEND_API}/uploads/${blog.video}`}
                                 type="video/mp4"
                               />
                               Your browser does not support the video tag.

@@ -29,10 +29,10 @@ const PayNow = () => {
         // Same logic as CheckData component - check ID format and call appropriate API
         if (userId.startsWith('user-')) {
           // If it's simplified ID format, use simpleId endpoint
-          response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getcustomer/simpleId/${userId}`);
+          response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getcustomer/simpleId/${userId}`);
         } else {
           // If it's MongoDB ObjectId format, use regular endpoint
-          response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getcustomer/${userId}`);
+          response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getcustomer/${userId}`);
         }
 
         // Handle different response structures

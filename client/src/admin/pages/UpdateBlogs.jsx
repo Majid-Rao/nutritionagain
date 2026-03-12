@@ -15,7 +15,7 @@ const UpdateBlogs = () => {
     // Fetch the current blog details
     const fetchBlogData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getblog/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getblog/${id}`);
         const blog = response.data;
         setName(blog.heading);
         setDescription(blog.description);
@@ -48,7 +48,7 @@ const UpdateBlogs = () => {
     if (video) formData.append('video', video); // Append video file (if any)
 
     try {
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_API}api/updateblog/${id}`, formData);
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_API}/api/updateblog/${id}`, formData);
 
       if (response.status === 200) {
         console.log('Blog updated successfully:', response.data);

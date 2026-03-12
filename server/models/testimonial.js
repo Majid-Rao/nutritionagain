@@ -9,6 +9,8 @@ const testimonialSchema = new mongoose.Schema({
       "Positive Pregnancies With Other Fertility Issues",
       "Reversals",
       "Male Fertility",
+      "Miracles Through Our Program",
+      "Miracles With Azoospermia & Ovarian Failure",
     ],
     required: true,
   },

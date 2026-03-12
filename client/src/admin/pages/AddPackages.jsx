@@ -14,7 +14,7 @@ const AddPackages = () => {
   useEffect(() => {
     const fetchVariations = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getallvariations`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getallvariations`);
         const result = await response.json();
         setVariations(result); // Assuming 'name' is available in variation
       } catch (error) {
@@ -42,7 +42,7 @@ const AddPackages = () => {
     if (image) formData.append('image', image); // Append image file
     if (variation) formData.append('variation', variation); // Append variation
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/addpackage`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/addpackage`, {
         method: 'POST',
         body: formData,
       });

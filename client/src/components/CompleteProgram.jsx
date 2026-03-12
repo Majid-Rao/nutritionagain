@@ -13,33 +13,32 @@ const CompleteProgram = () => {
     retryCount: 0
   });
 
-  const getImagePath = (imageName) => {
-    if (!imageName) return '/placeholder.jpg';
-    
-    try {
-      const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
-      if (!backend) return '/placeholder.jpg';
+const getImagePath = (imageName) => {
+  if (!imageName) return '/placeholder.jpg';
+  
+  try {
+    const backend = import.meta.env.VITE_BACKEND_API?.replace(/\/$/, '');
+    if (!backend) return '/placeholder.jpg';
 
-      // If it's already a complete URL, return it as-is
-      if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
-        return imageName;
-      }
-
-      // Remove any leading slashes or "uploads/programs/" prefix
-      const cleanPath = imageName
-        .replace(/^\/+/, '') // Remove leading slashes
-        .replace(/^uploads\/programs\//, ''); // Remove uploads/programs prefix if exists
-
-      // Use the /api/image/ endpoint
-      const fullPath = `${backend}/api/image/${cleanPath}`;
-      
-      return fullPath;
-    } catch (error) {
-      console.error('Image path error:', error);
-      return '/placeholder.jpg';
+    if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
+      return imageName;
     }
-  };
 
+    const cleanPath = imageName
+      .replace(/^\/+/, '')
+      .replace(/^uploads\/programs\//, '');
+
+    // DON'T convert spaces - keep as-is and encode for URL
+    const fullPath = `${backend}/uploads/programs/${encodeURIComponent(cleanPath)}`;
+    
+    console.log('🔍 Image URL:', fullPath);
+    
+    return fullPath;
+  } catch (error) {
+    console.error('Image path error:', error);
+    return '/placeholder.jpg';
+  }
+};
   const loadImageWithRetry = async (imgSrc, maxRetries = 3) => {
     let retryCount = 0;
 
@@ -73,7 +72,7 @@ const CompleteProgram = () => {
   useEffect(() => {
     const fetchProgram = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getprogram/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getprogram/${id}`);
         const data = await response.json();
         setProgram(data);
 

@@ -25,7 +25,7 @@ const UpdateOrder = () => {
   useEffect(() => {
   const fetchOrderData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/oneorder/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/oneorder/${id}`);
       const order = response.data;
 
       setCustomerName(order.customer.name || '');
@@ -68,7 +68,7 @@ const handleSubmit = async (e) => {
     };
 
     const response = await axios.put(
-      `${import.meta.env.VITE_BACKEND_API}api/updateorder/${id}`,
+      `${import.meta.env.VITE_BACKEND_API}/api/updateorder/${id}`,
       updatedOrder
     );
 

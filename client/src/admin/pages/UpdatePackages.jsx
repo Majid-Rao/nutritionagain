@@ -22,7 +22,7 @@ const UpdatePackage = () => {
     const fetchPackageData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_API}api/getonepackage/${id}`
+          `${import.meta.env.VITE_BACKEND_API}/api/getonepackage/${id}`
         );
         const pkg = response.data;
         setName(pkg.name);
@@ -37,7 +37,7 @@ const UpdatePackage = () => {
 
     const fetchVariations = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getallvariations`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getallvariations`);
         const result = await response.json();
         setVariations(result);
       } catch (error) {
@@ -71,7 +71,7 @@ const UpdatePackage = () => {
 
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_API}api/updatepackage/${id}`,
+        `${import.meta.env.VITE_BACKEND_API}/api/updatepackage/${id}`,
         formData,
         {
           headers: {
@@ -182,7 +182,7 @@ const UpdatePackage = () => {
                   {currentImage && (
                     <div className="mb-4">
                       <img
-                        src={`${import.meta.env.VITE_BACKEND_API}uploads/${currentImage}`}
+                        src={`${import.meta.env.VITE_BACKEND_API}/uploads/${currentImage}`}
                         alt="Current Package"
                         className="w-24 h-18 object-cover mb-2"
                       />

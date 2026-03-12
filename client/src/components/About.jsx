@@ -93,13 +93,13 @@ At Dr Aisha Lakhwani, we believe that everyone deserves to experience the touch,
             {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS Saima</h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS Tooba</h3>
               <p className="text-center text-lg text-ternary">SALES REPRESENTATIVE</p>
             </div>
             {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 animate-slide-in-up">
               <BsFillPeopleFill  className="mx-auto *:text-ternary mb-8" size={45}/>
-              <h3 className="text-2xl font-semibold text-center mb-2">MS Anny</h3>
+              <h3 className="text-2xl font-semibold text-center mb-2">MS Kashaf</h3>
               <p className="text-center text-lg text-ternary">ASSISTANT</p>
             </div>
           </div>

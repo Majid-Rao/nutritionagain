@@ -20,7 +20,7 @@ const AddTestimonial = () => {
       formData.append("category", category);
       formData.append("image", image);
 
-      await axios.post(`${import.meta.env.VITE_BACKEND_API}api/addtestimonial`, formData, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_API}/api/addtestimonial`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -82,6 +82,9 @@ const AddTestimonial = () => {
               <option>Positive Pregnancies With Other Fertility Issues</option>
               <option>Reversals</option>
               <option>Male Fertility</option>
+              <option>Miracles Through Our Program</option>
+              <option>Miracles With Azoospermia & Ovarian Failure</option>
+
             </select>
           </div>
 

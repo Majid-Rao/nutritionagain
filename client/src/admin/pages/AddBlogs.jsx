@@ -32,7 +32,7 @@ const AddBlogs = () => {
   if (video) formData.append('video', video); // Append video file (optional)
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/addblog`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/addblog`, {
       method: 'POST',
       body: formData,
     });

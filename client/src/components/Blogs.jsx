@@ -9,7 +9,7 @@ const BlogCard = ({ blog }) => {
     <div className="bg-white rounded-lg shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out flex flex-col h-full">
       <img
         className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity duration-300"
-        src={`${import.meta.env.VITE_BACKEND_API}uploads/${blog.image}`}
+        src={`${import.meta.env.VITE_BACKEND_API}/uploads/${blog.image}`}
         alt={blog.heading}
       />
       
@@ -44,7 +44,7 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}api/getblog/`)
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/getblog/`)
         const data = await response.json()
         setBlogs(data)
       } catch (error) {

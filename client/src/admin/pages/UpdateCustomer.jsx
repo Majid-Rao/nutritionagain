@@ -15,7 +15,7 @@ const UpdateCustomer = () => {
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}api/getcustomer/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/getcustomer/${id}`);
         // Check if response.data.customer exists, otherwise use response.data
         const customerData = response.data.customer || response.data;
         
@@ -96,7 +96,7 @@ const UpdateCustomer = () => {
     try {
       const updatedCustomer = { ...customer };
 
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_API}api/updatecustomer/${id}`, updatedCustomer);
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_API}/api/updatecustomer/${id}`, updatedCustomer);
 
       if (response.status === 200) {
         toast.success("Customer updated successfully!");

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,11 +9,125 @@ const TestimonialSlider = ({ category = "Low AMH", limit = 15 }) => {
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
 
+  // ✅ Backend URL ko memoize karein
+  const backend = useMemo(() => {
+    const url = import.meta.env.VITE_BACKEND_API;
+    if (!url) {
+      console.error('Backend URL not configured');
+      return '';
+    }
+    return url.replace(/\/$/, "");
+  }, []);
+
+  // ✅ Image path properly construct karne ka function
+  const getImagePath = (imageUrl) => {
+    if (!imageUrl) return '/placeholder.jpg';
+    if (!backend) return '/placeholder.jpg';
+    
+    try {
+      // Agar complete URL hai to waise hi return karo
+      if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+        return imageUrl;
+      }
+
+      // Leading slashes aur prefix remove karo
+      const cleanPath = imageUrl
+        .replace(/^\/+/, '')
+        .replace(/^uploads\/testimonials\//, '');
+
+      // Full URL construct karo - /api/image/ route use karke
+      const fullPath = `${backend}/api/image/${cleanPath}`;
+      
+      console.log('Image path:', fullPath); // Debug ke liye
+      return fullPath;
+    } catch (error) {
+      console.error('Image path construction error:', error);
+      return '/placeholder.jpg';
+    }
+  };
+
+  // ✅ Image component with error handling
+  const TestimonialImage = ({ item }) => {
+    const [imgState, setImgState] = useState({
+      loading: true,
+      error: false,
+      src: null
+    });
+
+    useEffect(() => {
+      let mounted = true;
+      
+      const loadImage = async () => {
+        if (!mounted) return;
+        
+        try {
+          const src = getImagePath(item.imageUrl);
+          
+          const img = new Image();
+          
+          await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = src;
+          });
+
+          if (mounted) {
+            setImgState({
+              loading: false,
+              error: false,
+              src
+            });
+          }
+        } catch (error) {
+          console.error('Image loading error:', error);
+          if (mounted) {
+            setImgState({
+              loading: false,
+              error: true,
+              src: null
+            });
+          }
+        }
+      };
+
+      loadImage();
+
+      return () => {
+        mounted = false;
+      };
+    }, [item.imageUrl]);
+
+    if (imgState.error) {
+      return (
+        <div className="w-52 h-72 bg-gray-300 dark:bg-gray-700 flex items-center justify-center rounded-xl mb-5 shadow-md">
+          <span className="text-gray-500 dark:text-gray-400 text-sm">Image not available</span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="relative w-52 h-72 overflow-hidden rounded-xl mb-5 shadow-md">
+        {imgState.loading && (
+          <div className="absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse" />
+        )}
+        {imgState.src && (
+          <img
+            src={imgState.src}
+            alt={item.category}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imgState.loading ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+        )}
+      </div>
+    );
+  };
+
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_API}api/gettestimonials?category=${encodeURIComponent(
+          `${backend}/api/gettestimonials?category=${encodeURIComponent(
             category
           )}&limit=${limit}`
         );
@@ -30,7 +144,7 @@ const TestimonialSlider = ({ category = "Low AMH", limit = 15 }) => {
     };
 
     fetchTestimonials();
-  }, [category, limit, refresh]);
+  }, [category, limit, refresh, backend]);
 
   // Listen for new testimonial event (from AddTestimonial)
   useEffect(() => {
@@ -85,13 +199,7 @@ const TestimonialSlider = ({ category = "Low AMH", limit = 15 }) => {
             {testimonials.map((item, index) => (
               <div key={item._id || index} className="px-4">
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-[1.02] transition-transform duration-300">
-                  <div className="w-52 h-72 overflow-hidden rounded-xl mb-5 shadow-md">
-                    <img
-                      src={`${import.meta.env.VITE_BACKEND_API.replace(/\/$/, "")}${item.imageUrl}`}
-                      alt={item.category}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <TestimonialImage item={item} />
                   <p className="text-base font-medium text-gray-800 dark:text-gray-200">
                     {item.category}
                   </p>

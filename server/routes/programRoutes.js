@@ -21,7 +21,12 @@ const storage = multer.diskStorage({
     cb(null, dir);
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+    // Remove spaces and special characters
+    const cleanName = file.originalname
+      .replace(/\s+/g, '-')  // Spaces ko dash se replace
+      .replace(/[()]/g, '');  // Brackets remove
+    
+    cb(null, Date.now() + "-" + cleanName);
   },
 });
 
@@ -77,48 +82,50 @@ router.put('/updateprogram/:id',
 
 router.delete('/deleteprogram/:id', programController.deleteProgram);
 
-router.get('/image/:filename', (req, res) => {
-  try {
-    const { filename } = req.params;
-    console.log('Requesting image:', filename); // ADD THIS
+// router.get('/image/:filename', (req, res) => {
+//   try {
+//     // DECODE the filename to handle %20 and special characters
+//     const filename = decodeURIComponent(req.params.filename);
     
-    const filepath = process.env.NODE_ENV === "production"
-      ? path.join("/tmp/programs", filename)
-      : path.join(__dirname, "../uploads/programs", filename);
+//     console.log('Requesting image:', filename); // Decoded filename
+    
+//     const filepath = process.env.NODE_ENV === "production"
+//       ? path.join("/tmp/programs", filename)
+//       : path.join(__dirname, "../uploads/programs", filename);
 
-    console.log('File path:', filepath); // ADD THIS
-    console.log('File exists:', fs.existsSync(filepath)); // ADD THIS
+//     console.log('File path:', filepath);
+//     console.log('File exists:', fs.existsSync(filepath));
 
-    if (fs.existsSync(filepath)) {
-      res.set({
-        'Cache-Control': 'public, max-age=31557600',
-        'Expires': new Date(Date.now() + 31557600000).toUTCString()
-      });
+//     if (fs.existsSync(filepath)) {
+//       res.set({
+//         'Cache-Control': 'public, max-age=31557600',
+//         'Expires': new Date(Date.now() + 31557600000).toUTCString()
+//       });
 
-      res.sendFile(filepath, (err) => {
-        if (err) {
-          console.error('Error sending file:', err);
-          res.status(500).json({
-            status: 'error',
-            message: 'Error serving image'
-          });
-        }
-      });
-    } else {
-      console.log('Image not found:', filepath);
-      res.status(404).json({
-        status: 'error',
-        message: 'Image not found'
-      });
-    }
-  } catch (error) {
-    console.error('Image serve error:', error);
-    res.status(500).json({
-      status: 'error',
-      message: 'Internal server error'
-    });
-  }
-});
+//       res.sendFile(filepath, (err) => {
+//         if (err) {
+//           console.error('Error sending file:', err);
+//           res.status(500).json({
+//             status: 'error',
+//             message: 'Error serving image'
+//           });
+//         }
+//       });
+//     } else {
+//       console.log('Image not found:', filepath);
+//       res.status(404).json({
+//         status: 'error',
+//         message: 'Image not found'
+//       });
+//     }
+//   } catch (error) {
+//     console.error('Image serve error:', error);
+//     res.status(500).json({
+//       status: 'error',
+//       message: 'Internal server error'
+//     });
+//   }
+// });
 // Global error handler
 router.use((err, req, res, next) => {
   console.error(err.stack);
