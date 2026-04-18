@@ -1,7 +1,7 @@
 import Header from "../layouts/Header";
 import Sidebar from "../layouts/Sidebar";
 import { motion } from "framer-motion";
-import { Edit, Trash2, Eye } from "lucide-react";
+import { Edit, Trash2, Eye, Copy} from "lucide-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -85,7 +85,11 @@ const handleSearch = (e) => {
       }
     }
   };
-
+  // copy ID
+  const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text);
+  toast.success("Customer ID copied!");
+};
   // Generate simple ID for display
 const generateSimpleId = (mongoId) => {
   if (!mongoId) return '';
@@ -126,7 +130,22 @@ const generateSimpleId = (mongoId) => {
           className="hover:bg-gray-700/50 cursor-pointer"
           onClick={() => toggleExpandedRow(customer._id)}
         >
-          <td className="px-4 py-3 text-sm text-gray-100">{generateSimpleId(customer._id)}</td>
+          <td className="px-4 py-3 text-sm text-gray-100">
+            <div className="flex items-center gap-2">
+    <span>{generateSimpleId(customer._id)}</span>
+
+    <button
+      onClick={(e) => {
+        e.stopPropagation(); // ❗ row expand na ho
+        copyToClipboard(generateSimpleId(customer._id));
+      }}
+      className="text-gray-400 hover:text-green-400 transition"
+      title="Copy ID"
+    >
+      <Copy size={14} />
+    </button>
+            </div>
+          </td>
           <td className="px-4 py-3 text-sm text-gray-100">{customer.fullName}</td>
           <td className="px-4 py-3 text-sm text-gray-300">{customer.gender}</td>
           <td className="px-4 py-3 text-sm text-gray-300">{customer.age}</td>
@@ -200,6 +219,9 @@ const generateSimpleId = (mongoId) => {
                             {customer.femaleFertilityHistory.marriedFemales.tryingToConceiveFor?.value || "-"} 
                             {customer.femaleFertilityHistory.marriedFemales.tryingToConceiveFor?.unit || ""}
                           </p>
+                          {/* <p><span className="text-gray-400">Are Periods Happen Without Medications:</span> {customer.femaleFertilityHistory.marriedFemales.arePeriodsWithoutMedications || "-"}</p>
+                          <p><span className="text-gray-400">Rounds Of Fertility Treatments ivf/IUI/etc/ovulation Medications (if taken):</span> {customer.femaleFertilityHistory.marriedFemales.roundsOfFertilityTreatments || "-"}</p> */}
+
                           <p><span className="text-gray-400">Cycle Length:</span> {customer.femaleFertilityHistory.marriedFemales.menstrualCycleLength || "-"} days</p>
                           <p><span className="text-gray-400">Flow:</span> {customer.femaleFertilityHistory.marriedFemales.flow || "-"}</p>
                           <p><span className="text-gray-400">Regularity:</span> {customer.femaleFertilityHistory.marriedFemales.cycleRegularity || "-"}</p>
@@ -277,7 +299,6 @@ const generateSimpleId = (mongoId) => {
                   <h4 className="text-lg font-semibold text-red-400 mb-3">Family History</h4>
                   <div className="space-y-2 text-sm">
                     <p><span className="text-gray-400">Infertility:</span> {formatBoolean(customer.familyHistory?.infertility)}</p>
-                    <p><span className="text-gray-400">PCOS:</span> {formatBoolean(customer.familyHistory?.pcos)}</p>
                     <p><span className="text-gray-400">Diabetes:</span> {formatBoolean(customer.familyHistory?.diabetes)}</p>
                     <p><span className="text-gray-400">Thyroid Disorders:</span> {formatBoolean(customer.familyHistory?.thyroidDisorders)}</p>
                     <p><span className="text-gray-400">Obesity:</span> {formatBoolean(customer.familyHistory?.obesity)}</p>

@@ -37,7 +37,7 @@ const customerModelSchema = new mongoose.Schema({
         enum: [
           'PCOS', 'Endometriosis', 'Fibroids', 'Recurrent miscarriages',
           'Thyroid disorders', 'High prolactin', 'Adenomyosis', 
-          'Blocked tubes', 'Diabetes', 'Autoimmune Disease', 'Other'
+          'Blocked tubes', 'Diabetes', 'Autoimmune Disease','Low AMH','Other'
         ]
       },
       otherConditions: { type: String },
@@ -107,7 +107,6 @@ const customerModelSchema = new mongoose.Schema({
   // Family History
   familyHistory: {
     infertility: { type: Boolean, default: false },
-    pcos: { type: Boolean, default: false },
     diabetes: { type: Boolean, default: false },
     thyroidDisorders: { type: Boolean, default: false },
     obesity: { type: Boolean, default: false },

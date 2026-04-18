@@ -15,7 +15,7 @@ const mailerRoutes = require('./routes/mailerRoutes');
 const consultemailRoutes = require('./routes/consultemailRoutes');
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const programRoutes = require('./routes/programRoutes');
-
+const paymentRoutes = require('./routes/paymentRoutes');
 const cors = require('cors');
 const fs = require('fs');
 const mongoose = require('mongoose');
@@ -112,12 +112,12 @@ app.use('/api', mailerRoutes);
 app.use('/api', consultemailRoutes);
 app.use('/api', testimonialRoutes);
 app.use('/api', programRoutes);
-
+app.use('/api/payment', paymentRoutes);
 // Serve static files from dist (React build)
-// app.use(express.static(path.join(__dirname, 'dist'), {
-//   maxAge: '1d', // Cache static files for 1 day
-//   etag: true
-// }));
+app.use(express.static(path.join(__dirname, 'dist'), {
+  maxAge: '1d', // Cache static files for 1 day
+  etag: true
+}));
 
 // Handle React Router - SPA fallback
 app.use((req, res, next) => {

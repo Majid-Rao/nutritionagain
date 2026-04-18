@@ -1,48 +1,26 @@
-import Packagepage from "./components/Packagepage"
-import About from "./components/About"
-import Contact from "./components/Contact"
+import {Home,AboutUs,Contact,Packagepage,
+Policy,Blogs,CompleteBlog,PackageShow,Checkout,CheckData,
+Consult,PayNow,Terms,TestimonialMain,OurPrograms,CompleteProgram,
+PaySuccess,
+} from './components/index';
+import {
+  AdminDashboard,AddBlogs,ViewBlogs,UpdateBlogs,AddVariation,
+  ViewVariation,UpdateVariation,UpdateOrder,CustomerDetails,
+  UpdateCustomer,AddTestimonial,ViewTestimonials,AddPrograms,
+  ViewPrograms,UpdateProgram,
+} from "./admin/pages/index";
 import { Route,Routes,Navigate } from "react-router-dom"
-import Home from "./components/Home"
-import Policy from "./components/Policy"
-import Blogs from "./components/Blogs"
 import Login from "./auth/Login/Login"
 import Register from "./auth/Register/Register"
 import { useAuth } from './contexts/AuthContext';
-import AdminDashboard from "./admin/pages/AdminDashboard"
-import AddBlogs from "./admin/pages/AddBlogs"
-import ViewBlogs from "./admin/pages/ViewBlogs"
-import UpdateBlogs from "./admin/pages/UpdateBlogs"
-import CompleteBlog from "./components/CompleteBlog"
-import AddVariation from "./admin/pages/AddVariation"
-import ViewVariation from "./admin/pages/ViewVariation"
-import UpdateVariation from "./admin/pages/UpdateVariation"
-import AddPackages from "./admin/pages/AddPackages"
-import ViewPackages from "./admin/pages/ViewPackages"
-import UpdatePackages from "./admin/pages/UpdatePackages"
-import PackageShow from "./components/PackageShow"
-import UpdateOrder from "./admin/pages/UpdateOrder"
-import Checkout from "./components/Checkout"
-import CheckData from "./components/CheckData"
-import Consult from "./components/Consult"
-import CustomerDetails from "./admin/pages/Patient"
-import UpdateCustomer from "./admin/pages/UpdateCustomer" 
-import PayNow from "./components/PayNow"
-import Terms from "./components/Terms"
-import TestimonialMain from "./components/TestimonialMain"
-import AddTestimonial from "./admin/pages/AddTestimonial"
-import ViewTestimonials from "./admin/pages/ViewTestimonials"
-import AddPrograms from "./admin/pages/AddPrograms"
-import ViewPrograms from "./admin/pages/ViewPrograms"
-import UpdateProgram from "./admin/pages/UpdateProgram"
-import OurPrograms from "./components/OurPrograms"
-import CompleteProgram from "./components/CompleteProgram"
+
 function App() {
   const { isAuthenticated } = useAuth();
   return (
     <>
     <Routes>
     <Route path="/" element={<Home/>}/>
-    <Route path="/about" element={<About/>}/>
+    <Route path="/about" element={<AboutUs/>}/>
     <Route path="/packages" element={<Packagepage/>}/>
     <Route path="/packageshow/:id" element={<PackageShow/>}/>
     <Route path="/checkout/:id" element={<Checkout/>}/>
@@ -55,6 +33,7 @@ function App() {
     <Route path="/checkdata" element={<CheckData/>}/>
     <Route path="/consult" element={<Consult/>}/>
     <Route path="/payment/:userId" element={<PayNow/>}/>
+    <Route path="/success/:userId" element={<PaySuccess/>}/>
     <Route path="/terms" element={<Terms/>}/>
     <Route path="/testimonials" element={<TestimonialMain/>}/>
     <Route path="/programs" element={<OurPrograms/>}/>

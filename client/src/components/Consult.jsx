@@ -23,6 +23,8 @@ const initialFormState = {
           value: "",
           unit: "months"
         },
+        // arePeriodsWithoutMedications : "Yes",
+        // roundsOfFertilityTreatments : "Nill",
         menstrualCycleLength: "",
         flow: "Light",
         cycleRegularity: "Regular",
@@ -69,7 +71,6 @@ const initialFormState = {
     foodIntolerances: "",
     familyHistory: {
       infertility: false,
-      pcos: false,
       diabetes: false,
       thyroidDisorders: false,
       obesity: false,
@@ -86,7 +87,7 @@ const Consult = () => {
   const femaleMarriedConditions = [
     'PCOS', 'Endometriosis', 'Fibroids', 'Recurrent miscarriages',
     'Thyroid disorders', 'High prolactin', 'Adenomyosis', 
-    'Blocked tubes', 'Diabetes', 'Autoimmune Disease'
+    'Blocked tubes', 'Diabetes', 'Autoimmune Disease','Low AMH',
   ];
 
   const femaleUnmarriedConditions = [
@@ -215,6 +216,8 @@ const handleSubmit = async (e) => {
             value: Number(formData.femaleFertilityHistory.marriedFemales.tryingToConceiveFor.value),
             unit: formData.femaleFertilityHistory.marriedFemales.tryingToConceiveFor.unit
           },
+          // arePeriodsWithoutMedications:formData.femaleFertilityHistory.marriedFemales.arePeriodsWithoutMedications,
+          // roundsOfFertilityTreatments:formData.femaleFertilityHistory.marriedFemales.roundsOfFertilityTreatments,
           menstrualCycleLength: Number(formData.femaleFertilityHistory.marriedFemales.menstrualCycleLength),
           flow: formData.femaleFertilityHistory.marriedFemales.flow,
           cycleRegularity: formData.femaleFertilityHistory.marriedFemales.cycleRegularity,
@@ -492,6 +495,39 @@ const handleSubmit = async (e) => {
       <option value="years">Years</option>
     </select>
   </div>
+                  
+                  {/* <div>
+                      <label className="block text-lg font-medium text-gray-700">Are Periods Happen Without Medications</label>
+                      <select
+                        name="femaleFertilityHistory.marriedFemales.arePeriodsWithoutMedications"
+                        value={formData.femaleFertilityHistory.marriedFemales.arePeriodsWithoutMedications}
+                        onChange={handleChange}
+                        className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-ternary"
+                      >
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                     <div>
+                      <label className="block text-lg font-medium text-gray-700">Rounds Of Fertility Treatments ivf/IUI/etc/ovulation Medications (if taken)</label>
+                      <select
+                        name="femaleFertilityHistory.marriedFemales.roundsOfFertilityTreatments"
+                        value={formData.femaleFertilityHistory.marriedFemales.roundsOfFertilityTreatments}
+                        onChange={handleChange}
+                        className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-ternary"
+                      >
+                        <option value="Nill">Nill</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                      </select>
+                    </div> */}
                     <div>
                       <label className="block text-lg font-medium text-gray-700">Menstrual Cycle Length (days)</label>
                       <input

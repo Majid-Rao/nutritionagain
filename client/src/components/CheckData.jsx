@@ -156,7 +156,7 @@ const CheckData = () => {
                 </tr>
                 <tr>
                   <td className="px-4 py-2 font-semibold">Price</td>
-                  <td className="px-4 py-2">Rs: {userData?.price || 'N/A'}</td>
+                  <td className="px-4 py-2">USD: {userData?.price || 'N/A'}</td>
                 </tr>
               </tbody>
             </table>
