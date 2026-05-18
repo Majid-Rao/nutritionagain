@@ -4,9 +4,11 @@ import { IoMdSearch, IoMdMenu } from "react-icons/io";
 import { MdOutlineDarkMode, MdOutlineLightMode, MdCurrencyExchange } from "react-icons/md";
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { FaShoppingCart } from 'react-icons/fa';
+import { useCart } from '../../contexts/CartContext.jsx';
 const Navbar = () => {
   const navigate = useNavigate();
+  const { cartCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -63,6 +65,7 @@ const Navbar = () => {
             <Link to="/" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">Home</li></Link>
             <Link to="/about" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">About</li></Link>
             <Link to="/consult" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">Consultation form</li></Link>
+            <Link to="/ourproducts" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">Our Products</li></Link>  
             <Link to="/blogs" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">Blogs</li></Link>
             <Link to="/programs" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">Programs</li></Link>
             <Link to="/contact" onClick={() => setIsOpen(false)}><li className="list-none subpixel-antialiased text-md font-semibold hover:bg-[#f2d2cf] rounded-md hover:scale-105 transition-transform">Contact</li></Link>
@@ -70,31 +73,57 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar & Cart */}
-          <div className="flex justify-between items-center gap-4 animate-slide-in-right transition-all duration-300">
-            <div className="relative hidden sm:block group">
-              <input type="text" placeholder="search..." className="w-[200px] sm:w-[250px] group-hover:w-[250px] transition-all duration-300 cursor-pointer border border-grey-300 rounded-full px-3 py-1 focus:outline-none focus:border-1 focus:border-primary dark:bg-gray-700 dark:text-white" />
-              <IoMdSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 group-hover:text-primary text-gray-500" />
-            </div>
-            <button className="bg-gradient-to-r from-ternary to-green-300 dark:from-gray-700 dark:to-gray-600 text-white rounded-full px-4 py-1 hover:bg-gray-900 transition-all duration-200 flex items-center gap-3 group" onClick={() => navigate('/checkdata')}>
-              <span className="font-bold group-hover:block hidden transition-all duration-200">PayNow</span>
-              <MdCurrencyExchange className="text-xl text-black dark:text-white drop-shadow-sm cursor-pointer animate-bounce-logo" />
-            </button>
-            {/* Dark Mode Toggle */}
-            {darkMode ? (
-              <MdOutlineLightMode className="text-2xl cursor-pointer hover:text-white transition-all duration-200 mr-4" onClick={darkmodeToggle} />
-            ) : (
-              <MdOutlineDarkMode className="text-2xl cursor-pointer hover:text-white transition-all duration-200 mr-4" onClick={darkmodeToggle} />
-            )}
-          </div>
+          <div className="flex justify-between items-center gap-3 sm:gap-4 animate-slide-in-right transition-all duration-300">
+
+  {/* Cart Icon */}
+  <button
+    onClick={() => navigate('/cart')}
+    className="relative flex items-center justify-center w-11 h-11   hover:scale-105 transition-all duration-300"
+    aria-label="Open cart"
+  >
+    <FaShoppingCart className="text-lg text-gray-700 dark:text-white" />
+
+    {cartCount > 0 && (
+      <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center">
+        {cartCount}
+      </span>
+    )}
+  </button>
+
+  {/* PayNow Button */}
+  <button
+    className="bg-gradient-to-r from-ternary to-green-300 dark:from-gray-700 dark:to-gray-600 text-white rounded-full px-4 py-2 hover:bg-gray-900 transition-all duration-200 flex items-center gap-3 group"
+    onClick={() => navigate('/checkdata')}
+  >
+    <span className="font-bold hidden sm:block transition-all duration-200">
+      PayNow
+    </span>
+    <MdCurrencyExchange className="text-xl text-black dark:text-white drop-shadow-sm cursor-pointer animate-bounce-logo" />
+  </button>
+
+  {/* Dark Mode Toggle */}
+  {darkMode ? (
+    <MdOutlineLightMode
+      className="text-2xl cursor-pointer hover:text-white transition-all duration-200 mr-2 sm:mr-4"
+      onClick={darkmodeToggle}
+    />
+  ) : (
+    <MdOutlineDarkMode
+      className="text-2xl cursor-pointer hover:text-white transition-all duration-200 mr-2 sm:mr-4"
+      onClick={darkmodeToggle}
+    />
+  )}
+</div>  
         </div>
       </div>
 
       {/* Lower Nav (Desktop view) */}
       <div className="hidden md:flex justify-center items-center animate-fade-in bg-white dark:bg-gray-900 py-2">
-        <ul className="flex justify-between items-center lg:gap-18 md:gap-10 xl:gap-24 text-gray-900 dark:text-gray-300 text-sm px-4 subpixel-antialiased font-semibold">
+        <ul className="flex justify-between items-center lg:gap-12 md:gap-8 xl:gap-20 text-gray-900 dark:text-gray-300 text-sm px-4 subpixel-antialiased font-semibold">
           <Link to="/"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">Home</li></Link>
           <Link to="/about"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">About</li></Link>
           <Link to="/consult"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">Consultation form</li></Link>
+          <Link to="/ourproducts"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">Products</li></Link>
           <Link to="/blogs"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">Blogs</li></Link>
           <Link to="/programs"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">Programs</li></Link>
           <Link to="/contact"><li className="xl:p-2 lg:p-4 md:p-4 hover:bg-[#f2d2cf] dark:hover:text-black rounded-md hover:scale-100 transition-transform">Contact</li></Link>

@@ -21,8 +21,8 @@ const SIDEBAR_ITEMS = [
   // { name: "View Packages", icon: NotebookPen, color: "#EC4899", href: "/viewpackages" },
   { name: "Add Blogs", icon: ArrowLeftRight, color: "#10B981", href: "/addblogs" },
   { name: "View Blogs", icon: BookOpenCheck, color: "#F59E0B", href: "/viewblogs" },
-  { name: "Add Variation", icon: ArrowLeftRight, color: "#10B981", href: "/addvariation" },
-  { name: "View Variations", icon: BookOpenCheck, color: "#F59E0B", href: "/viewvariations" },
+  { name: "Shop Info", icon: BookOpenCheck, color: "#F59E0B", href: "/shopinfo" },
+  
   { name: "Add Testimonial", icon: ArrowLeftRight, color: "#10B981", href: "/addtestimonial" },
   { name: "View Testimonial", icon: BookOpenCheck, color: "#F59E0B", href: "/viewtestimonials" },
   { name: "Add Programs", icon: ArrowLeftRight, color: "#10B981", href: "/addprograms" },

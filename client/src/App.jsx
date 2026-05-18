@@ -1,13 +1,13 @@
 import {Home,AboutUs,Contact,Packagepage,
 Policy,Blogs,CompleteBlog,PackageShow,Checkout,CheckData,
 Consult,PayNow,Terms,TestimonialMain,OurPrograms,CompleteProgram,
-PaySuccess,
+PaySuccess,OurProducts,
+ShowProduct,Cart,EcomOrder,
 } from './components/index';
 import {
-  AdminDashboard,AddBlogs,ViewBlogs,UpdateBlogs,AddVariation,
-  ViewVariation,UpdateVariation,UpdateOrder,CustomerDetails,
+  AdminDashboard,AddBlogs,ViewBlogs,UpdateBlogs,UpdateOrder,CustomerDetails,
   UpdateCustomer,AddTestimonial,ViewTestimonials,AddPrograms,
-  ViewPrograms,UpdateProgram,
+  ViewPrograms,UpdateProgram,ShopInfo
 } from "./admin/pages/index";
 import { Route,Routes,Navigate } from "react-router-dom"
 import Login from "./auth/Login/Login"
@@ -21,6 +21,8 @@ function App() {
     <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/about" element={<AboutUs/>}/>
+    <Route path="/cart" element={<Cart/>}/>
+    <Route path="/ecom-order" element={<EcomOrder />} />
     <Route path="/packages" element={<Packagepage/>}/>
     <Route path="/packageshow/:id" element={<PackageShow/>}/>
     <Route path="/checkout/:id" element={<Checkout/>}/>
@@ -38,20 +40,18 @@ function App() {
     <Route path="/testimonials" element={<TestimonialMain/>}/>
     <Route path="/programs" element={<OurPrograms/>}/>
     <Route path="/program/:id" element={<CompleteProgram />} />
+    <Route path= "/ourproducts" element={<OurProducts/>}/>
+    <Route path= "/product/:id" element={<ShowProduct/>}/>
+
     //admin routes
     <Route path="/admin" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login"/>} />
     <Route path="/addblogs" element={isAuthenticated ? <AddBlogs /> : <Navigate to="/login"/>} />
     <Route path="/viewblogs" element={isAuthenticated ? <ViewBlogs /> : <Navigate to="/login"/>} />
     <Route path="/updateblog/:id" element={isAuthenticated ? <UpdateBlogs/> : <Navigate to="/login"/>} />
-    <Route path="/addvariation" element={isAuthenticated ? <AddVariation /> : <Navigate to="/login"/>} />
-    <Route path="/viewvariations" element={isAuthenticated ? <ViewVariation /> : <Navigate to="/login"/>} />
-    <Route path="/updatevariation/:id" element={isAuthenticated ? <UpdateVariation/> : <Navigate to="/login"/>} />
     <Route path="/addtestimonial" element={isAuthenticated ? <AddTestimonial /> : <Navigate to="/login"/>} />
     <Route path="/viewtestimonials" element={isAuthenticated ? <ViewTestimonials /> : <Navigate to="/login"/>} />
-    {/* <Route path="/addpackages" element={isAuthenticated ? <AddPackages /> : <Navigate to="/login"/>} />
-    <Route path="/viewpackages" element={isAuthenticated ? <ViewPackages /> : <Navigate to="/login"/>} />
-    <Route path="/updatepackages/:id" element={isAuthenticated ? <UpdatePackages/> : <Navigate to="/login"/>} />
-     */}
+    <Route path="/shopinfo" element={isAuthenticated ? <ShopInfo /> : <Navigate to="/login"/>} />
+
     {/* <Route path="/orders" element={isAuthenticated ? <Orders /> : <Navigate to="/login"/>} /> */}
      <Route path="/addprograms" element={isAuthenticated ? <AddPrograms /> : <Navigate to="/login"/>} />
     <Route path="/viewprograms" element={isAuthenticated ? <ViewPrograms /> : <Navigate to="/login"/>} />

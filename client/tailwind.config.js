@@ -27,8 +27,13 @@ export default {
           'slide-in-up': 'slideInUp 1s ease-out',
           'slide-in-down': 'slideInDown 1s ease-out',
           "spin-slow": "spin 2s linear ",
+          marquee: 'marquee 20s linear infinite',
       },
        keyframes: {
+         marquee: {
+        '0%':   { transform: 'translateX(0)' },
+        '100%': { transform: 'translateX(-50%)' },
+      },
         slideInUp: {
           '0%': {
             transform: 'translateY(-100%)', // Start off-screen at the top

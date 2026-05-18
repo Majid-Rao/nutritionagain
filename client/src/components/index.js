@@ -23,10 +23,14 @@ import Productsfile from './Productsfile';
 import Terms from './Terms';
 import TestimonialMain from './TestimonialMain';
 import TestimonialSlider from './TestimonialSlider';
+import OurProducts from './OurProducts'
+import ShowProduct from './ShowProduct'
+import Cart from './Cart'
+import EcomOrder from './EcomOrder'
 export {Home,AboutUs,Achievements,Blogs,CheckData,Checkout,CompleteBlog,
     CompleteProgram,Consult,Contact,Features,Footer,Howitworks,Middlesection,
     OurPrograms,Packagepage,PackageShow,PayNow,PaySuccess,Policy,Productsfile,
-    Terms,TestimonialMain,TestimonialSlider,
+    Terms,TestimonialMain,TestimonialSlider,OurProducts,ShowProduct,Cart,EcomOrder,
 }
 
 

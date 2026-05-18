@@ -6,6 +6,8 @@ const connectDB = require('./config/db');
 const authRouter = require('./routes/authRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const variationRoutes = require('./routes/variationRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
 const packageRoutes = require('./routes/packageRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const buyRoutes = require('./routes/buyRoutes');
@@ -16,6 +18,8 @@ const consultemailRoutes = require('./routes/consultemailRoutes');
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const programRoutes = require('./routes/programRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+const productOrderRoutes = require('./routes/productOrderRoutes')
 const cors = require('cors');
 const fs = require('fs');
 const mongoose = require('mongoose');
@@ -102,7 +106,11 @@ app.get('/health', (req, res) => {
 // API Routes
 app.use('/api/auth', authRouter);
 app.use('/api', blogRoutes);
+app.use('/api', categoryRoutes);
 app.use('/api', variationRoutes);
+app.use('/api', productRoutes);
+app.use('/api', reviewRoutes);
+
 app.use('/api', packageRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', buyRoutes);
@@ -112,6 +120,8 @@ app.use('/api', mailerRoutes);
 app.use('/api', consultemailRoutes);
 app.use('/api', testimonialRoutes);
 app.use('/api', programRoutes);
+app.use('/api', productOrderRoutes);
+
 app.use('/api/payment', paymentRoutes);
 // Serve static files from dist (React build)
 app.use(express.static(path.join(__dirname, 'dist'), {

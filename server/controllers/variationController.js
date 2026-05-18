@@ -1,71 +1,53 @@
-const Variation = require('../models/variatonModel');  // Import the Variation model
+const Variation = require('../models/variatonModel.js');
 
-// Create a new variation
-exports.createVariation = async (req, res) => {
+exports.addVariation = async (req, res) => {
   try {
-    const { name, options } = req.body;
-
-    const newVariation = new Variation({
-      name,
-      options,
-    });
-
-    await newVariation.save();
-    res.status(201).json({ message: 'Variation created successfully', newVariation });
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating variation', error });
+    const variation = await Variation.create({ name: req.body.name });
+    res.status(201).json({ success: true, variation });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
   }
 };
 
-// Get all variations
 exports.getAllVariations = async (req, res) => {
   try {
     const variations = await Variation.find();
-    res.status(200).json(variations);
-  } catch (error) {
-    res.status(500).json({ message: 'Error retrieving variations', error });
+    res.status(200).json({ success: true, variations });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
-// Get a single variation by ID
-exports.getVariationById = async (req, res) => {
+exports.getSingleVariation = async (req, res) => {
   try {
     const variation = await Variation.findById(req.params.id);
-    if (!variation) {
-      return res.status(404).json({ message: 'Variation not found' });
-    }
-    res.status(200).json(variation);
-  } catch (error) {
-    res.status(500).json({ message: 'Error retrieving variation', error });
+    if (!variation) return res.status(404).json({ success: false, message: 'Variation not found' });
+    res.status(200).json({ success: true, variation });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
-// Update a variation by ID
-exports.updateVariation = async (req, res) => {
+exports.editVariation = async (req, res) => {
   try {
-    const updatedVariation = await Variation.findByIdAndUpdate(
+    const variation = await Variation.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
-      { new: true }
+      { name: req.body.name },
+      { new: true, runValidators: true }
     );
-    if (!updatedVariation) {
-      return res.status(404).json({ message: 'Variation not found' });
-    }
-    res.status(200).json({ message: 'Variation updated successfully', updatedVariation });
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating variation', error });
+    if (!variation) return res.status(404).json({ success: false, message: 'Variation not found' });
+    res.status(200).json({ success: true, variation });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
   }
 };
 
-// Delete a variation by ID
 exports.deleteVariation = async (req, res) => {
   try {
     const variation = await Variation.findByIdAndDelete(req.params.id);
-    if (!variation) {
-      return res.status(404).json({ message: 'Variation not found' });
-    }
-    res.status(200).json({ message: 'Variation deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting variation', error });
+    if (!variation) return res.status(404).json({ success: false, message: 'Variation not found' });
+    res.status(200).json({ success: true, message: 'Variation deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };

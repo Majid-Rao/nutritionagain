@@ -1,190 +1,88 @@
-import { useState } from 'react';
-import Header from "../layouts/Header";
-import Sidebar from "../layouts/Sidebar";
-import toast from "react-hot-toast";
+// AddVariation.jsx
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const BASE = import.meta.env.VITE_BACKEND_API;
+
 const AddVariation = () => {
-  const [name, setName] = useState('');
-  const [optionName, setOptionName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [options, setOptions] = useState([]);
+  const [name, setName]     = useState('');
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg]       = useState(null);
 
-  // Handle the addition of options
-  const handleAddOption = () => {
-    if (optionName && description && price) {
-      setOptions([
-        ...options,
-        { name: optionName, description, price: parseFloat(price) }
-      ]);
-      setOptionName('');
-      setDescription('');
-      setPrice('');
-    } else {
-      alert('Please fill in all option details.');
-    }
-  };
-
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let finalOptions = [...options];
-    // If no options added via Add Option, but fields are filled, use those as the only option
-    if (finalOptions.length === 0 && optionName && description && price) {
-      finalOptions = [
-        { name: optionName, description, price: parseFloat(price) }
-      ];
-    }
-
-    if (finalOptions.length === 0) {
-      alert('Please add at least one option or fill the option fields.');
-      return;
-    }
-
-    const formData = {
-      name,
-      options: finalOptions,
-    };
-
+    if (!name.trim()) return;
+    setLoading(true);
+    setMsg(null);
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/createvariation`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-
-        console.log('Variation added:', result);
-        // Reset form after successful submission
-        setName('');
-        setOptionName('');
-        setDescription('');
-        setPrice('');
-        setOptions([]);
-        toast.success('Variation added successfully!', {
-          position: 'top-center',
-        });
-      } else {
-        console.error('Error adding variation:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error during form submission:', error);
+      await axios.post(`${BASE}/api/addVariation`, { name });
+      setMsg({ type: 'success', text: 'Variation added successfully!' });
+      setName('');
+    } catch (err) {
+      setMsg({ type: 'error', text: err.response?.data?.message || 'Something went wrong' });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-      <div className='flex h-screen bg-gray-900 text-gray-100 overflow-hidden'>
-        <div className='fixed inset-0 z-0'>
-          <div className='absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-80' />
-          <div className='absolute inset-0 backdrop-blur-sm' />
+    <div className="w-full max-w-md">
+      <p className="text-gray-400 text-xs mb-5">
+        Add New Variations
+      </p>
+
+      {msg && (
+        <div className={`mb-4 px-4 py-3 rounded-xl text-sm font-medium border ${
+          msg.type === 'success'
+            ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-400'
+            : 'bg-red-500/10 border-red-500/40 text-red-400'
+        }`}>
+          {msg.type === 'success' ? '✓ ' : '✕ '}{msg.text}
         </div>
-        <Sidebar />
-        <div className='flex-1 overflow-auto relative z-10'>
-          <Header title='Add Variation' />
-          <main className='max-w-5xl mx-auto py-4 px-2 sm:px-4 lg:px-8'>
-            <div className="max-w-md mx-auto p-4 sm:p-6 bg-black text-white rounded-lg shadow-lg">
-              <h1 className="text-2xl md:text-3xl font-bold text-center text-blue-500 mb-6">Add Variation</h1>
-              <form onSubmit={handleSubmit} className="space-y-1">
-                {/* Name Field */}
-                <div>
-                  <label htmlFor="name" className="block text-md sm:text-lg font-medium">Package Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full mt-2 p-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
+      )}
 
-                {/* Option Name Field */}
-                <div>
-                  <label htmlFor="optionName" className="block text-md sm:text-lg font-medium">Option Name</label>
-                  <input
-                    type="text"
-                    id="optionName"
-                    name="optionName"
-                    value={optionName}
-                    onChange={(e) => setOptionName(e.target.value)}
-                    className="w-full mt-2 p-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* Description Field */}
-                <div>
-                  <label htmlFor="description" className="block text-md sm:text-lg font-medium">Description</label>
-                  <input
-                    type="text"
-                    id="description"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-full mt-2 p-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* Price Field */}
-                <div>
-                  <label htmlFor="price" className="block text-md sm:text-lg font-medium">Price</label>
-                  <input
-                    type="number"
-                    id="price"
-                    name="price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="w-full mt-2 p-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* Add Option Button */}
-                <div className="text-center">
-                  <button
-                    type="button"
-                    onClick={handleAddOption}
-                    className="px-4 py-2 mt-2 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
-                  >
-                    Add Option
-                  </button>
-                </div>
-
-                {/* Display added options */}
-                {options.length > 0 && (
-                  <div className="mt-4">
-                    <h2 className="text-lg font-bold">Added Options:</h2>
-                    <ul className="space-y-2">
-                      {options.map((option, index) => (
-                        <li key={index} className="bg-gray-800 p-2 rounded-md">
-                          <p><strong>Name:</strong> {option.name}</p>
-                          <p><strong>Description:</strong> {option.description}</p>
-                          <p><strong>Price:</strong> ${option.price}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Submit Button */}
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="px-4 py-2 mt-4 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 focus:outline-none"
-                  >
-                    Submit Variation
-                  </button>
-                </div>
-              </form>
-            </div>
-          </main>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+            Variation Name
+          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g. 5mg, 50mg, 100ml, 1kg..."
+            className="w-full bg-gray-900/60 border border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600
+              focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/40 transition-all duration-200"
+          />
         </div>
-      </div>
-    </>
+
+        <button
+          type="submit"
+          disabled={loading || !name.trim()}
+          className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold
+            bg-gradient-to-r from-cyan-500 to-teal-600 text-white
+            hover:from-cyan-400 hover:to-teal-500 transition-all duration-200
+            disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/20"
+        >
+          {loading ? (
+            <>
+              <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+              </svg>
+              Adding...
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              Add Variation
+            </>
+          )}
+        </button>
+      </form>
+    </div>
   );
 };
 
