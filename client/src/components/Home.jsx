@@ -10,7 +10,7 @@ import Achievements from './Achievements'
 import SlidesHome from './SlidesHome'
 import Testimonial from './TestimonialSlider'
 import Footer from './Footer'
-
+import ClinicSlider from './ClinicSlider'
 const Home = () => {
   return (
    <>
@@ -19,6 +19,7 @@ const Home = () => {
    {/* <Productsfile/> */}
    <Features/>
    <Middlesection/>
+   <ClinicSlider/>
    <Howitworks/>
    <Achievements/>
     <SlidesHome/>
