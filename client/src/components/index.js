@@ -28,11 +28,12 @@ import ShowProduct from './ShowProduct'
 import Cart from './Cart'
 import EcomOrder from './EcomOrder'
 import ClinicSlider from './ClinicSlider';
+import VideoReelSection from './VideoReelSection';
 export {Home,AboutUs,Achievements,Blogs,CheckData,Checkout,CompleteBlog,
     CompleteProgram,Consult,Contact,Features,Footer,Howitworks,Middlesection,
     OurPrograms,Packagepage,PackageShow,PayNow,PaySuccess,Policy,Productsfile,
     Terms,TestimonialMain,TestimonialSlider,OurProducts,ShowProduct,Cart,EcomOrder,
-    ClinicSlider,
+    ClinicSlider,VideoReelSection,
 }
 
 
