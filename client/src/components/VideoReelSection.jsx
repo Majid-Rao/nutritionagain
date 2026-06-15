@@ -1,25 +1,13 @@
-import mainVideoWebm  from "../assets/convertedFiles/v1.webm";
-import mainVideoMp4   from "../assets/convertedFiles/v1.mp4";
-import mainThumb      from "../assets/convertedFiles/1.webp";
-
-import reel1Webm      from "../assets/convertedFiles/v2.webm";
-import reel1Mp4       from "../assets/convertedFiles/v2.mp4";
-import reel1Thumb     from "../assets/convertedFiles/15.webp";
-
-import reel2Webm      from "../assets/convertedFiles/v3.webm";
-import reel2Mp4       from "../assets/convertedFiles/v3.mp4";
-import reel2Thumb     from "../assets/convertedFiles/16.webp";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// STEP 1: Import your videos above
-// STEP 2: Update the data below — fill in your imported variables
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── Thumbnail imports from assets folder ────────────────────────────────────
+import mainThumb  from "../assets/convertedFiles/1.webp";
+import reel1Thumb from "../assets/convertedFiles/15.webp";
+import reel2Thumb from "../assets/convertedFiles/16.webp";
 
 import { useRef, useState, useEffect } from "react";
 
+// ─── Cloudinary Video URLs + local thumbnails ─────────────────────────────────
 const MAIN_VIDEO = {
-  webm:     mainVideoWebm,
-  mp4:      mainVideoMp4,
+  mp4:      "https://res.cloudinary.com/dm7hrlpkj/video/upload/v1781553342/Highlight_2_bjbv2i.mp4",
   poster:   mainThumb,
   title:    "Clinic Grand Opening — Full Tour",
   duration: "4:22",
@@ -29,8 +17,7 @@ const MAIN_VIDEO = {
 const REELS = [
   {
     id: 1,
-    webm:     reel1Webm,
-    mp4:      reel1Mp4,
+    mp4:      "https://res.cloudinary.com/dm7hrlpkj/video/upload/v1781554173/Sequence_01_1_q58pqv.mp4",
     poster:   reel1Thumb,
     title:    "Opening Ceremony Reel",
     duration: "0:32",
@@ -38,8 +25,7 @@ const REELS = [
   },
   {
     id: 2,
-    webm:     reel2Webm,
-    mp4:      reel2Mp4,
+    mp4:      "https://res.cloudinary.com/dm7hrlpkj/video/upload/v1781554189/Sequence_01_ye1d4s.mp4",
     poster:   reel2Thumb,
     title:    "Team Intro Reel",
     duration: "0:45",
@@ -65,8 +51,8 @@ function useInView(threshold = 0.15) {
 }
 
 // ─── Video Tile ───────────────────────────────────────────────────────────────
-function VideoTile({ webm, mp4, poster, title, duration, tag, isMain, delay = 0 }) {
-  const videoRef            = useRef(null);
+function VideoTile({ mp4, poster, title, duration, tag, isMain, delay = 0 }) {
+  const videoRef                = useRef(null);
   const [playing, setPlaying]   = useState(false);
   const [progress, setProgress] = useState(0);
   const [hovered, setHovered]   = useState(false);
@@ -126,8 +112,7 @@ function VideoTile({ webm, mp4, poster, title, duration, tag, isMain, delay = 0 
         preload="metadata"
         onClick={(e) => e.stopPropagation()}
       >
-        {webm && <source src={webm} type="video/webm" />}
-        {mp4  && <source src={mp4}  type="video/mp4"  />}
+        <source src={mp4} type="video/mp4" />
       </video>
 
       {/* Skeleton shimmer while loading */}
@@ -157,7 +142,7 @@ function VideoTile({ webm, mp4, poster, title, duration, tag, isMain, delay = 0 
       <div
         className="absolute top-0 right-0 pointer-events-none"
         style={{
-          width: isMain ? "160px" : "100px",
+          width:  isMain ? "160px" : "100px",
           height: isMain ? "160px" : "100px",
           background: "radial-gradient(circle at top right, rgba(212,83,126,0.22) 0%, transparent 70%)",
         }}
@@ -187,12 +172,12 @@ function VideoTile({ webm, mp4, poster, title, duration, tag, isMain, delay = 0 
         <div
           className="flex items-center justify-center rounded-full border transition-all duration-300"
           style={{
-            width:   isMain ? "64px" : "50px",
-            height:  isMain ? "64px" : "50px",
-            background: "rgba(212,83,126,0.18)",
+            width:       isMain ? "64px" : "50px",
+            height:      isMain ? "64px" : "50px",
+            background:  "rgba(212,83,126,0.18)",
             borderColor: "rgba(212,83,126,0.55)",
-            transform: hovered ? "scale(1.12)" : "scale(1)",
-            boxShadow: hovered ? "0 0 28px rgba(212,83,126,0.25)" : "none",
+            transform:   hovered ? "scale(1.12)" : "scale(1)",
+            boxShadow:   hovered ? "0 0 28px rgba(212,83,126,0.25)" : "none",
           }}
         >
           {playing ? (
@@ -219,7 +204,7 @@ function VideoTile({ webm, mp4, poster, title, duration, tag, isMain, delay = 0 
         <p
           className="text-white font-medium leading-snug"
           style={{
-            fontSize: isMain ? "14px" : "12px",
+            fontSize:   isMain ? "14px" : "12px",
             textShadow: "0 1px 6px rgba(0,0,0,0.6)",
           }}
         >
@@ -275,10 +260,6 @@ export default function VideoReelSection() {
           0%   { background-position: -200% 0; }
           100% { background-position:  200% 0; }
         }
-        @keyframes vr-line-grow {
-          from { transform: scaleX(0); }
-          to   { transform: scaleX(1); }
-        }
       `}</style>
 
       <div className="w-full max-w-7xl mx-auto vr-sans">
@@ -298,19 +279,19 @@ export default function VideoReelSection() {
             <div
               className="h-px bg-[#D4537E] origin-left"
               style={{
-                width: "28px",
-                transform: headingInView ? "scaleX(1)" : "scaleX(0)",
+                width:      "28px",
+                transform:  headingInView ? "scaleX(1)" : "scaleX(0)",
                 transition: "transform 0.5s 0.2s cubic-bezier(0.25,1,0.5,1)",
               }}
             />
-            <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-[#D4537E] ">
+            <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-[#D4537E]">
               Our Clinic Content
             </span>
             <div
               className="h-px bg-[#D4537E] origin-left"
               style={{
-                width: "28px",
-                transform: headingInView ? "scaleX(1)" : "scaleX(0)",
+                width:      "28px",
+                transform:  headingInView ? "scaleX(1)" : "scaleX(0)",
                 transition: "transform 0.5s 0.3s cubic-bezier(0.25,1,0.5,1)",
               }}
             />
@@ -347,14 +328,11 @@ export default function VideoReelSection() {
         </div>
 
         {/* ── Video Grid ───────────────────────────────────────────────── */}
-        {/* Desktop: main video left (flex-[1.7]), reels column right  */}
-        {/* Mobile: all 3 stacked full width, 1 per row                */}
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-6 lg:items-stretch">
 
           {/* Main video */}
           <div className="w-full lg:flex-[1.7]">
             <VideoTile
-              webm={MAIN_VIDEO.webm}
               mp4={MAIN_VIDEO.mp4}
               poster={MAIN_VIDEO.poster}
               title={MAIN_VIDEO.title}
@@ -365,12 +343,11 @@ export default function VideoReelSection() {
             />
           </div>
 
-          {/* Reels column — side by side on tablet, stacked on desktop sidebar, stacked on mobile */}
+          {/* Reels column */}
           <div className="w-full lg:flex-1 flex flex-col sm:flex-row lg:flex-col gap-5">
             {REELS.map((reel, i) => (
               <div key={reel.id} className="w-full sm:flex-1 lg:flex-none">
                 <VideoTile
-                  webm={reel.webm}
                   mp4={reel.mp4}
                   poster={reel.poster}
                   title={reel.title}
@@ -393,7 +370,7 @@ export default function VideoReelSection() {
             </span>
           </div>
           <span className="text-xs text-gray-300 dark:text-white/20 duration-200 hidden sm:block tracking-wider uppercase">
-            WebM · MP4
+            Cloudinary · MP4
           </span>
         </div>
 
