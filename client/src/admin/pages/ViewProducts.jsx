@@ -257,11 +257,11 @@ const DeleteModal = ({ product, onClose, onDeleted }) => {
           </div>
           <div>
             <h3 className="text-sm font-bold text-white">Delete Product?</h3>
-            <p className="text-xs text-gray-500 mt-0.5">Yeh action undo nahi ho sakta</p>
+            <p className="text-xs text-gray-500 mt-0.5">Are you sure you want to delete this?</p>
           </div>
         </div>
         <p className="text-sm text-gray-400">
-          <span className="text-white font-medium">"{product.name}"</span> permanently delete ho jaayega.
+          <span className="text-white font-medium">"{product.name}"</span> This product will be permanently delete.
         </p>
         <div className="flex gap-3 pt-1">
           <button onClick={onClose}
